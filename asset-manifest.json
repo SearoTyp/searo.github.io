@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/searo.github.io/static/css/main.63853022.css",
-    "main.js": "/searo.github.io/static/js/main.3ae2a70d.js",
+    "main.js": "/searo.github.io/static/js/main.d47991b6.js",
     "static/js/453.8c72c7ba.chunk.js": "/searo.github.io/static/js/453.8c72c7ba.chunk.js",
     "index.html": "/searo.github.io/index.html",
     "main.63853022.css.map": "/searo.github.io/static/css/main.63853022.css.map",
-    "main.3ae2a70d.js.map": "/searo.github.io/static/js/main.3ae2a70d.js.map",
+    "main.d47991b6.js.map": "/searo.github.io/static/js/main.d47991b6.js.map",
     "453.8c72c7ba.chunk.js.map": "/searo.github.io/static/js/453.8c72c7ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.63853022.css",
-    "static/js/main.3ae2a70d.js"
+    "static/js/main.d47991b6.js"
   ]
 }
