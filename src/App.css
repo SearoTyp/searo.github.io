@@ -87,8 +87,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #000;
-  color: white;
+  background: #000 !important; /* Ensure the background is applied */
+  color: white !important; /* Ensure the text color is applied */
   position: relative;
   z-index: 1;
 }

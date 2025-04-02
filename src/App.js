@@ -241,7 +241,7 @@ function App() {
                     <section className="about" id="about">
                       <div className="about-content">
                         <div className="about-left">
-                          <img src="/Portfolio_pic.jpg" alt="Profile" className="profile-pic" onError={() => console.log("Failed to load profile picture")} />
+                        <img src={`${process.env.PUBLIC_URL}/nahi.jpg`}  alt="Profile"  className="profile-pic" onError={() => console.log("Failed to load profile picture")} />
                           <div className="skills">
                             <h3>Skills</h3>
                             <ul>
