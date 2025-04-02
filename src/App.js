@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaLinkedin, FaFileAlt, FaAngleDoubleDown } from 'react-icons/fa';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
 import Project3 from './projects/Project3';
@@ -18,13 +18,17 @@ function App() {
   const overlayRef = useRef(null);
 
   useEffect(() => {
+    console.log("App component mounted");
     // Preloader timeout
     const timer = setTimeout(() => {
       gsap.to('.preloader', {
         opacity: 0,
         duration: 1,
         ease: 'power2.out',
-        onComplete: () => setLoading(false),
+        onComplete: () => {
+          console.log("Preloader finished, setting loading to false");
+          setLoading(false);
+        },
       });
     }, 2200);
 
@@ -33,6 +37,8 @@ function App() {
 
   useEffect(() => {
     if (loading) return; // Wait until the preloader is done
+
+    console.log("Loading is false, applying GSAP animations");
 
     // Fade in the homepage content after the preloader
     gsap.from('.home-content > *', {
@@ -186,7 +192,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename="/searo.github.io">
       <div className="App">
         {loading && <div className="preloader"><span>NM</span></div>}
         <div className="transition-overlay" ref={overlayRef}></div>
@@ -219,6 +225,7 @@ function App() {
                 path="/"
                 element={
                   <>
+                    {console.log("Rendering Home route")} {/* Add this to confirm the route is matched */}
                     {/* Home Section */}
                     <section className="home" id="home">
                       <div className="home-content">
@@ -234,7 +241,7 @@ function App() {
                     <section className="about" id="about">
                       <div className="about-content">
                         <div className="about-left">
-                          <img src="/Portfolio_pic.jpg" alt="Profile" className="profile-pic" />
+                          <img src="/Portfolio_pic.jpg" alt="Profile" className="profile-pic" onError={() => console.log("Failed to load profile picture")} />
                           <div className="skills">
                             <h3>Skills</h3>
                             <ul>
@@ -273,7 +280,7 @@ function App() {
                           <h3>Project 1</h3>
                           <p className="project-preview">A portfolio website with animations</p>
                           <div className="project-details-hover">
-                            <p>Dynamic portfolio with GSAP animations. Click to learn more!</p>
+                          <p>Dynamic portfolio with GSAP animations. Click to learn more!</p>
                           </div>
                         </Link>
                         <Link to="/project/2" className="project-card">
@@ -328,6 +335,7 @@ function App() {
               <Route path="/project/4" element={<Project4 />} />
               <Route path="/project/5" element={<Project5 />} />
               <Route path="/project/6" element={<Project6 />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </>
         )}
