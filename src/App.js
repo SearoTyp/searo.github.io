@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaLinkedin, FaFileAlt, FaAngleDoubleDown } from 'react-icons/fa';
+import { FaAngleDoubleDown, FaLinkedin, FaFileAlt } from 'react-icons/fa';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
@@ -16,10 +16,13 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   const [loading, setLoading] = useState(true);
   const overlayRef = useRef(null);
+  const headerRef = useRef(null);
+  const skillsBoxRef = useRef(null);
+  const hobbiesBoxRef = useRef(null);
+  const aboutTextRef = useRef(null);
 
   useEffect(() => {
     console.log("App component mounted");
-    // Preloader timeout
     const timer = setTimeout(() => {
       gsap.to('.preloader', {
         opacity: 0,
@@ -36,11 +39,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (loading) return; // Wait until the preloader is done
+    if (loading) return;
 
     console.log("Loading is false, applying GSAP animations");
 
-    // Fade in the homepage content after the preloader
     gsap.from('.home-content > *', {
       opacity: 0,
       y: 50,
@@ -49,7 +51,6 @@ function App() {
       ease: 'power2.out',
     });
 
-    // "Explode" effect for the entire home-content when scrolling
     gsap.to('.home-content', {
       opacity: 0,
       y: 200,
@@ -150,7 +151,27 @@ function App() {
       );
     });
 
-    // Animate the scroll arrow up and down
+    // Contact section animations
+    gsap.fromTo(
+      '.contact-content > *',
+      { opacity: 0, y: 50, rotateY: 90 },
+      {
+        opacity: 1,
+        y: 0,
+        rotateY: 0,
+        stagger: 0.2,
+        duration: 0.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.contact',
+          start: 'top 80%',
+          end: 'top 60%',
+          scrub: false,
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
     gsap.to('.scroll-arrow', {
       y: 20,
       repeat: -1,
@@ -160,7 +181,6 @@ function App() {
     });
   }, [loading]);
 
-  // Smooth scroll to About section on arrow click
   const scrollToAbout = () => {
     const tl = gsap.timeline();
 
@@ -197,27 +217,17 @@ function App() {
         {loading && <div className="preloader"><span>NM</span></div>}
         <div className="transition-overlay" ref={overlayRef}></div>
 
-        {/* Header and Content */}
         {!loading && (
           <>
-            <header className="header">
+            <header className="header" ref={headerRef}>
               <div className="logo">Nahiyan Muhammad's Portfolio</div>
               <nav className="nav">
-                <a href="#home">Home</a>
-                <a href="#about">About Me</a>
                 <a href="#projects">Projects</a>
-                <a href="#contact">Contact Me</a>
-                <a
-                  href="https://linkedin.com/in/your-profile"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaLinkedin className="icon" />
-                </a>
-                <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer">
-                  <FaFileAlt className="icon" />
-                </a>
+                <a href="#about">About</a>
               </nav>
+              <div className="contact-link">
+                <a href="#contact">Contact Me</a>
+              </div>
             </header>
 
             <Routes>
@@ -225,24 +235,47 @@ function App() {
                 path="/"
                 element={
                   <>
-                    {console.log("Rendering Home route")} {/* Add this to confirm the route is matched */}
-                    {/* Home Section */}
+                    {console.log("Rendering Home route")}
                     <section className="home" id="home">
                       <div className="home-content">
-                        <h1 className="intro-text">Hi, Welcome to my Portfolio</h1>
-                        <p className="subtitle">Scroll down to see more</p>
+                        <h1 className="intro-text">Hi! My name is Nahiyan Muhammad</h1>
+                        <p className="role-text">Engineer | Builder | Energy & Sustainability Enthusiast</p>
+                        <p className="welcome-text">Welcome to my digital portfolio</p>
                         <div className="scroll-arrow" onClick={scrollToAbout}>
                           <FaAngleDoubleDown />
                         </div>
                       </div>
+                      <div className="social-icons">
+                        <a
+                          href="https://linkedin.com/in/your-profile"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="social-icon"
+                        >
+                          <FaLinkedin />
+                        </a>
+                        <a
+                          href="/path-to-your-resume.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="social-icon"
+                        >
+                          <FaFileAlt />
+                        </a>
+                      </div>
                     </section>
 
-                    {/* About Section */}
                     <section className="about" id="about">
+                      <h2 className="about-title">About</h2>
                       <div className="about-content">
                         <div className="about-left">
-                        <img src={`${process.env.PUBLIC_URL}/nahi.jpg`}  alt="Profile"  className="profile-pic" onError={() => console.log("Failed to load profile picture")} />
-                          <div className="skills">
+                          <img
+                            src={`${process.env.PUBLIC_URL}/nahi.jpg`}
+                            alt="Profile"
+                            className="profile-pic"
+                            onError={() => console.log("Failed to load profile picture")}
+                          />
+                          <div className="skills" ref={skillsBoxRef}>
                             <h3>Skills</h3>
                             <ul>
                               <li>React</li>
@@ -253,13 +286,12 @@ function App() {
                           </div>
                         </div>
                         <div className="about-right">
-                          <h2>About Me</h2>
-                          <p>
-                            Hello! I’m Nahiyan. I love building interactive web experiences and 
-                            exploring new technologies. I’m currently focused on front-end development, 
+                          <p ref={aboutTextRef}>
+                            Hello! I'm Nahiyan. I love building interactive web experiences and 
+                            exploring new technologies. I'm currently focused on front-end development, 
                             animations, and creative design.
                           </p>
-                          <div className="hobbies">
+                          <div className="hobbies" ref={hobbiesBoxRef}>
                             <h3>Hobbies & Interests</h3>
                             <ul>
                               <li>Photography</li>
@@ -272,59 +304,56 @@ function App() {
                       </div>
                     </section>
 
-                    {/* Projects Section */}
                     <section className="projects" id="projects">
                       <h2>Projects</h2>
                       <div className="project-grid">
                         <Link to="/project/1" className="project-card">
                           <h3>Project 1</h3>
                           <p className="project-preview">A portfolio website with animations</p>
-                          <div className="project-details-hover">
-                          <p>Dynamic portfolio with GSAP animations. Click to learn more!</p>
-                          </div>
                         </Link>
                         <Link to="/project/2" className="project-card">
                           <h3>Project 2</h3>
                           <p className="project-preview">Interactive game using JavaScript</p>
-                          <div className="project-details-hover">
-                            <p>A fun game built with HTML5 Canvas. Click to learn more!</p>
-                          </div>
                         </Link>
                         <Link to="/project/3" className="project-card">
                           <h3>Project 3</h3>
                           <p className="project-preview">E-commerce website</p>
-                          <div className="project-details-hover">
-                            <p>Shop online with a seamless UX. Click to learn more!</p>
-                          </div>
                         </Link>
                         <Link to="/project/4" className="project-card">
                           <h3>Project 4</h3>
                           <p className="project-preview">Weather app with API</p>
-                          <div className="project-details-hover">
-                            <p>Real-time weather updates. Click to learn more!</p>
-                          </div>
                         </Link>
                         <Link to="/project/5" className="project-card">
                           <h3>Project 5</h3>
                           <p className="project-preview">Blog platform</p>
-                          <div className="project-details-hover">
-                            <p>Share your thoughts online. Click to learn more!</p>
-                          </div>
                         </Link>
                         <Link to="/project/6" className="project-card">
                           <h3>Project 6</h3>
                           <p className="project-preview">Task management app</p>
-                          <div className="project-details-hover">
-                            <p>Organize your tasks efficiently. Click to learn more!</p>
-                          </div>
                         </Link>
                       </div>
                     </section>
 
-                    {/* Contact Section */}
                     <section className="contact" id="contact">
-                      <h2>Contact Me</h2>
-                      <p>Email: your.email@example.com</p>
+                      <div className="contact-content">
+                        <p className="contact-subtitle">GOT A PROJECT IN MIND?</p>
+                        <h2 className="contact-title">LET'S CONNECT</h2>
+                        <a href="mailto:nahiyanm@bu.edu" className="contact-button">
+                          WRITE A MESSAGE
+                        </a>
+                        <p className="contact-social-text">FEEL FREE TO CONNECT WITH ME ON SOCIAL</p>
+                        <div className="contact-social-links">
+                          <a href="https://www.joinhandshake.com/" target="_blank" rel="noopener noreferrer">
+                            HANDSHAKE
+                          </a>
+                          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+                            LINKEDIN
+                          </a>
+                          <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
+                            INSTAGRAM
+                          </a>
+                        </div>
+                      </div>
                     </section>
                   </>
                 }
