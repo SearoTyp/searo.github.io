@@ -192,7 +192,7 @@ function App() {
   };
 
   return (
-    <Router basename="/searo.github.io">
+    <Router>
       <div className="App">
         {loading && <div className="preloader"><span>NM</span></div>}
         <div className="transition-overlay" ref={overlayRef}></div>

@@ -2,7 +2,7 @@
   "name": "searo.github.io",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://searotyp.github.io/searo.github.io/",
+  "homepage": "https://searotyp.github.io",
   "dependencies": {
     "gh-pages": "^6.3.0",
     "gsap": "^3.12.7",
