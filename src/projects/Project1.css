@@ -1,0 +1,128 @@
+/* Project Page */
+.project-page {
+    min-height: 100vh;
+    padding: 0 20px 60px;
+    background: #f0f0f0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .project-header {
+    position: relative;
+    background-color: #000; /* Explicitly set to match homepage */
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+  }
+  
+  .project-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Match homepage gradient */
+    opacity: 0.3; /* Match homepage opacity */
+    z-index: 0;
+    will-change: opacity; /* Match homepage optimization */
+  }
+  
+  .project-header h2 {
+    position: relative;
+    z-index: 1;
+    color: #00d4ff !important; /* Keep the correct color */
+    font-size: 3rem;
+    margin: 0;
+    opacity: 1 !important; /* Ensure no inherited opacity */
+    text-transform: uppercase; /* Match the screenshot */
+  }
+  
+  .project-details {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .project-content {
+    margin-top: 20px;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .project-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 40px;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .project-item.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .project-item img {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .project-item p {
+    width: 50%;
+    line-height: 1.6;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #00d4ff;
+    text-decoration: none;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .back-link:hover,
+  .back-link:focus {
+    text-decoration: underline;
+    outline: 2px solid #00d4ff;
+    outline-offset: 2px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .project-item {
+      flex-direction: column;
+    }
+    .project-item.reverse {
+      flex-direction: column;
+    }
+    .project-item img,
+    .project-item p {
+      width: 100%;
+    }
+    .project-header h2 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .project-header h2 {
+      font-size: 2rem;
+    }
+  }

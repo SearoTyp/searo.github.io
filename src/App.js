@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaAngleDoubleDown, FaLinkedin, FaFileAlt } from 'react-icons/fa';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
 import Project3 from './projects/Project3';
@@ -15,11 +15,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const overlayRef = useRef(null);
   const headerRef = useRef(null);
   const skillsBoxRef = useRef(null);
   const hobbiesBoxRef = useRef(null);
   const aboutTextRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Disable browser scroll restoration on initial load
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0); // Immediate scroll to top on initial load
+  }, []);
 
   useEffect(() => {
     console.log("App component mounted");
@@ -42,6 +53,9 @@ function App() {
     if (loading) return;
 
     console.log("Loading is false, applying GSAP animations");
+
+    // Kill existing ScrollTriggers to prevent duplicates
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
     gsap.from('.home-content > *', {
       opacity: 0,
@@ -67,7 +81,6 @@ function App() {
       },
     });
 
-    // Background transition effect (gradient wave)
     gsap.fromTo(
       '.home::before',
       { opacity: 0.3, background: 'linear-gradient(135deg, #1e3c72, #2a5298)' },
@@ -83,7 +96,6 @@ function App() {
       }
     );
 
-    // 3D wave effect for the about section
     const aboutElements = gsap.utils.toArray('.about-content > *');
     gsap.fromTo(
       aboutElements,
@@ -107,7 +119,6 @@ function App() {
       }
     );
 
-    // 3D wave effect for about-left and about-right children
     gsap.fromTo(
       '.about-left > *, .about-right > *',
       { opacity: 0, scale: 0.5, y: 50, rotateY: 90 },
@@ -130,7 +141,6 @@ function App() {
       }
     );
 
-    // Animate project cards with a 3D flip effect
     gsap.utils.toArray('.project-card').forEach((card) => {
       gsap.fromTo(
         card,
@@ -151,7 +161,6 @@ function App() {
       );
     });
 
-    // Contact section animations
     gsap.fromTo(
       '.contact-content > *',
       { opacity: 0, y: 50, rotateY: 90 },
@@ -179,7 +188,30 @@ function App() {
       duration: 1,
       ease: 'sine.inOut',
     });
-  }, [loading]);
+
+    // Header scroll animation for homepage only
+    if (location.pathname === '/') {
+      let lastScrollTop = 0;
+      const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+          setIsHeaderVisible(false);
+        } else {
+          setIsHeaderVisible(true);
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+
+    // Refresh ScrollTrigger after navigation
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+      console.log("ScrollTrigger refreshed in App.js");
+    }, 300);
+  }, [loading, location.pathname]);
 
   const scrollToAbout = () => {
     const tl = gsap.timeline();
@@ -211,16 +243,38 @@ function App() {
       });
   };
 
-  return (
-    <Router>
-      <div className="App">
-        {loading && <div className="preloader"><span>NM</span></div>}
-        <div className="transition-overlay" ref={overlayRef}></div>
+  const handleProjectClick = (path) => {
+    const tl = gsap.timeline();
+    tl.to(overlayRef.current, {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        navigate(path);
+        gsap.to(overlayRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          onComplete: () => {
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            console.log("Scrolled to top after navigation to:", path);
+          },
+        });
+      },
+    });
+  };
 
-        {!loading && (
-          <>
+
+  return (
+    <div className="App">
+      {loading && <div className="preloader"><span>NM</span></div>}
+      <div className="transition-overlay" ref={overlayRef}></div>
+
+      {!loading && (
+        <>
+          {location.pathname === '/' && isHeaderVisible && (
             <header className="header" ref={headerRef}>
-              <div className="logo">Nahiyan Muhammad's Portfolio</div>
+              <div className="logo">Nahiyan M.</div>
               <nav className="nav">
                 <a href="#projects">Projects</a>
                 <a href="#about">About</a>
@@ -229,148 +283,159 @@ function App() {
                 <a href="#contact">Contact Me</a>
               </div>
             </header>
+          )}
 
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    {console.log("Rendering Home route")}
-                    <section className="home" id="home">
-                      <div className="home-content">
-                        <h1 className="intro-text">Hi! My name is Nahiyan Muhammad</h1>
-                        <p className="role-text">Engineer | Builder | Energy & Sustainability Enthusiast</p>
-                        <p className="welcome-text">Welcome to my digital portfolio</p>
-                        <div className="scroll-arrow" onClick={scrollToAbout}>
-                          <FaAngleDoubleDown />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  {console.log("Rendering Home route")}
+                  <section className="home" id="home">
+                    <div className="home-content">
+                      <h1 className="intro-text">Hi! My name is Nahiyan Muhammad</h1>
+                      <p className="role-text">Engineer | Aspiring entrepreneur | Designer | Energy & Sustainability Enthusiast</p>
+                      <p className="welcome-text">Welcome to my portfolio</p>
+                      <div className="scroll-arrow" onClick={scrollToAbout}>
+                        <FaAngleDoubleDown />
+                      </div>
+                    </div>
+                    <div className="social-icons">
+                      <a
+                        href="https://www.linkedin.com/in/nahiyan-muhammad/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-icon"
+                      >
+                        <FaLinkedin />
+                      </a>
+                      <a
+                        href="/Master%20Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-icon"
+                      >
+                        <FaFileAlt />
+                      </a>
+                    </div>
+                  </section>
+
+                  <section className="about" id="about">
+                    <h2 className="about-title">About</h2>
+                    <div className="about-content">
+                      <div className="about-left">
+                        <img
+                          src={`${process.env.PUBLIC_URL}/nahi.jpg`}
+                          alt="Profile"
+                          className="profile-pic"
+                          onError={() => console.log("Failed to load profile picture")}
+                        />
+                        <div className="skills" ref={skillsBoxRef}>
+                          <h3>Skills</h3>
+                          <ul>
+                            <li>Onshape, Solidworks & CREO</li>
+                            <li>AutoCAD</li>
+                            <li>JavaScript</li>
+                            <li>HTML/CSS</li>
+                            <li>Visual Basics of Application</li>
+                            <li>Gcode</li>
+                            <li>React</li>
+                            <li>Arduino</li>
+                            <li>C, C++ & C#</li>
+                            <li>Manufacturing: Soldering, CNC etc.</li>
+                            <li>MOOSE, COMSOL & Gmsh</li>
+                          </ul>
                         </div>
                       </div>
-                      <div className="social-icons">
-                        <a
-                          href="https://linkedin.com/in/your-profile"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="social-icon"
-                        >
-                          <FaLinkedin />
+                      <div className="about-right">
+                        <p ref={aboutTextRef}>
+                          Hello! I’m Nahiyan, from Dhaka, Bangladesh. I’m currently pursuing a B.S. in Mechanical and Computer Engineering at Boston University. My passions include designing CAD models, developing sustainable solutions, analyzing financial investments, and exploring entrepreneurship. I believe in combining creativity, discipline, and teamwork to make a real-world impact.
+                        </p>
+                        <div className="hobbies" ref={hobbiesBoxRef}>
+                          <h3>Hobbies & Interests</h3>
+                          <ul>
+                            <li>Gym, Soccer & Running</li>
+                            <li>Competition & Hackathons</li>
+                            <li>Watching Marvel</li>
+                            <li>Engage in environment and energy-related research.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="projects" id="projects">
+                    <h2>Projects</h2>
+                    <div className="project-grid">
+                      <div onClick={() => handleProjectClick('/project/1')} className="project-card">
+                        <h3>Project 1</h3>
+                        <p className="project-preview">Batch Reverse Osmosis System</p>
+                      </div>
+                      <div onClick={() => handleProjectClick('/project/2')} className="project-card">
+                        <h3>Project 2</h3>
+                        <p className="project-preview">FreshFridge</p>
+                      </div>
+                      <div onClick={() => handleProjectClick('/project/3')} className="project-card">
+                        <h3>Project 3</h3>
+                        <p className="project-preview">Lamp Buddy</p>
+                      </div>
+                      <div onClick={() => handleProjectClick('/project/4')} className="project-card">
+                        <h3>Project 4</h3>
+                        <p className="project-preview">Automatic Water Dispensing System</p>
+                      </div>
+                      <div onClick={() => handleProjectClick('/project/5')} className="project-card">
+                        <h3>Project 5</h3>
+                        <p className="project-preview">Light Based Head Tracker</p>
+                      </div>
+                      <div onClick={() => handleProjectClick('/project/6')} className="project-card">
+                        <h3>Project 6</h3>
+                        <p className="project-preview">Motor Controlled Vehicle</p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="contact" id="contact">
+                    <div className="contact-content">
+                      <p className="contact-subtitle">GOT A PROJECT IN MIND?</p>
+                      <h2 className="contact-title">LET'S CONNECT</h2>
+                      <a href="mailto:nahiyanm@bu.edu" className="contact-button">
+                        WRITE A MESSAGE
+                      </a>
+                      <p className="contact-social-text">FEEL FREE TO CONNECT WITH ME ON SOCIAL</p>
+                      <div className="contact-social-links">
+                        <a href="https://www.joinhandshake.com/" target="_blank" rel="noopener noreferrer">
+                          HANDSHAKE
                         </a>
-                        <a
-                          href="/path-to-your-resume.pdf"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="social-icon"
-                        >
-                          <FaFileAlt />
+                        <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+                          LINKEDIN
+                        </a>
+                        <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
+                          INSTAGRAM
                         </a>
                       </div>
-                    </section>
-
-                    <section className="about" id="about">
-                      <h2 className="about-title">About</h2>
-                      <div className="about-content">
-                        <div className="about-left">
-                          <img
-                            src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-                            alt="Profile"
-                            className="profile-pic"
-                            onError={() => console.log("Failed to load profile picture")}
-                          />
-                          <div className="skills" ref={skillsBoxRef}>
-                            <h3>Skills</h3>
-                            <ul>
-                              <li>React</li>
-                              <li>GSAP</li>
-                              <li>JavaScript</li>
-                              <li>HTML/CSS</li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="about-right">
-                          <p ref={aboutTextRef}>
-                            Hello! I'm Nahiyan. I love building interactive web experiences and 
-                            exploring new technologies. I'm currently focused on front-end development, 
-                            animations, and creative design.
-                          </p>
-                          <div className="hobbies" ref={hobbiesBoxRef}>
-                            <h3>Hobbies & Interests</h3>
-                            <ul>
-                              <li>Photography</li>
-                              <li>Music Production</li>
-                              <li>Traveling</li>
-                              <li>Tech Blogging</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-
-                    <section className="projects" id="projects">
-                      <h2>Projects</h2>
-                      <div className="project-grid">
-                        <Link to="/project/1" className="project-card">
-                          <h3>Project 1</h3>
-                          <p className="project-preview">A portfolio website with animations</p>
-                        </Link>
-                        <Link to="/project/2" className="project-card">
-                          <h3>Project 2</h3>
-                          <p className="project-preview">Interactive game using JavaScript</p>
-                        </Link>
-                        <Link to="/project/3" className="project-card">
-                          <h3>Project 3</h3>
-                          <p className="project-preview">E-commerce website</p>
-                        </Link>
-                        <Link to="/project/4" className="project-card">
-                          <h3>Project 4</h3>
-                          <p className="project-preview">Weather app with API</p>
-                        </Link>
-                        <Link to="/project/5" className="project-card">
-                          <h3>Project 5</h3>
-                          <p className="project-preview">Blog platform</p>
-                        </Link>
-                        <Link to="/project/6" className="project-card">
-                          <h3>Project 6</h3>
-                          <p className="project-preview">Task management app</p>
-                        </Link>
-                      </div>
-                    </section>
-
-                    <section className="contact" id="contact">
-                      <div className="contact-content">
-                        <p className="contact-subtitle">GOT A PROJECT IN MIND?</p>
-                        <h2 className="contact-title">LET'S CONNECT</h2>
-                        <a href="mailto:nahiyanm@bu.edu" className="contact-button">
-                          WRITE A MESSAGE
-                        </a>
-                        <p className="contact-social-text">FEEL FREE TO CONNECT WITH ME ON SOCIAL</p>
-                        <div className="contact-social-links">
-                          <a href="https://www.joinhandshake.com/" target="_blank" rel="noopener noreferrer">
-                            HANDSHAKE
-                          </a>
-                          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
-                            LINKEDIN
-                          </a>
-                          <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
-                            INSTAGRAM
-                          </a>
-                        </div>
-                      </div>
-                    </section>
-                  </>
-                }
-              />
-              <Route path="/project/1" element={<Project1 />} />
-              <Route path="/project/2" element={<Project2 />} />
-              <Route path="/project/3" element={<Project3 />} />
-              <Route path="/project/4" element={<Project4 />} />
-              <Route path="/project/5" element={<Project5 />} />
-              <Route path="/project/6" element={<Project6 />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </>
-        )}
-      </div>
-    </Router>
+                    </div>
+                  </section>
+                </>
+              }
+            />
+            <Route path="/project/1" element={<Project1 />} onEnter={() => console.log("Navigated to Project 1")} />
+            <Route path="/project/2" element={<Project2 />} />
+            <Route path="/project/3" element={<Project3 />} />
+            <Route path="/project/4" element={<Project4 />} />
+            <Route path="/project/5" element={<Project5 />} />
+            <Route path="/project/6" element={<Project6 />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </>
+      )}
+    </div>
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
