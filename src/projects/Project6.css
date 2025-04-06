@@ -1,0 +1,602 @@
+/* Project Page */
+.project-page {
+    min-height: 100vh;
+    padding: 0 20px 60px;
+    background: #f0f0f0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle Background Pattern */
+.project-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 2px, transparent 2px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+/* Header */
+.project-header {
+    position: relative;
+    background-color: #000;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.project-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.project-header h2 {
+    position: relative;
+    z-index: 1;
+    color: #00d4ff !important;
+    font-size: 3rem;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeInDown 1s ease forwards;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Project Details Container */
+.project-details {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Project Goal Section */
+.project-goal {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #00d4ff;
+    transition: transform 0.3s ease;
+}
+
+.project-goal:hover {
+    transform: translateY(-5px);
+}
+
+.project-goal h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.project-goal h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #1e3c72, #00d4ff);
+}
+
+.project-goal p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Bullet Points Styling for Project Goal and Collage Section */
+.goal-list {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.goal-list li {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+
+.goal-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: #00d4ff;
+    font-size: 1.2rem;
+}
+
+/* Project Content */
+.project-content {
+    margin-top: 20px;
+    position: relative;
+}
+
+/* Section Divider */
+.project-content::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #1e3c72, #00d4ff);
+    margin: 0 auto 40px;
+}
+
+/* Single Image Items */
+.project-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 40px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.8s ease forwards;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+/* Animation delays for all 9 sections */
+.project-item:nth-child(1) {
+    animation-delay: 0s;
+}
+.project-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.project-item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+.project-item:nth-child(4) {
+    animation-delay: 0.6s;
+}
+.project-item:nth-child(5) {
+    animation-delay: 0.8s;
+}
+.project-item:nth-child(6) {
+    animation-delay: 1.0s;
+}
+.project-item:nth-child(7) {
+    animation-delay: 1.2s;
+}
+.project-item:nth-child(8) {
+    animation-delay: 1.4s;
+}
+.project-item:nth-child(9) {
+    animation-delay: 1.6s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-item.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Text container for sections */
+.text-container {
+    width: 50%;
+}
+
+/* Single images (non-collage) */
+.project-item img:not(.collage-image) {
+    width: 50%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-item img:not(.collage-image):hover {
+    transform: scale(1.02);
+}
+
+/* Resized image for Section 2 */
+.project-item img.resized-image {
+    width: 50%;
+    height: auto;
+}
+
+/* Section videos */
+.project-item .section-video {
+    width: 50%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-item .section-video:hover {
+    transform: scale(1.02);
+}
+
+/* Resized video for Section 9 */
+.project-item .section-video.resized-video {
+    height: 300px;
+}
+
+/* Section 3: Video only, no text */
+.project-item:nth-child(3) .section-video {
+    width: 100%;
+}
+
+/* Project item paragraph */
+.project-item p {
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.1rem;
+    position: relative;
+    padding-left: 20px;
+    margin: 15px 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-left: 2px solid #00d4ff;
+}
+
+/* Add a small decorative element before the paragraph */
+.project-item p::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color: #00d4ff;
+    font-size: 1.2rem;
+}
+
+/* Hover effect for paragraphs */
+.project-item p:hover {
+    background-color: rgba(0, 212, 255, 0.05);
+    color: #222;
+}
+
+/* Collage Section Headings */
+.project-item h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 15px 0 10px;
+    position: relative;
+}
+
+.project-item h4::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #1e3c72, #00d4ff);
+}
+
+/* Collage Container */
+.collage-container {
+    width: 50%;
+    height: 600px;
+    display: grid;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+/* Section 8 Collage: 1x3 Vertical Layout for 3 Images (Collage on Left, Text on Right) */
+.project-item:nth-child(8) .collage-container.vertical-collage {
+    display: grid;
+    grid-template-areas: 
+        "img1"
+        "img2"
+        "img3";
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    height: 750px; /* Increased from 600px to make the images larger */
+    width: 50%; /* Takes half the width to sit next to text */
+}
+
+/* Ensure each image takes up its grid area fully */
+.project-item:nth-child(8) .collage-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Assign grid areas for Section 8 */
+.project-item:nth-child(8) .collage-image:nth-child(1) {
+    grid-area: img1;
+}
+.project-item:nth-child(8) .collage-image:nth-child(2) {
+    grid-area: img2;
+}
+.project-item:nth-child(8) .collage-image:nth-child(3) {
+    grid-area: img3;
+}
+
+/* Project Conclusion Section */
+.project-conclusion {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-top: 4px solid #00d4ff;
+    transition: transform 0.3s ease;
+}
+
+.project-conclusion:hover {
+    transform: translateY(-5px);
+}
+
+.project-conclusion h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.project-conclusion h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #1e3c72, #00d4ff);
+}
+
+.project-conclusion p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.8;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add a subtle background to conclusion paragraph */
+.project-conclusion p:hover {
+    background-color: rgba(0, 212, 255, 0.1);
+    color: #222;
+}
+
+/* Add a decorative element before the conclusion paragraph */
+.project-conclusion p::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    color: #00d4ff;
+    font-size: 1.2rem;
+}
+
+/* Conclusion Video */
+.project-conclusion .conclusion-video {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-conclusion .conclusion-video:hover {
+    transform: scale(1.02);
+}
+
+/* Collage Images */
+.collage-image {
+    object-fit: contain;
+    display: block;
+    border-radius: 0;
+    transition: transform 0.3s ease;
+}
+
+.collage-image:hover {
+    transform: scale(1.05);
+}
+
+/* Project Links Container */
+.project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    position: relative;
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    color: #00d4ff;
+    text-decoration: none;
+    background: none;
+    border: 1px solid #00d4ff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover,
+.back-link:focus {
+    background: #00d4ff;
+    color: #000;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-item {
+        flex-direction: column;
+    }
+    .project-item.reverse {
+        flex-direction: column;
+    }
+    .project-item img:not(.collage-image),
+    .project-item .section-video,
+    .project-item .collage-container,
+    .project-item .text-container {
+        width: 100%;
+    }
+    .project-item img.resized-image {
+        width: 100%;
+        height: auto;
+    }
+    .project-header h2 {
+        font-size: 2.5rem;
+    }
+    .project-goal h3 {
+        font-size: 1.3rem;
+    }
+    .project-item img:not(.collage-image),
+    .project-item .section-video {
+        height: 320px;
+    }
+    .project-item .section-video.resized-video {
+        height: 240px;
+    }
+    .collage-container {
+        width: 100%;
+        height: 480px;
+    }
+    .project-item:nth-child(8) .collage-container.vertical-collage {
+        height: 600px;
+    }
+    .project-conclusion h3 {
+        font-size: 1.3rem;
+    }
+    .project-conclusion .conclusion-video {
+        height: 400px;
+    }
+    .project-item p,
+    .project-conclusion p {
+        font-size: 1rem;
+        padding: 10px;
+    }
+    .goal-list li {
+        font-size: 0.95rem;
+        padding-left: 20px;
+    }
+    .project-item h4 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-header h2 {
+        font-size: 2rem;
+    }
+    .project-goal h3 {
+        font-size: 1.2rem;
+    }
+    .project-item img:not(.collage-image),
+    .project-item .section-video {
+        height: 240px;
+    }
+    .project-item .section-video.resized-video {
+        height: 200px;
+    }
+    .collage-container {
+        height: 360px;
+    }
+    .project-item:nth-child(8) .collage-container.vertical-collage {
+        height: 480px;
+    }
+    .project-conclusion h3 {
+        font-size: 1.2rem;
+    }
+    .project-conclusion .conclusion-video {
+        height: 300px;
+    }
+    .project-item p,
+    .project-conclusion p {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+    .goal-list li {
+        font-size: 0.9rem;
+        padding-left: 20px;
+    }
+    .project-item h4 {
+        font-size: 1rem;
+    }
+}

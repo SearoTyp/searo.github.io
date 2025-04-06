@@ -1,166 +1,178 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Project1.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Project1 = () => {
-  const projectRef = useRef(null);
-  const navigate = useNavigate(); // Add useNavigate hook
-
-  useEffect(() => {
-    console.log("Project1 component mounted");
-    
-    // Force scroll to top immediately when component mounts
-    window.scrollTo(0, 0);
-    
-    const projectElement = projectRef.current;
-    if (!projectElement) {
-      console.error("Project element not found");
-      return;
-    }
-
-    gsap.set(projectElement, { opacity: 1, visibility: 'visible' });
-    gsap.set('.project-header', { opacity: 1, visibility: 'visible' });
-    gsap.set('.project-header::before', { opacity: 0.3 });
-    gsap.set('.project-details', { opacity: 1, visibility: 'visible' });
-    gsap.set('.project-content', { opacity: 1, visibility: 'visible' });
-    gsap.set('.project-item', { opacity: 1, visibility: 'visible' });
-    gsap.set('.back-link', { opacity: 1, visibility: 'visible' });
-
-    gsap.from('.project-header h2', {
-      opacity: 0,
-      y: -50,
-      duration: 1,
-      ease: 'power2.out',
-      onStart: () => console.log("Animating project header"),
-      onComplete: () => {
-        gsap.set('.project-header h2', { opacity: 1 });
-      },
-    });
-
-    gsap.utils.toArray('.project-item').forEach((item, index) => {
-      gsap.from(item, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top 80%',
-          end: 'top 60%',
-          toggleActions: 'play none none none',
-          onEnter: () => console.log(`Project item ${index + 1} entered viewport`),
-        },
-      });
-    });
-
-    gsap.from('.back-link', {
-      opacity: 0,
-      y: 20,
-      duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.back-link',
-        start: 'top 90%',
-        end: 'top 70%',
-        toggleActions: 'play none none none',
-        onEnter: () => console.log("Back link entered viewport"),
-      },
-    });
-
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-      console.log("ScrollTrigger refreshed in Project1.js");
-    }, 100);
-  }, []);
-
-  // Add handleBackClick to use the same transition effect
-  const handleBackClick = () => {
-    const overlay = document.querySelector('.transition-overlay');
-    const tl = gsap.timeline();
-    tl.to(overlay, {
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        navigate('/');
-        gsap.to(overlay, {
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-          onComplete: () => {
-            window.scrollTo({ top: 0, behavior: 'instant' });
-            console.log("Scrolled to top after navigation to: /");
-          },
-        });
-      },
-    });
-  };
-
   return (
-    <div className="project-page" ref={projectRef}>
-      {console.log("Rendering Project1 component")}
+    <div className="project-page">
       <div className="project-header">
         <h2>Batch Reverse Osmosis System</h2>
       </div>
       <div className="project-details">
+        <div className="project-goal">
+          <h3>Project Goal and Approach</h3>
+          <p>
+            <strong>My goal was to design and engineer the first-ever Countertop Batch Reverse Osmosis (BRO) Filter for Harmony Desalting.</strong> I approached the project by first defining the inspiration for the project, answering questions
+            such as: <em>where would it be used, why is it better, who would it benefit and of course, how would I build it.</em> I began the procurement for the project, preparing the Bill of Materials
+            alongside designing the Piping and Instrumentation Diagrams.
+          </p>
+        </div>
+
         <div className="project-content">
+          {/* First Image Section: Single Image */}
           <div className="project-item">
             <img
-              src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-              alt="Project 1"
+              src={`${process.env.PUBLIC_URL}/Harmony/P&ID.png`}
+              alt="Piping and Instrumentation Diagram for Batch Reverse Osmosis System"
               onError={() => console.error("Failed to load Project 1")}
             />
             <p>
-              This is the first image description for the Batch Reverse Osmosis System project. Here, we showcase the initial design phase, highlighting the core components and their integration.
+              Inspired by industrial-scale P&IDs, I designed a streamlined version tailored for this project. Strategic component placement and cost-conscious design decisions were key to its success. Safety remained a top priority throughout, leading to the integration of pressure relief valves and a robust water circulation system.
             </p>
           </div>
+
+          {/* Second Image Section: Collage of 4 Images (2x2 Grid) */}
           <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-              alt="Project 2"
-              onError={() => console.error("Failed to load Project 2")}
-            />
+            <div className="collage-container">
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/Coverblock.jpg`}
+                alt="Cover block of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage 1")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/Lidfit.jpg`}
+                alt="Lid fitting of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage 2")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/ROinside.jpg`}
+                alt="Inside view of the Reverse Osmosis system"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage 3")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/Rooutside.jpg`}
+                alt="Outside view of the Reverse Osmosis system"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage 4")}
+              />
+            </div>
             <p>
-              The second image illustrates the testing phase of the system, where we evaluated its efficiency in water purification under various conditions.
+              A commercial water filter was retrofitted to develop the BRO system. The collage highlights key components from the original unit alongside a custom CAD design for the new housing. To minimize costs, critical elements like the high-pressure and circulation pumps were preserved and integrated into the redesigned system.
             </p>
           </div>
+
+          {/* Third Image Section: Collage of 1 Video and 2 Images */}
           <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-              alt="Project 3"
-              onError={() => console.error("Failed to load Project 3")}
-            />
+            <div className="collage-container">
+              <video
+                className="collage-video"
+                loop
+                controls
+                playsInline
+                onError={() => console.error("Failed to load Collage Video")}
+              >
+                <source src={`${process.env.PUBLIC_URL}/Harmony/Circuitvid.mov`} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/CircuitDiagram.jpg`}
+                alt="Circuit diagram for the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 1")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/ElectronicsBox.jpg`}
+                alt="Electronics box of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 2")}
+              />
+            </div>
             <p>
-              In this third image, we present the final prototype of the Batch Reverse Osmosis System, showcasing its compact design and improved performance metrics.
+              The circuit diagram illustrates how core components manage water flow throughout the system. Directional flow was controlled using solenoid valves operated via solid-state relays. A circulation pump was integrated to enable BRO functionality. For safety and autonomy, the system was built with transient suppressors (RC snubbers), Arduino-based control logic, and circuit breakers—eliminating the need for daily maintenance. All programming was done using the Arduino IDE. Components were rigorously tested for performance and reliability; one of the key tests involved monitoring solenoid valve actuation and ensuring they remained within safe thermal limits.
             </p>
           </div>
+
+          {/* Fourth Image Section: Collage of 6 Images (2x3 Grid) */}
           <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-              alt="Project 4"
-              onError={() => console.error("Failed to load Project 4")}
-            />
+            <div className="collage-container">
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/PVback.jpg`}
+                alt="Installation 1 of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 4-1")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/PVBlocker.jpg`}
+                alt="Installation 2 of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 4-2")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/Connector1.jpg`}
+                alt="Installation 3 of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 4-3")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/Conducsens.jpg`}
+                alt="Installation 4 of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 4-4")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/ValveHolder.jpg`}
+                alt="Installation 5 of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 4-5")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/Harmony/Permeate Connector.jpg`}
+                alt="Installation 6 of the Batch Reverse Osmosis System"
+                className="collage-image"
+                onError={() => console.error("Failed to load Collage Image 4-6")}
+              />
+            </div>
             <p>
-              The fourth image highlights the installation process of the system in a real-world setting, demonstrating its practical application and ease of use.
+              The components shown here were custom-designed for 3D printing using a resin printer to ensure watertight precision. These fittings were engineered to support a robust system capable of integrating multiple sensors and a bladder, enabling seamless connectivity and reliable performance under pressure.
             </p>
           </div>
+
+          {/* Fifth Image Section: Single Video */}
           <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-              alt="Project 5"
-              onError={() => console.error("Failed to load Project 5")}
-            />
+            <video
+              className="collage-video"
+              loop
+              controls
+              playsInline
+              onError={() => console.error("Failed to load Collage Video")}
+            >
+              <source src={`${process.env.PUBLIC_URL}/Harmony/Pressuregauge.mov`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
             <p>
-              Finally, the fifth image shows the results of our long-term testing, including data on water purity levels and system durability over time.
+              A pressure gauge was installed on the vessel to visualize the BRO system in action. When pressure rises, the system enters the permeate production phase—generating clean drinking water. As the pressure drops, the system resets, initiating a new cycle.
             </p>
           </div>
         </div>
-        <button onClick={handleBackClick} className="back-link">Back to Home</button>
+
+        {/* Project Conclusion Section */}
+        <div className="project-conclusion">
+          <h3>Project Conclusion</h3>
+          <p>
+            The Countertop Batch Reverse Osmosis Filter project for Harmony Desalting was a resounding success. It would not have been possible without the mentorship and support of <strong>Quantum Wei</strong>. Who played a pivotal role in guiding me throughout the process and helping me expand my knowledge. Beyond learning about BRO systems, this project deepened my skills in initiative-taking, problem-solving under pressure, and applying engineering theory to real-world challenges.
+          </p>
+          <img
+            src={`${process.env.PUBLIC_URL}/Harmony/Final.jpg`}
+            alt="Final Batch Reverse Osmosis System"
+            onError={() => console.error("Failed to load Project Conclusion Image")}
+          />
+        </div>
       </div>
+
+      <Link to="/" className="back-link">Back to Home</Link>
     </div>
   );
 };

@@ -24,14 +24,6 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Disable browser scroll restoration on initial load
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0); // Immediate scroll to top on initial load
-  }, []);
-
   useEffect(() => {
     console.log("App component mounted");
     const timer = setTimeout(() => {
@@ -51,7 +43,7 @@ function App() {
 
   useEffect(() => {
     if (loading) return;
-
+    
     console.log("Loading is false, applying GSAP animations");
 
     // Kill existing ScrollTriggers to prevent duplicates
@@ -120,7 +112,7 @@ function App() {
     );
 
     gsap.fromTo(
-      '.about-left > *, .about-right > *',
+      '.about-left > *, .about-right > *, .about-boxes > *',
       { opacity: 0, scale: 0.5, y: 50, rotateY: 90 },
       {
         opacity: 1,
@@ -206,6 +198,7 @@ function App() {
       return () => window.removeEventListener('scroll', handleScroll);
     }
 
+
     // Refresh ScrollTrigger after navigation
     setTimeout(() => {
       ScrollTrigger.refresh();
@@ -251,19 +244,18 @@ function App() {
       ease: 'power2.inOut',
       onComplete: () => {
         navigate(path);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          ScrollTrigger.refresh();
+        }, 100); // tweak this delay as needed
         gsap.to(overlayRef.current, {
           opacity: 0,
           duration: 0.8,
           ease: 'power2.out',
-          onComplete: () => {
-            window.scrollTo({ top: 0, behavior: 'instant' });
-            console.log("Scrolled to top after navigation to:", path);
-          },
         });
       },
     });
   };
-
 
   return (
     <div className="App">
@@ -323,34 +315,39 @@ function App() {
                   <section className="about" id="about">
                     <h2 className="about-title">About</h2>
                     <div className="about-content">
-                      <div className="about-left">
-                        <img
-                          src={`${process.env.PUBLIC_URL}/nahi.jpg`}
-                          alt="Profile"
-                          className="profile-pic"
-                          onError={() => console.log("Failed to load profile picture")}
-                        />
-                        <div className="skills" ref={skillsBoxRef}>
-                          <h3>Skills</h3>
-                          <ul>
-                            <li>Onshape, Solidworks & CREO</li>
-                            <li>AutoCAD</li>
-                            <li>JavaScript</li>
-                            <li>HTML/CSS</li>
-                            <li>Visual Basics of Application</li>
-                            <li>Gcode</li>
-                            <li>React</li>
-                            <li>Arduino</li>
-                            <li>C, C++ & C#</li>
-                            <li>Manufacturing: Soldering, CNC etc.</li>
-                            <li>MOOSE, COMSOL & Gmsh</li>
-                          </ul>
+                      <div className="about-top">
+                        <div className="about-left">
+                          <img
+                            src={`${process.env.PUBLIC_URL}/nahi.jpg`}
+                            alt="Profile"
+                            className="profile-pic"
+                            onError={() => console.log("Failed to load profile picture")}
+                          />
+                        </div>
+                        <div className="about-right">
+                          <p ref={aboutTextRef}>
+                            Hello! I’m Nahiyan, from Dhaka, Bangladesh. I’m currently pursuing a B.S. in Mechanical and Computer Engineering at Boston University. My passions include designing CAD models, developing sustainable solutions, analyzing financial investments, and exploring entrepreneurship. I believe in combining creativity, discipline, and teamwork to make a real-world impact.
+                          </p>
                         </div>
                       </div>
-                      <div className="about-right">
-                        <p ref={aboutTextRef}>
-                          Hello! I’m Nahiyan, from Dhaka, Bangladesh. I’m currently pursuing a B.S. in Mechanical and Computer Engineering at Boston University. My passions include designing CAD models, developing sustainable solutions, analyzing financial investments, and exploring entrepreneurship. I believe in combining creativity, discipline, and teamwork to make a real-world impact.
-                        </p>
+                      <div className="about-boxes">
+                        <div className="skills" ref={skillsBoxRef}>
+                          <h3 className="skills-title">Skills</h3>
+                          <div className="skills-columns">
+                            <div className="skills-column">
+                              <h3>Programming:</h3>
+                              <p>C/C#/C++, React, Python, JavaScript, HTML/CSS, MATLAB MOOSE, COMSOL</p>
+                              <h3>Design & Modeling:</h3>
+                              <p>SolidWorks, OnShape, CREO, AutoCAD, Canva, Figma, Adobe Suite</p>
+                            </div>
+                            <div className="skills-column">
+                              <h3>Hardware Tools:</h3>
+                              <p>Solder, CNC, Microcontrollers, Accelerometers, Oscilloscope, Multimeter, Lathe</p>
+                              <h3>Language:</h3>
+                              <p>Native English and Bangla</p>
+                            </div>
+                          </div>
+                        </div>
                         <div className="hobbies" ref={hobbiesBoxRef}>
                           <h3>Hobbies & Interests</h3>
                           <ul>
@@ -389,7 +386,7 @@ function App() {
                       </div>
                       <div onClick={() => handleProjectClick('/project/6')} className="project-card">
                         <h3>Project 6</h3>
-                        <p className="project-preview">Motor Controlled Vehicle</p>
+                        <p className="project-preview">Motor Speed Control</p>
                       </div>
                     </div>
                   </section>
@@ -398,15 +395,43 @@ function App() {
                     <div className="contact-content">
                       <p className="contact-subtitle">GOT A PROJECT IN MIND?</p>
                       <h2 className="contact-title">LET'S CONNECT</h2>
-                      <a href="mailto:nahiyanm@bu.edu" className="contact-button">
-                        WRITE A MESSAGE
-                      </a>
+                      <form
+                        className="contact-form"
+                        action="mailto:nahiyanm@bu.edu"
+                        method="POST"
+                        encType="text/plain"
+                      >
+                        <label htmlFor="name">Name</label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          placeholder="Your Name"
+                          required
+                        />
+                        <label htmlFor="email">Email</label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          placeholder="Your Email"
+                          required
+                        />
+                        <label htmlFor="message">Message</label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          placeholder="Write a message..."
+                          required
+                        ></textarea>
+                        <button type="submit">Send Message</button>
+                      </form>
                       <p className="contact-social-text">FEEL FREE TO CONNECT WITH ME ON SOCIAL</p>
                       <div className="contact-social-links">
                         <a href="https://www.joinhandshake.com/" target="_blank" rel="noopener noreferrer">
                           HANDSHAKE
                         </a>
-                        <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+                        <a href="https://linkedin.com/in/nahiyan-muhammad" target="_blank" rel="noopener noreferrer">
                           LINKEDIN
                         </a>
                         <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">

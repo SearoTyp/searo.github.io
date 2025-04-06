@@ -1,31 +1,258 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Project4.css';
 
-const Project4 = () => (
-  <div className="project-page">
-    <h1>Project 4</h1>
-    <div className="project-details">
-      <div className="project-content">
-        <h3>Description</h3>
-        <p>
-          A weather app that provides real-time weather updates using a public API.
-        </p>
-        <h3>Technologies Used</h3>
-        <ul>
-          <li>React</li>
-          <li>API Integration</li>
-          <li>CSS</li>
-        </ul>
-        <h3>Images</h3>
-        <img src="/project4-image.jpg" alt="Project 4" />
-        <h3>Links</h3>
-        <a href="https://your-project4-link.com" target="_blank" rel="noopener noreferrer">
-          View Project
-        </a>
+const Project4 = () => {
+  return (
+    <div className="project-page">
+      <div className="project-header">
+        <h2>Automatic Water Dispensing System</h2>
+      </div>
+      <div className="project-details">
+        <div className="project-goal">
+          <h3>Project Goal and Approach</h3>
+          <p>
+            <strong>Designed, manufactured, assembled, and automated a Cartesian motor system with 2.5 degrees of freedom for an automatic water dispensing system.</strong> This system was developed to deliver precise water dispensing for applications such as plant irrigation or industrial fluid management. My approach involved creating custom parts using Onshape and Solidworks, efficiently manufacturing components with a waterjet, and programming the system with G-code to achieve full automation and adaptability.
+          </p>
+        </div>
+
+        <div className="project-content">
+          {/* Section 1: Preliminary Motor Testing */}
+          <div className="project-item">
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/1.jpg`}
+              alt="Initial Experimentation"
+              onError={() => console.error("Failed to load Initial Experimentation Image")}
+            />
+            <p>
+              Before starting the main project, we conducted initial tests to understand stepper motor functionality by using them to draw on cardboard with a marker. This foundational step was essential since our project also utilized three motors. A unique feature of our experiment was converting G-code into visual outputs using Repetier Host and Arduino, resulting in a successful drawing of a dinosaur.
+            </p>
+          </div>
+
+          {/* Section 2: Conceptual Design Development */}
+          <div className="project-item reverse">
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/2.jpg`}
+              alt="Design Concept"
+              onError={() => console.error("Failed to load Design Concept Image")}
+            />
+            <p>
+              The project kicked off with a brainstorming session to define the system’s objectives, ultimately deciding on an automatic water dispensing system. This image showcases the initial conceptual model of our water dispenser. In later sections, we’ll explore how this concept evolved into the final product, highlighting key differences and improvements.
+            </p>
+          </div>
+
+          {/* Section 3: Component Fabrication Process */}
+          <div className="project-item">
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/3.jpg`}
+              alt="Component Fabrication"
+              onError={() => console.error("Failed to load Component Fabrication Image")}
+            />
+            <p>
+              Fabricating the components was a pivotal phase in transforming our concept into reality. We used a waterjet to precisely cut custom parts, ensuring durability and accuracy. This image captures the early stages of component manufacturing, which laid the groundwork for the assembly of our water dispensing system.
+            </p>
+          </div>
+
+          {/* Section 4: Custom Parts Overview (3x3 Grid Collage with 9 Images) */}
+          <div className="project-item">
+            <div>
+              <h4>Custom Parts Overview</h4>
+              <p>
+                To bring our design to life, we crafted a series of custom components essential for the water dispensing system: 
+                <p><ul className="goal-list">
+                  <li>8020 Holder</li>
+                  <li>Stepper Motor Bracket</li>
+                  <li>Pump Holder</li>
+                  <li>Middle Motor Mount</li>
+                  <li>Idle Pulley Mount Cross</li>
+                  <li>Gear</li>
+                  <li>Cross Member</li>
+                  <li>Spray Sleeve</li>
+                  <li>Spray Tube</li>
+                  <li>Spray Cap</li>
+                </ul></p>
+              </p>
+            </div>
+            <div className="collage-container">
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/4.jpg`}
+                alt="Part 1"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 1 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/5.jpg`}
+                alt="Part 2"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 2 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/6.jpg`}
+                alt="Part 3"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 3 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/7.jpg`}
+                alt="Part 4"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 4 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/8.jpg`}
+                alt="Part 5"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 5 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/9.jpg`}
+                alt="Part 6"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 6 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/10.jpg`}
+                alt="Part 7"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 7 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/11.jpg`}
+                alt="Part 8"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 8 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/12.jpg`}
+                alt="Part 9"
+                className="collage-image"
+                onError={() => console.error("Failed to load Part 9 Image")}
+              />
+            </div>
+          </div>
+
+          {/* Section 5: Motor Integration Demonstration */}
+          <div className="project-item">
+            <video
+              className="section-video"
+              loop
+              controls
+              playsInline
+              onError={() => console.error("Failed to load Motor Integration Video")}
+            >
+              <source src={`${process.env.PUBLIC_URL}/WaterDispensing/Vid1.mov`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          {/* Section 6: Adding the Sprayer Mechanism */}
+          <div className="project-item reverse">
+            <video
+              className="section-video"
+              loop
+              controls
+              playsInline
+              onError={() => console.error("Failed to load G-code Programming Video")}
+            >
+              <source src={`${process.env.PUBLIC_URL}/WaterDispensing/Vid2.mov`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p>
+              After successfully testing the system’s two primary axes, as shown in the video, we introduced the final half degree of freedom by incorporating a sprayer mechanism. This was achieved by attaching the sprayer to the middle-mounted motor using a gear and transfer case, enabling precise rotational movement for effective water dispersion.
+            </p>
+          </div>
+
+          {/* Section 7: Overcoming Gear Fabrication Challenges */}
+          <div className="project-item">
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/gear.jpg`}
+              alt="Sensor Integration"
+              onError={() => console.error("Failed to load Sensor Integration Image")}
+            />
+            <p>
+              One of the major challenges we faced was fabricating the gear to ensure precise alignment with the motor pulley’s teeth. Initial attempts using 3D printing failed due to insufficient accuracy in tooth spacing and the material’s lack of durability, causing the parts to slip. To resolve this, we switched to waterjet cutting the gear from acrylic, which provided the necessary precision and durability for reliable operation.
+            </p>
+          </div>
+
+          {/* Section 8: System Elevation for Enhanced Display */}
+          <div className="project-item reverse">
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/house.jpg`}
+              alt="Assembly Process"
+              onError={() => console.error("Failed to load Assembly Process Image")}
+            />
+            <p>
+              To better demonstrate the system’s functionality and create a more realistic model, we elevated the entire setup—a feature not part of the original design, as seen here. This modification allowed us to fully showcase the water dispensing system in action, enhancing both its practicality and visual appeal.
+            </p>
+          </div>
+
+          {/* Section 9: Final System Assembly and Testing */}
+          <div className="project-item">
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg`}
+              alt="Testing and Calibration"
+              onError={() => console.error("Failed to load Testing and Calibration Image")}
+            />
+            <p>
+              Despite minor challenges, such as integrating the pump and DC motor with the water system, we successfully resolved these issues and completed the final assembly. The result is a fully automated water dispensing system, ready to perform reliably in real-world applications.
+            </p>
+          </div>
+
+          {/* Section 10: G-code Programming and System Automation */}
+          <div className="project-item vertical-layout">
+            <div className="text-container">
+              <h4>G-code Programming and System Automation</h4>
+              <p>
+                The entire system was powered by an Arduino Mega, programmed using G-code to automate its operations. We developed a program on the Arduino Mega to interpret G-code instructions, utilizing Repetier-Host to write and execute the code. This setup allows users to input specific parameters, such as plant locations and watering durations, enabling the system to automatically handle diverse dispensing patterns with precision.
+              </p>
+            </div>
+            <div className="collage-container">
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/code1.jpeg`}
+                alt="Final System 1"
+                className="collage-image"
+                onError={() => console.error("Failed to load Final System 1 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/code2.jpeg`}
+                alt="Final System 2"
+                className="collage-image"
+                onError={() => console.error("Failed to load Final System 2 Image")}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/code.jpeg`}
+                alt="Final System 3"
+                className="collage-image"
+                onError={() => console.error("Failed to load Final System 3 Image")}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Project Conclusion Section */}
+        <div className="project-conclusion">
+          <h3>Project Conclusion</h3>
+          <p>
+            The video below demonstrates the real-world functionality of our water dispensing system. We incorporated a sprinkler mechanism using a DC motor to mimic the gentle sprinkling motion required for seeds, avoiding overwatering. This video provides a comprehensive overview of the system’s capabilities, highlights the challenges we overcame, and showcases the complete model in action.
+          </p>
+          <video
+            className="conclusion-video"
+            loop
+            controls
+            playsInline
+            onError={() => console.error("Failed to load Project Conclusion Video")}
+          >
+            <source src={`${process.env.PUBLIC_URL}/WaterDispensing/Final Vid.MP4`} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <div className="project-links">
+        <Link to="/" className="back-link">Back to Home</Link>
       </div>
     </div>
-    <Link to="/" className="back-link">Back to Home</Link>
-  </div>
-);
+  );
+};
 
 export default Project4;
