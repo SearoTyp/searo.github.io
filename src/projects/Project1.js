@@ -67,16 +67,14 @@ const Project1 = () => {
           {/* Third Image Section: Collage of 1 Video and 2 Images */}
           <div className="project-item">
             <div className="collage-container">
-              <video
+              <iframe
                 className="collage-video"
-                loop
-                controls
-                playsInline
-                onError={() => console.error("Failed to load Collage Video")}
-              >
-                <source src={`${process.env.PUBLIC_URL}/Harmony/Circuitvid.mov`} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                src="https://www.youtube.com/embed/EeYUG1SiIBo"
+                title="Circuit Video for Batch Reverse Osmosis System"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/CircuitDiagram.jpg`}
                 alt="Circuit diagram for the Batch Reverse Osmosis System"
@@ -95,7 +93,7 @@ const Project1 = () => {
             </p>
           </div>
 
-          {/* Fourth Image Section: Collage of 6 Images (2x3 Grid) */}
+          {/* Fourth Image Section: Collage of 6 Images (3x2 Grid) */}
           <div className="project-item reverse">
             <div className="collage-container">
               <img
@@ -142,16 +140,14 @@ const Project1 = () => {
 
           {/* Fifth Image Section: Single Video */}
           <div className="project-item">
-            <video
+            <iframe
               className="collage-video"
-              loop
-              controls
-              playsInline
-              onError={() => console.error("Failed to load Collage Video")}
-            >
-              <source src={`${process.env.PUBLIC_URL}/Harmony/Pressuregauge.mov`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+              src="https://www.youtube.com/embed/QspQdUqWWcw"
+              title="Pressure Gauge Demonstration for Batch Reverse Osmosis System"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             <p>
               A pressure gauge was installed on the vessel to visualize the BRO system in action. When pressure rises, the system enters the permeate production phase—generating clean drinking water. As the pressure drops, the system resets, initiating a new cycle.
             </p>

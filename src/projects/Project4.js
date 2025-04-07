@@ -74,89 +74,42 @@ const Project4 = () => {
               </p>
             </div>
             <div className="collage-container">
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/4.jpg`}
-                alt="Part 1"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 1 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/5.jpg`}
-                alt="Part 2"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 2 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/6.jpg`}
-                alt="Part 3"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 3 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/7.jpg`}
-                alt="Part 4"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 4 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/8.jpg`}
-                alt="Part 5"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 5 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/9.jpg`}
-                alt="Part 6"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 6 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/10.jpg`}
-                alt="Part 7"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 7 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/11.jpg`}
-                alt="Part 8"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 8 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/12.jpg`}
-                alt="Part 9"
-                className="collage-image"
-                onError={() => console.error("Failed to load Part 9 Image")}
-              />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/4.jpg`} alt="Part 1" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/5.jpg`} alt="Part 2" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/6.jpg`} alt="Part 3" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/7.jpg`} alt="Part 4" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/8.jpg`} alt="Part 5" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/9.jpg`} alt="Part 6" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/10.jpg`} alt="Part 7" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/11.jpg`} alt="Part 8" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/12.jpg`} alt="Part 9" className="collage-image" />
             </div>
           </div>
 
           {/* Section 5: Motor Integration Demonstration */}
           <div className="project-item">
-            <video
-              className="section-video"
-              loop
-              controls
-              playsInline
-              onError={() => console.error("Failed to load Motor Integration Video")}
-            >
-              <source src={`${process.env.PUBLIC_URL}/WaterDispensing/Vid1.mov`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", width: "100%" }}>
+              <iframe
+                src="https://www.youtube.com/embed/mX1cEsyZYXI"
+                title="Motor Integration Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+              ></iframe>
+            </div>
           </div>
 
           {/* Section 6: Adding the Sprayer Mechanism */}
           <div className="project-item reverse">
-            <video
-              className="section-video"
-              loop
-              controls
-              playsInline
-              onError={() => console.error("Failed to load G-code Programming Video")}
-            >
-              <source src={`${process.env.PUBLIC_URL}/WaterDispensing/Vid2.mov`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", width: "100%" }}>
+              <iframe
+                src="https://www.youtube.com/embed/Fn5qT6mBMYk"
+                title="Sprayer Mechanism Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+              ></iframe>
+            </div>
             <p>
               After successfully testing the system’s two primary axes, as shown in the video, we introduced the final half degree of freedom by incorporating a sprayer mechanism. This was achieved by attaching the sprayer to the middle-mounted motor using a gear and transfer case, enabling precise rotational movement for effective water dispersion.
             </p>
@@ -164,11 +117,7 @@ const Project4 = () => {
 
           {/* Section 7: Overcoming Gear Fabrication Challenges */}
           <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/WaterDispensing/gear.jpg`}
-              alt="Sensor Integration"
-              onError={() => console.error("Failed to load Sensor Integration Image")}
-            />
+            <img src={`${process.env.PUBLIC_URL}/WaterDispensing/gear.jpg`} alt="Sensor Integration" />
             <p>
               One of the major challenges we faced was fabricating the gear to ensure precise alignment with the motor pulley’s teeth. Initial attempts using 3D printing failed due to insufficient accuracy in tooth spacing and the material’s lack of durability, causing the parts to slip. To resolve this, we switched to waterjet cutting the gear from acrylic, which provided the necessary precision and durability for reliable operation.
             </p>
@@ -176,11 +125,7 @@ const Project4 = () => {
 
           {/* Section 8: System Elevation for Enhanced Display */}
           <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/WaterDispensing/house.jpg`}
-              alt="Assembly Process"
-              onError={() => console.error("Failed to load Assembly Process Image")}
-            />
+            <img src={`${process.env.PUBLIC_URL}/WaterDispensing/house.jpg`} alt="Assembly Process" />
             <p>
               To better demonstrate the system’s functionality and create a more realistic model, we elevated the entire setup—a feature not part of the original design, as seen here. This modification allowed us to fully showcase the water dispensing system in action, enhancing both its practicality and visual appeal.
             </p>
@@ -188,11 +133,7 @@ const Project4 = () => {
 
           {/* Section 9: Final System Assembly and Testing */}
           <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg`}
-              alt="Testing and Calibration"
-              onError={() => console.error("Failed to load Testing and Calibration Image")}
-            />
+            <img src={`${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg`} alt="Testing and Calibration" />
             <p>
               Despite minor challenges, such as integrating the pump and DC motor with the water system, we successfully resolved these issues and completed the final assembly. The result is a fully automated water dispensing system, ready to perform reliably in real-world applications.
             </p>
@@ -207,24 +148,9 @@ const Project4 = () => {
               </p>
             </div>
             <div className="collage-container">
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/code1.jpeg`}
-                alt="Final System 1"
-                className="collage-image"
-                onError={() => console.error("Failed to load Final System 1 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/code2.jpeg`}
-                alt="Final System 2"
-                className="collage-image"
-                onError={() => console.error("Failed to load Final System 2 Image")}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/WaterDispensing/code.jpeg`}
-                alt="Final System 3"
-                className="collage-image"
-                onError={() => console.error("Failed to load Final System 3 Image")}
-              />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/code1.jpeg`} alt="Final System 1" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/code2.jpeg`} alt="Final System 2" className="collage-image" />
+              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/code.jpeg`} alt="Final System 3" className="collage-image" />
             </div>
           </div>
         </div>
@@ -235,16 +161,15 @@ const Project4 = () => {
           <p>
             The video below demonstrates the real-world functionality of our water dispensing system. We incorporated a sprinkler mechanism using a DC motor to mimic the gentle sprinkling motion required for seeds, avoiding overwatering. This video provides a comprehensive overview of the system’s capabilities, highlights the challenges we overcame, and showcases the complete model in action.
           </p>
-          <video
-            className="conclusion-video"
-            loop
-            controls
-            playsInline
-            onError={() => console.error("Failed to load Project Conclusion Video")}
-          >
-            <source src={`${process.env.PUBLIC_URL}/WaterDispensing/Final Vid.MP4`} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", width: "100%" }}>
+            <iframe
+              src="https://www.youtube.com/embed/A_hi-rURnzw"
+              title="Final System Overview"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+            ></iframe>
+          </div>
         </div>
       </div>
 

@@ -199,16 +199,16 @@ const Project5 = () => {
           <p>
             The Light Based Head Tracker project successfully created an accessible and reliable system for users with limited dexterity to interact with technology through head movements. By integrating light sensors, an Arduino Mega, and an LED display, the system achieved a 97% accuracy rate in tracking head positions, with a fast response time of 50 ms. Challenges such as ensuring comfort, managing varying lighting conditions, and optimizing sensor sensitivity were overcome through iterative design and testing. The final system, as demonstrated in the sections above, provides a practical solution for assistive technology applications, with potential for further development in areas like multi-axis tracking or integration with advanced communication devices. Check out the final demonstration below!
           </p>
-          <video
-            className="conclusion-video"
-            loop
-            controls
-            playsInline
-            onError={() => console.error("Failed to load Project Conclusion Video")}
-          >
-            <source src={`${process.env.PUBLIC_URL}HeadSensor/FinalVid.mov`} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="video-container">
+            <iframe
+              className="conclusion-video"
+              src="https://www.youtube.com/embed/Fo3scTZS1BI"
+              title="Light Based Head Tracker Demo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </div>
 

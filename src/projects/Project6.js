@@ -12,7 +12,7 @@ const Project6 = () => {
         <div className="project-goal">
           <h3>Project Goal and Approach</h3>
           <p>
-            <strong>The objective of this project was to design a platform that leverages Multibody Dynamic Simulation to maximize the acceleration of a 1-foot aluminum extrusion section, transporting it 10 feet while keeping it upright.</strong> This initiative tackled the challenge of efficient and stable transportation. Our approach involved CAding and Simulations, iterative prototyping, and rigorous testing to ensure the system achieved its performance targets.
+            <strong>The objective of this project was to design a platform that leverages Multibody Dynamic Simulation to maximize the acceleration of a 1-foot aluminum extrusion section, transporting it 10 feet while keeping it upright.</strong> This initiative tackled the challenge of efficient and stable transportation. Our approach involved CADing and Simulations, iterative prototyping, and rigorous testing to ensure the system achieved its performance targets.
           </p>
         </div>
 
@@ -52,18 +52,17 @@ const Project6 = () => {
             </div>
           </div>
 
-          {/* Section 3: System Testing (Video Only) */}
+          {/* Section 3: System Testing (YouTube Video) */}
           <div className="project-item">
-            <video
+            <iframe
               className="section-video"
-              loop
-              controls
-              playsInline
+              src="https://www.youtube.com/embed/dr3hQA2cLek"
+              title="System Testing Video for Motor Speed Control"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
               onError={() => console.error("Failed to load System Testing Video")}
-            >
-              <source src={`${process.env.PUBLIC_URL}/MotorControl/Vid1.mp4`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            ></iframe>
           </div>
 
           {/* Section 4: Component Assembly */}
@@ -112,7 +111,7 @@ const Project6 = () => {
             />
             <div className="text-container">
               <p>
-                This Arduino sketch governs the motor’s acceleration and deceleration for both forward and backward movements using PWM signals on two digital output pins. In the `setup()` function, pins 5 and 6 are configured as outputs to control the motor. The `loop()` function orchestrates a gradual increase in PWM values from 0 to 235 to accelerate the motor, followed by a decrease back to 0 for deceleration, with a brief pause before reversing direction. This process is repeated for backward motion, ensuring precise speed and directional control. After one complete cycle, the program enters an infinite loop, halting further execution and maintaining the motor in a static state. This setup is ideal for applications requiring accurate motor control, such as robotics or automated systems.
+                This Arduino sketch governs the motor’s acceleration and deceleration for both forward and backward movements using PWM signals on two digital output pins. In the setup() function, pins 5 and 6 are configured as outputs to control the motor. The loop() function orchestrates a gradual increase in PWM values from 0 to 235 to accelerate the motor, followed by a decrease back to 0 for deceleration, with a brief pause before reversing direction. This process is repeated for backward motion, ensuring precise speed and directional control. After one complete cycle, the program enters an infinite loop, halting further execution and maintaining the motor in a static state. This setup is ideal for applications requiring accurate motor control, such as robotics or automated systems.
               </p>
             </div>
           </div>
@@ -173,18 +172,17 @@ const Project6 = () => {
             </div>
           </div>
 
-          {/* Section 9: Final Demonstration (Video with Text) */}
+          {/* Section 9: Final Demonstration (YouTube Video with Text) */}
           <div className="project-item reverse">
-            <video
+            <iframe
               className="section-video resized-video"
-              loop
-              controls
-              playsInline
+              src="https://www.youtube.com/embed/QXV90hcXmdk"
+              title="Final Demonstration Video for Motor Speed Control"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
               onError={() => console.error("Failed to load Final Demonstration Video")}
-            >
-              <source src={`${process.env.PUBLIC_URL}/MotorControl/Vid 2.mp4`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            ></iframe>
             <div className="text-container">
               <p>
                 The SolidWorks simulation estimated a travel time of approximately 9.5 seconds at an acceleration of 950 mm/s². This closely aligned with our physical model, which completed the 10-foot distance in 10.4 seconds, as shown in the video. The slight discrepancy can be attributed to factors such as surface irregularities or higher-than-expected friction between the tires and the ground.
@@ -197,18 +195,17 @@ const Project6 = () => {
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
-            This project successfully demonstrated the design and implementation of a motor speed control system capable of transporting a 1-foot aluminum extrusion section over a 10-foot distance while maintaining its upright orientation. Through a combination of SolidWorks simulations, iterative prototyping, and motor control via Arduino, we achieved a system that balanced speed, stability, and accuracy. The project would not have been possible without <em> Luis, XimXim and Kaan</em>. Check out our final design below!
+            This project successfully demonstrated the design and implementation of a motor speed control system capable of transporting a 1-foot aluminum extrusion section over a 10-foot distance while maintaining its upright orientation. Through a combination of SolidWorks simulations, iterative prototyping, and motor control via Arduino, we achieved a system that balanced speed, stability, and accuracy. The project would not have been possible without <em>Luis, XimXim, and Kaan</em>. Check out our final design below!
           </p>
-          <video
+          <iframe
             className="conclusion-video"
-            loop
-            controls
-            playsInline
+            src="https://www.youtube.com/embed/gtnZAXxPlus"
+            title="Final Design Video for Motor Speed Control"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
             onError={() => console.error("Failed to load Project Conclusion Video")}
-          >
-            <source src={`${process.env.PUBLIC_URL}/MotorControl/Final Vid.MP4`} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          ></iframe>
         </div>
       </div>
 

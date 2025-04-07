@@ -41,25 +41,21 @@ const Project3 = () => {
                 src={`${process.env.PUBLIC_URL}/Lamp Buddy/image.jpg`}
                 alt="Touch-Free Operation"
                 className="collage-image"
-                onError={() => console.error("Failed to load Touch-Free Operation Image")}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Lamp Buddy/Circuit.jpg`}
                 alt="Timer System"
                 className="collage-image"
-                onError={() => console.error("Failed to load Timer System Image")}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Lamp Buddy/uv.jpg`}
                 alt="Mood Lighting"
                 className="collage-image"
-                onError={() => console.error("Failed to load Mood Lighting Image")}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Lamp Buddy/Housing.jpg`}
                 alt="Lamp Buddy Assembly"
                 className="collage-image"
-                onError={() => console.error("Failed to load Lamp Buddy Assembly Image")}
               />
             </div>
             <div>
@@ -109,16 +105,15 @@ const Project3 = () => {
           <p>
             Lamp Buddy was a rewarding project that combined hardware and software to create a practical tool for students. It won 3rd place in the <a href="https://www.bu.edu/eng/academics/teaching-and-innovation/singh-imagineering-lab-silab/competitions/lutron-lighting-competition/lutron-2024-competition/" target="_blank" rel="noopener noreferrer" className="competition-link">Lutron Lighting Innovation Challenge 2024</a>, highlighting its innovative approach to minimizing distractions and enhancing study environments. The project would not have been possible without the help of <em>Inal, Mario, and Slava</em>. Check out our video to see Lamp Buddy in action!
           </p>
-          <video
-            className="conclusion-video"
-            loop
-            controls
-            playsInline
-            onError={() => console.error("Failed to load Project Conclusion Video")}
-          >
-            <source src={`${process.env.PUBLIC_URL}/Lamp Buddy/IMG.mov`} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", width: "100%" }}>
+            <iframe
+              src="https://www.youtube.com/embed/e01kFQK6CQI"
+              title="Lamp Buddy Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+            ></iframe>
+          </div>
         </div>
       </div>
 
