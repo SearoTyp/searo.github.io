@@ -106,16 +106,23 @@ const Project2 = () => {
           <p>
             FreshFridge was a successful attempt at building an intuitive, feature-rich web application that simplifies kitchen management. The project would not have been possible without <em>Sae</em>, <em>Dil</em>, <em>Alex</em>, <em>Vq</em>, and <em>Jackie</em>. Check out our video to see all the features of FreshFridge!
           </p>
-          <video
-            className="conclusion-video"
-            loop
-            controls
-            playsInline
-            onError={() => console.error("Failed to load Project Conclusion Video")}
-          >
-            <source src={`${process.env.PUBLIC_URL}/FreshFridge/FreshFridge.mov`} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="conclusion-video" style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}>
+                        <iframe
+                        src="https://www.youtube.com/embed/qe16tw61GcM"
+                  title="FreshFridge Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    border: "none"
+                  }}
+                ></iframe>
+              </div>
+
         </div>
       </div>
 
