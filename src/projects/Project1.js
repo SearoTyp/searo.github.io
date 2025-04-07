@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Project1.css';
 
 const Project1 = () => {
+  // Ensure the page scrolls to the top when the component mounts
+  useEffect(() => {
+    console.log("Project1 component mounted, scrolling to top");
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant', // Use 'instant' to avoid smooth scrolling
+    });
+
+    // Additional fallback: Ensure the document body and HTML are reset
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []); // Empty dependency array ensures this runs only on mount
+
   return (
     <div className="project-page">
       <div className="project-header">
@@ -19,7 +33,6 @@ const Project1 = () => {
         </div>
 
         <div className="project-content">
-          {/* First Image Section: Single Image */}
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/Harmony/P&ID.png`}
@@ -31,7 +44,6 @@ const Project1 = () => {
             </p>
           </div>
 
-          {/* Second Image Section: Collage of 4 Images (2x2 Grid) */}
           <div className="project-item reverse">
             <div className="collage-container">
               <img
@@ -64,7 +76,6 @@ const Project1 = () => {
             </p>
           </div>
 
-          {/* Third Image Section: Collage of 1 Video and 2 Images */}
           <div className="project-item">
             <div className="collage-container">
               <iframe
@@ -93,7 +104,6 @@ const Project1 = () => {
             </p>
           </div>
 
-          {/* Fourth Image Section: Collage of 6 Images (3x2 Grid) */}
           <div className="project-item reverse">
             <div className="collage-container">
               <img
@@ -138,7 +148,6 @@ const Project1 = () => {
             </p>
           </div>
 
-          {/* Fifth Image Section: Single Video */}
           <div className="project-item">
             <iframe
               className="collage-video"
@@ -154,7 +163,6 @@ const Project1 = () => {
           </div>
         </div>
 
-        {/* Project Conclusion Section */}
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>

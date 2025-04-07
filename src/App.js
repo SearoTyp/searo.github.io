@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaAngleDoubleDown, FaLinkedin, FaFileAlt } from 'react-icons/fa';
 import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import Project1 from './projects/Project1';
@@ -11,250 +9,80 @@ import Project5 from './projects/Project5';
 import Project6 from './projects/Project6';
 import './App.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 function App() {
   const [loading, setLoading] = useState(true);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const overlayRef = useRef(null);
   const headerRef = useRef(null);
-  const skillsBoxRef = useRef(null);
-  const hobbiesBoxRef = useRef(null);
-  const aboutTextRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Reset scroll position on route change with a slight delay
+  useEffect(() => {
+    console.log("Route changed to:", location.pathname);
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant',
+      });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   useEffect(() => {
     console.log("App component mounted");
     const timer = setTimeout(() => {
-      gsap.to('.preloader', {
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out',
-        onComplete: () => {
-          console.log("Preloader finished, setting loading to false");
-          setLoading(false);
-        },
-      });
+      setLoading(false);
     }, 2200);
 
     return () => clearTimeout(timer);
   }, []);
 
+  // Header scroll behavior for homepage only
   useEffect(() => {
-    if (loading) return;
-    
-    console.log("Loading is false, applying GSAP animations");
-
-    // Kill existing ScrollTriggers to prevent duplicates
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-
-    gsap.from('.home-content > *', {
-      opacity: 0,
-      y: 50,
-      stagger: 0.2,
-      duration: 1,
-      ease: 'power2.out',
-    });
-
-    gsap.to('.home-content', {
-      opacity: 0,
-      y: 200,
-      scale: 0.8,
-      rotateX: 45,
-      rotateY: 45,
-      ease: 'power2.in',
-      scrollTrigger: {
-        trigger: '.home',
-        start: 'top 20%',
-        end: 'bottom top',
-        scrub: 1,
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.fromTo(
-      '.home::before',
-      { opacity: 0.3, background: 'linear-gradient(135deg, #1e3c72, #2a5298)' },
-      {
-        opacity: 0,
-        background: 'linear-gradient(135deg, #f0f0f0, #f0f0f0)',
-        scrollTrigger: {
-          trigger: '.home',
-          start: 'top 20%',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      }
-    );
-
-    const aboutElements = gsap.utils.toArray('.about-content > *');
-    gsap.fromTo(
-      aboutElements,
-      { opacity: 0, scale: 0.5, y: 150, rotateX: 90 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        rotateX: 0,
-        stagger: {
-          each: 0.2,
-          from: 'center',
-        },
-        ease: 'elastic.out(1, 0.3)',
-        scrollTrigger: {
-          trigger: '.home',
-          start: 'bottom 50%',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      '.about-left > *, .about-right > *, .about-boxes > *',
-      { opacity: 0, scale: 0.5, y: 50, rotateY: 90 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        rotateY: 0,
-        stagger: {
-          each: 0.1,
-          from: 'center',
-        },
-        ease: 'elastic.out(1, 0.5)',
-        scrollTrigger: {
-          trigger: '.home',
-          start: 'bottom 50%',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      }
-    );
-
-    gsap.utils.toArray('.project-card').forEach((card) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 50, rotateY: 90 },
-        {
-          opacity: 1,
-          y: 0,
-          rotateY: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 80%',
-            end: 'top 60%',
-            scrub: true,
-          },
-        }
-      );
-    });
-
-    gsap.fromTo(
-      '.contact-content > *',
-      { opacity: 0, y: 50, rotateY: 90 },
-      {
-        opacity: 1,
-        y: 0,
-        rotateY: 0,
-        stagger: 0.2,
-        duration: 0.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.contact',
-          start: 'top 80%',
-          end: 'top 60%',
-          scrub: false,
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-
-    gsap.to('.scroll-arrow', {
-      y: 20,
-      repeat: -1,
-      yoyo: true,
-      duration: 1,
-      ease: 'sine.inOut',
-    });
-
-    // Header scroll animation for homepage only
     if (location.pathname === '/') {
       let lastScrollTop = 0;
       const handleScroll = () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-          setIsHeaderVisible(false);
-        } else {
+        const scrollDifference = Math.abs(scrollTop - lastScrollTop);
+
+        // Debug scroll values
+        console.log("ScrollTop:", scrollTop, "LastScrollTop:", lastScrollTop, "Difference:", scrollDifference);
+
+        // Show header if at the very top of the page
+        if (scrollTop === 0) {
           setIsHeaderVisible(true);
         }
+        // Only toggle visibility if the scroll difference is significant (e.g., > 10 pixels)
+        else if (scrollDifference > 10) {
+          if (scrollTop > lastScrollTop) {
+            setIsHeaderVisible(false); // Hide header when scrolling down
+          } else {
+            setIsHeaderVisible(true); // Show header when scrolling up
+          }
+        }
+
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
       };
 
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
+    } else {
+      // Ensure header is hidden on other pages
+      setIsHeaderVisible(false);
     }
-
-
-    // Refresh ScrollTrigger after navigation
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-      console.log("ScrollTrigger refreshed in App.js");
-    }, 300);
-  }, [loading, location.pathname]);
+  }, [location.pathname]);
 
   const scrollToAbout = () => {
-    const tl = gsap.timeline();
-
-    tl.to(overlayRef.current, {
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.inOut',
-    })
-      .to(
-        '.home-content > *',
-        {
-          opacity: 0,
-          y: 80,
-          scale: 0.8,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        onComplete: () => {
-          document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-        },
-      });
+    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleProjectClick = (path) => {
-    const tl = gsap.timeline();
-    tl.to(overlayRef.current, {
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        navigate(path);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          ScrollTrigger.refresh();
-        }, 100); // tweak this delay as needed
-        gsap.to(overlayRef.current, {
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      },
-    });
+    navigate(path);
   };
 
   return (
@@ -264,8 +92,9 @@ function App() {
 
       {!loading && (
         <>
-          {location.pathname === '/' && isHeaderVisible && (
-            <header className="header" ref={headerRef}>
+          {/* Always render the header on the homepage, control visibility with class */}
+          {location.pathname === '/' && (
+            <header className={`header ${!isHeaderVisible ? 'hidden' : ''}`} ref={headerRef}>
               <div className="logo">Nahiyan M.</div>
               <nav className="nav">
                 <a href="#projects">Projects</a>
@@ -325,13 +154,13 @@ function App() {
                           />
                         </div>
                         <div className="about-right">
-                          <p ref={aboutTextRef}>
+                          <p>
                             Hello! I’m Nahiyan, from Dhaka, Bangladesh. I’m currently pursuing a B.S. in Mechanical and Computer Engineering at Boston University. My passions include designing CAD models, developing sustainable solutions, analyzing financial investments, and exploring entrepreneurship. I believe in combining creativity, discipline, and teamwork to make a real-world impact.
                           </p>
                         </div>
                       </div>
                       <div className="about-boxes">
-                        <div className="skills" ref={skillsBoxRef}>
+                        <div className="skills">
                           <h3 className="skills-title">Skills</h3>
                           <div className="skills-columns">
                             <div className="skills-column">
@@ -348,7 +177,7 @@ function App() {
                             </div>
                           </div>
                         </div>
-                        <div className="hobbies" ref={hobbiesBoxRef}>
+                        <div className="hobbies">
                           <h3>Hobbies & Interests</h3>
                           <ul>
                             <li>Gym, Soccer & Running</li>
@@ -428,13 +257,13 @@ function App() {
                       </form>
                       <p className="contact-social-text">FEEL FREE TO CONNECT WITH ME ON SOCIAL</p>
                       <div className="contact-social-links">
-                        <a href="https://www.joinhandshake.com/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://bu.joinhandshake.com/profiles/h8susk" target="_blank" rel="noopener noreferrer">
                           HANDSHAKE
                         </a>
                         <a href="https://linkedin.com/in/nahiyan-muhammad" target="_blank" rel="noopener noreferrer">
                           LINKEDIN
                         </a>
-                        <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/imnain/?hl=en" target="_blank" rel="noopener noreferrer">
                           INSTAGRAM
                         </a>
                       </div>

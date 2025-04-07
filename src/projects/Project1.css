@@ -9,7 +9,9 @@
   align-items: center;
   justify-content: flex-start;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  top: 0; /* Ensure the container starts at the top */
+  margin: 0; /* Remove any margins that might offset the position */
 }
 
 /* Subtle Background Pattern */
@@ -22,7 +24,7 @@
   height: 100%;
   background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 2px, transparent 2px);
   background-size: 20px 20px;
-  opacity: 0.5;
+  /* opacity: 0.5;*/
   z-index: 0;
 }
 
@@ -47,6 +49,11 @@
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   opacity: 0.3;
   z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+.project-header:hover::before {
+  opacity: 0.5;
 }
 
 .project-header h2 {
@@ -90,6 +97,9 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-left: 4px solid #00d4ff;
   transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .project-goal:hover {
@@ -143,15 +153,15 @@
   align-items: center;
   margin-bottom: 40px;
   gap: 40px;
-  opacity: 0;
-  transform: translateY(50px);
-  animation: fadeInUp 0.8s ease forwards;
   background: #fff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .project-item:hover {
@@ -171,21 +181,11 @@
   pointer-events: none;
 }
 
-.project-item:nth-child(1) {
-  animation-delay: 0s;
-}
-.project-item:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.project-item:nth-child(3) {
-  animation-delay: 0.4s;
-}
-.project-item:nth-child(4) {
-  animation-delay: 0.6s;
-}
-.project-item:nth-child(5) {
-  animation-delay: 0.8s;
-}
+.project-item:nth-child(1) { animation-delay: 0s; }
+.project-item:nth-child(2) { animation-delay: 0.2s; }
+.project-item:nth-child(3) { animation-delay: 0.4s; }
+.project-item:nth-child(4) { animation-delay: 0.6s; }
+.project-item:nth-child(5) { animation-delay: 0.8s; }
 
 @keyframes fadeInUp {
   to {
@@ -238,7 +238,6 @@
   border-left: 2px solid #00d4ff;
 }
 
-/* Add a small decorative element before the paragraph */
 .project-item p::before {
   content: '▹';
   position: absolute;
@@ -248,7 +247,6 @@
   font-size: 1.2rem;
 }
 
-/* Hover effect for paragraphs */
 .project-item p:hover {
   background-color: rgba(0, 212, 255, 0.05);
   color: #222;
@@ -275,7 +273,6 @@
   gap: 0;
 }
 
-/* Assign grid areas for the images in the second section */
 .project-item:nth-child(2) .collage-image:nth-child(1) {
   grid-area: img1;
   width: 80%;
@@ -314,7 +311,6 @@
   gap: 0;
 }
 
-/* Video in the Third Section: Spans both columns in the top row */
 .project-item:nth-child(3) .collage-video {
   grid-area: video;
   width: 30%;
@@ -322,7 +318,6 @@
   margin: 0 auto;
 }
 
-/* First Image in the Third Section: First column in the bottom row */
 .project-item:nth-child(3) .collage-image:nth-child(2) {
   grid-area: img1;
   width: 100%;
@@ -330,7 +325,6 @@
   margin: 0;
 }
 
-/* Second Image in the Third Section: Second column in the bottom row */
 .project-item:nth-child(3) .collage-image:nth-child(3) {
   grid-area: img2;
   width: 100%;
@@ -348,11 +342,10 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 0px;
-  height: 400px; /* Increased height to accommodate 3 rows */
+  height: 400px;
   width: 2000px;
 }
 
-/* Assign grid areas for the images in the fourth section */
 .project-item:nth-child(4) .collage-image:nth-child(1) {
   grid-area: img1;
   width: 60%;
@@ -407,6 +400,9 @@
   position: relative;
   border-top: 4px solid #00d4ff;
   transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .project-conclusion:hover {
@@ -444,13 +440,11 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Add a subtle background to conclusion paragraph */
 .project-conclusion p:hover {
   background-color: rgba(0, 212, 255, 0.1);
   color: #222;
 }
 
-/* Add a decorative element before the conclusion paragraph */
 .project-conclusion p::before {
   content: '▹';
   position: absolute;
@@ -522,6 +516,7 @@
   color: #000;
   text-decoration: none;
   outline: none;
+  transform: scale(1.05);
 }
 
 /* Responsive Design */
@@ -548,7 +543,7 @@
     height: 400px;
   }
   .project-item:nth-child(4) .collage-container {
-    height: 480px; /* Adjusted for 3 rows on smaller screens */
+    height: 480px;
   }
   .project-conclusion h3 {
     font-size: 1.3rem;
@@ -577,7 +572,7 @@
     height: 300px;
   }
   .project-item:nth-child(4) .collage-container {
-    height: 360px; /* Adjusted for 3 rows on smaller screens */
+    height: 360px;
   }
   .project-item img:not(.collage-image) {
     height: 300px;
