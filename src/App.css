@@ -298,11 +298,6 @@ body {
   transition: color 0.3s ease;
 }
 
-/* Keep the hover effect disabled for role-text */
-.role-text:hover {
-  /* color: #00d4ff; */ /* Keep this commented to prevent color change */
-}
-
 .welcome-text {
   font-size: 1.2rem;
   font-style: italic;
