@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project5.css';
 
 const Project5 = () => {
+  // State to manage the modal visibility and the selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal with the clicked image
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
   return (
     <div className="project-page">
       <div className="project-header">
@@ -21,11 +37,13 @@ const Project5 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/HeadSensor/1.png`}
-              alt="Prototype"
+              alt="Prototype of light-based head tracker"
               onError={(e) => {
                 console.error("Failed to load Prototype Image");
                 e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/1.png`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -38,11 +56,13 @@ const Project5 = () => {
           <div className="project-item reverse">
             <img
               src={`${process.env.PUBLIC_URL}/HeadSensor/2.png`}
-              alt="Setup Process"
+              alt="Setup process for head tracker"
               onError={(e) => {
                 console.error("Failed to load Setup Process Image");
                 e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/2.png`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -55,11 +75,13 @@ const Project5 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/HeadSensor/3.png`}
-              alt="System Specifications"
+              alt="System specifications for head tracker"
               onError={(e) => {
                 console.error("Failed to load System Specifications Image");
                 e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/3.png`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -76,48 +98,56 @@ const Project5 = () => {
               <div className="grid-item">
                 <img
                   src={`${process.env.PUBLIC_URL}/HeadSensor/4.png`}
-                  alt="Sensor 1"
+                  alt="First sensor of head tracker"
                   className="collage-image"
                   onError={(e) => {
                     console.error("Failed to load Sensor 1 Image");
                     e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                   }}
+                  onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/4.png`)}
+                  style={{ cursor: 'pointer' }}
                 />
                 <p className="image-label">Sensor</p>
               </div>
               <div className="grid-item">
                 <img
                   src={`${process.env.PUBLIC_URL}/HeadSensor/5.png`}
-                  alt="Sensor 2"
+                  alt="Second sensor of head tracker"
                   className="collage-image"
                   onError={(e) => {
                     console.error("Failed to load Sensor 2 Image");
                     e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                   }}
+                  onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/5.png`)}
+                  style={{ cursor: 'pointer' }}
                 />
                 <p className="image-label">Sensor</p>
               </div>
               <div className="grid-item">
                 <img
                   src={`${process.env.PUBLIC_URL}/HeadSensor/6.png`}
-                  alt="Infrared LEDs and Housing 1"
+                  alt="First view of infrared LEDs and housing"
                   className="collage-image"
                   onError={(e) => {
                     console.error("Failed to load Infrared LEDs and Housing 1 Image");
                     e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                   }}
+                  onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/6.png`)}
+                  style={{ cursor: 'pointer' }}
                 />
                 <p className="image-label">Infrared LEDs and Housing</p>
               </div>
               <div className="grid-item">
                 <img
                   src={`${process.env.PUBLIC_URL}/HeadSensor/7.png`}
-                  alt="Infrared LEDs and Housing 2"
+                  alt="Second view of infrared LEDs and housing"
                   className="collage-image"
                   onError={(e) => {
                     console.error("Failed to load Infrared LEDs and Housing 2 Image");
                     e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                   }}
+                  onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/7.png`)}
+                  style={{ cursor: 'pointer' }}
                 />
                 <p className="image-label">Infrared LEDs and Housing</p>
               </div>
@@ -129,21 +159,25 @@ const Project5 = () => {
             <div className="collage-container side-by-side">
               <img
                 src={`${process.env.PUBLIC_URL}/HeadSensor/8.png`}
-                alt="Circuitry"
+                alt="Circuitry of head tracker"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Circuitry Image");
                   e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/8.png`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/HeadSensor/9.png`}
-                alt="Arduino Mega"
+                alt="Arduino Mega for head tracker"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Arduino Mega Image");
                   e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/9.png`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <div className="text-container">
@@ -164,30 +198,36 @@ const Project5 = () => {
             <div className="collage-container horizontal-collage">
               <img
                 src={`${process.env.PUBLIC_URL}/HeadSensor/10.png`}
-                alt="Sensor Data Processing Speed"
+                alt="Sensor data processing speed graph"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Sensor Data Processing Speed Image");
                   e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/10.png`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/HeadSensor/11.png`}
-                alt="LED Display Refresh Rate"
+                alt="LED display refresh rate graph"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load LED Display Refresh Rate Image");
                   e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/11.png`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/HeadSensor/12.png`}
-                alt="Error Rates"
+                alt="Error rates graph for head tracker"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Error Rates Image");
                   e.target.src = `${process.env.PUBLIC_URL}/HeadSensor/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/12.png`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
           </div>
@@ -215,6 +255,24 @@ const Project5 = () => {
       <div className="project-links">
         <Link to="/" className="back-link">Back to Home</Link>
       </div>
+
+      {/* Modal for Image Display */}
+      {isModalOpen && (
+        <div className="image-modal">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={closeModal}>
+              ×
+            </button>
+            <div className="modal-image-wrapper">
+              <img
+                src={selectedImage}
+                alt="Enlarged view of head tracker content"
+                className="modal-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

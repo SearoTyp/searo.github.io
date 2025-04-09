@@ -486,6 +486,69 @@
     outline: none;
 }
 
+/* Image Modal */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.modal-close-button:hover {
+    background: #e63939;
+}
+
+.modal-image-wrapper {
+    max-width: 100%;
+    max-height: 70vh;
+    overflow: auto; /* Allow scrolling if the image overflows */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .project-item {
@@ -574,6 +637,15 @@
         padding: 8px;
     }
     .project-item h4 {
+        font-size: 1rem;
+    }
+    /* Modal adjustments for smaller screens */
+    .modal-content {
+        padding: 10px;
+    }
+    .modal-close-button {
+        width: 25px;
+        height: 25px;
         font-size: 1rem;
     }
 }

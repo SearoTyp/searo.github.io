@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project4.css';
 
 const Project4 = () => {
+  // State for modal visibility and selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+  
   return (
     <div className="project-page">
       <div className="project-header">
@@ -23,6 +39,8 @@ const Project4 = () => {
               src={`${process.env.PUBLIC_URL}/WaterDispensing/1.jpg`}
               alt="Initial Experimentation"
               onError={() => console.error("Failed to load Initial Experimentation Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/1.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               Before starting the main project, we conducted initial tests to understand stepper motor functionality by using them to draw on cardboard with a marker. This foundational step was essential since our project also utilized three motors. A unique feature of our experiment was converting G-code into visual outputs using Repetier Host and Arduino, resulting in a successful drawing of a dinosaur.
@@ -35,6 +53,8 @@ const Project4 = () => {
               src={`${process.env.PUBLIC_URL}/WaterDispensing/2.jpg`}
               alt="Design Concept"
               onError={() => console.error("Failed to load Design Concept Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/2.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               The project kicked off with a brainstorming session to define the system’s objectives, ultimately deciding on an automatic water dispensing system. This image showcases the initial conceptual model of our water dispenser. In later sections, we’ll explore how this concept evolved into the final product, highlighting key differences and improvements.
@@ -47,6 +67,8 @@ const Project4 = () => {
               src={`${process.env.PUBLIC_URL}/WaterDispensing/3.jpg`}
               alt="Component Fabrication"
               onError={() => console.error("Failed to load Component Fabrication Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/3.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               Fabricating the components was a pivotal phase in transforming our concept into reality. We used a waterjet to precisely cut custom parts, ensuring durability and accuracy. This image captures the early stages of component manufacturing, which laid the groundwork for the assembly of our water dispensing system.
@@ -74,15 +96,69 @@ const Project4 = () => {
               </p>
             </div>
             <div className="collage-container">
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/4.jpg`} alt="Part 1" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/5.jpg`} alt="Part 2" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/6.jpg`} alt="Part 3" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/7.jpg`} alt="Part 4" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/8.jpg`} alt="Part 5" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/9.jpg`} alt="Part 6" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/10.jpg`} alt="Part 7" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/11.jpg`} alt="Part 8" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/12.jpg`} alt="Part 9" className="collage-image" />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/4.jpg`}
+                alt="Part 1"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/4.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/5.jpg`}
+                alt="Part 2"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/5.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/6.jpg`}
+                alt="Part 3"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/6.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/7.jpg`}
+                alt="Part 4"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/7.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/8.jpg`}
+                alt="Part 5"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/8.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/9.jpg`}
+                alt="Part 6"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/9.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/10.jpg`}
+                alt="Part 7"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/10.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/11.jpg`}
+                alt="Part 8"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/11.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/12.jpg`}
+                alt="Part 9"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/12.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
           </div>
 
@@ -117,7 +193,12 @@ const Project4 = () => {
 
           {/* Section 7: Overcoming Gear Fabrication Challenges */}
           <div className="project-item">
-            <img src={`${process.env.PUBLIC_URL}/WaterDispensing/gear.jpg`} alt="Sensor Integration" />
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/gear.jpg`}
+              alt="Sensor Integration"
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/gear.jpg`)}
+              style={{ cursor: 'pointer' }}
+            />
             <p>
               One of the major challenges we faced was fabricating the gear to ensure precise alignment with the motor pulley’s teeth. Initial attempts using 3D printing failed due to insufficient accuracy in tooth spacing and the material’s lack of durability, causing the parts to slip. To resolve this, we switched to waterjet cutting the gear from acrylic, which provided the necessary precision and durability for reliable operation.
             </p>
@@ -125,7 +206,12 @@ const Project4 = () => {
 
           {/* Section 8: System Elevation for Enhanced Display */}
           <div className="project-item reverse">
-            <img src={`${process.env.PUBLIC_URL}/WaterDispensing/house.jpg`} alt="Assembly Process" />
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/house.jpg`}
+              alt="Assembly Process"
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/house.jpg`)}
+              style={{ cursor: 'pointer' }}
+            />
             <p>
               To better demonstrate the system’s functionality and create a more realistic model, we elevated the entire setup—a feature not part of the original design, as seen here. This modification allowed us to fully showcase the water dispensing system in action, enhancing both its practicality and visual appeal.
             </p>
@@ -133,7 +219,12 @@ const Project4 = () => {
 
           {/* Section 9: Final System Assembly and Testing */}
           <div className="project-item">
-            <img src={`${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg`} alt="Testing and Calibration" />
+            <img
+              src={`${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg`}
+              alt="Testing and Calibration"
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg`)}
+              style={{ cursor: 'pointer' }}
+            />
             <p>
               Despite minor challenges, such as integrating the pump and DC motor with the water system, we successfully resolved these issues and completed the final assembly. The result is a fully automated water dispensing system, ready to perform reliably in real-world applications.
             </p>
@@ -148,9 +239,27 @@ const Project4 = () => {
               </p>
             </div>
             <div className="collage-container">
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/code1.jpeg`} alt="Final System 1" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/code2.jpeg`} alt="Final System 2" className="collage-image" />
-              <img src={`${process.env.PUBLIC_URL}/WaterDispensing/code.jpeg`} alt="Final System 3" className="collage-image" />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/code1.jpeg`}
+                alt="Final System 1"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/code1.jpeg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/code2.jpeg`}
+                alt="Final System 2"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/code2.jpeg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/WaterDispensing/code.jpeg`}
+                alt="Final System 3"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/WaterDispensing/code.jpeg`)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
           </div>
         </div>
@@ -176,6 +285,24 @@ const Project4 = () => {
       <div className="project-links">
         <Link to="/" className="back-link">Back to Home</Link>
       </div>
+
+      {/* Modal for Zoomable Image */}
+      {isModalOpen && (
+  <div className="image-modal">
+    <div className="modal-content">
+      <button className="modal-close-button" onClick={closeModal}>
+        ×
+      </button>
+      <div className="modal-image-wrapper">
+        <img
+          src={selectedImage}
+          alt="Enlarged view of project content"
+          className="modal-image"
+        />
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

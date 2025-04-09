@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project1.css';
 
@@ -16,6 +16,22 @@ const Project1 = () => {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
   }, []); // Empty dependency array ensures this runs only on mount
+
+  // State to manage the modal visibility and the selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal with the clicked image
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
 
   return (
     <div className="project-page">
@@ -38,6 +54,8 @@ const Project1 = () => {
               src={`${process.env.PUBLIC_URL}/Harmony/P&ID.png`}
               alt="Piping and Instrumentation Diagram for Batch Reverse Osmosis System"
               onError={() => console.error("Failed to load Project 1")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/P&ID.png`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               Inspired by industrial-scale P&IDs, I designed a streamlined version tailored for this project. Strategic component placement and cost-conscious design decisions were key to its success. Safety remained a top priority throughout, leading to the integration of pressure relief valves and a robust water circulation system.
@@ -51,24 +69,32 @@ const Project1 = () => {
                 alt="Cover block of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage 1")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Coverblock.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/Lidfit.jpg`}
                 alt="Lid fitting of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage 2")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Lidfit.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/ROinside.jpg`}
                 alt="Inside view of the Reverse Osmosis system"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage 3")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/ROinside.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/Rooutside.jpg`}
                 alt="Outside view of the Reverse Osmosis system"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage 4")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Rooutside.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <p>
@@ -91,12 +117,16 @@ const Project1 = () => {
                 alt="Circuit diagram for the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 1")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/CircuitDiagram.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/ElectronicsBox.jpg`}
                 alt="Electronics box of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 2")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/ElectronicsBox.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <p>
@@ -111,36 +141,48 @@ const Project1 = () => {
                 alt="Installation 1 of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 4-1")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/PVback.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/PVBlocker.jpg`}
                 alt="Installation 2 of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 4-2")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/PVBlocker.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/Connector1.jpg`}
                 alt="Installation 3 of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 4-3")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Connector1.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/Conducsens.jpg`}
                 alt="Installation 4 of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 4-4")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Conducsens.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/Harmony/ValveHolder.jpg`}
                 alt="Installation 5 of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 4-5")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/ValveHolder.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
-                src={`${process.env.PUBLIC_URL}/Harmony/Permeate Connector.jpg`}
+                src={`${process.env.PUBLIC_URL}/Harmony/Permeate connector.jpg`}
                 alt="Installation 6 of the Batch Reverse Osmosis System"
                 className="collage-image"
                 onError={() => console.error("Failed to load Collage Image 4-6")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Permeate connector.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <p>
@@ -172,11 +214,31 @@ const Project1 = () => {
             src={`${process.env.PUBLIC_URL}/Harmony/Final.jpg`}
             alt="Final Batch Reverse Osmosis System"
             onError={() => console.error("Failed to load Project Conclusion Image")}
+            onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Final.jpg`)}
+            style={{ cursor: 'pointer' }}
           />
         </div>
       </div>
 
       <Link to="/" className="back-link">Back to Home</Link>
+
+      {/* Modal for Image Display */}
+      {isModalOpen && (
+  <div className="image-modal">
+    <div className="modal-content">
+      <button className="modal-close-button" onClick={closeModal}>
+        ×
+      </button>
+      <div className="modal-image-wrapper">
+        <img
+          src={selectedImage}
+          alt="Enlarged view of project content"
+          className="modal-image"
+        />
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

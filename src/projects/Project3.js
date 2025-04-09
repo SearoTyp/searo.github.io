@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project3.css';
 
 const Project3 = () => {
+  // State to manage the modal visibility and the selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal with the clicked image
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
   return (
     <div className="project-page">
       <div className="project-header">
@@ -21,8 +37,10 @@ const Project3 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/LampBuddy/schem.jpg`}
-              alt="Lamp Buddy Design Concept"
+              alt="Lamp Buddy design concept schematic"
               onError={() => console.error("Failed to load Lamp Buddy Design Concept Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/schem.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               The design concept for Lamp Buddy focused on creating a sleek, modern study lamp that blends functionality with aesthetics:
@@ -39,23 +57,31 @@ const Project3 = () => {
             <div className="collage-container">
               <img
                 src={`${process.env.PUBLIC_URL}/LampBuddy/image.jpg`}
-                alt="Touch-Free Operation"
+                alt="Touch-free operation of Lamp Buddy"
                 className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/image.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/LampBuddy/Circuit.jpg`}
-                alt="Timer System"
+                alt="Timer system circuit for Lamp Buddy"
                 className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/Circuit.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/LampBuddy/uv.jpg`}
-                alt="Mood Lighting"
+                alt="Mood lighting feature of Lamp Buddy"
                 className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/uv.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/LampBuddy/Housing.jpg`}
-                alt="Lamp Buddy Assembly"
+                alt="Lamp Buddy assembly and housing"
                 className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/Housing.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <div>
@@ -85,8 +111,10 @@ const Project3 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg`}
-              alt="Lamp Buddy Implementation"
+              alt="Lamp Buddy implementation with mood lights"
               onError={() => console.error("Failed to load Lamp Buddy Implementation Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               The implementation of Lamp Buddy involved a combination of hardware and software:
@@ -128,6 +156,24 @@ const Project3 = () => {
         </a>
         <Link to="/" className="back-link">Back to Home</Link>
       </div>
+
+      {/* Modal for Image Display */}
+      {isModalOpen && (
+        <div className="image-modal">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={closeModal}>
+              ×
+            </button>
+            <div className="modal-image-wrapper">
+              <img
+                src={selectedImage}
+                alt="Enlarged view of Lamp Buddy content"
+                className="modal-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

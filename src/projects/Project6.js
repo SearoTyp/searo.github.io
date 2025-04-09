@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project6.css';
 
 const Project6 = () => {
+  // State to manage the modal visibility and the selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal with the clicked image
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
   return (
     <div className="project-page">
       <div className="project-header">
@@ -21,11 +37,13 @@ const Project6 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/1.jpeg`}
-              alt="Initial Concept"
+              alt="Initial concept for motor speed control system"
               onError={(e) => {
                 console.error("Failed to load Initial Concept Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`; // Fallback image
+                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/1.jpeg`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -38,12 +56,14 @@ const Project6 = () => {
           <div className="project-item reverse">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/2.png`}
-              alt="Prototype Development"
+              alt="Prototype development for motor speed control"
               className="resized-image"
               onError={(e) => {
                 console.error("Failed to load Prototype Development Image");
                 e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/2.png`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -69,11 +89,13 @@ const Project6 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/3.png`}
-              alt="Component Assembly"
+              alt="Component assembly of motor speed control system"
               onError={(e) => {
                 console.error("Failed to load Component Assembly Image");
                 e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/3.png`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -86,11 +108,13 @@ const Project6 = () => {
           <div className="project-item reverse">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/4.jpg`}
-              alt="Design Refinement"
+              alt="Design refinement for motor speed control system"
               onError={(e) => {
                 console.error("Failed to load Design Refinement Image");
                 e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/4.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -103,11 +127,13 @@ const Project6 = () => {
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/5.jpeg`}
-              alt="Functional Testing"
+              alt="Functional testing of motor speed control system"
               onError={(e) => {
                 console.error("Failed to load Functional Testing Image");
                 e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/5.jpeg`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -120,11 +146,13 @@ const Project6 = () => {
           <div className="project-item reverse">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/6.jpg`}
-              alt="System Integration"
+              alt="System integration of motor speed control components"
               onError={(e) => {
                 console.error("Failed to load System Integration Image");
                 e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
               }}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/6.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <div className="text-container">
               <p>
@@ -138,30 +166,36 @@ const Project6 = () => {
             <div className="collage-container vertical-collage">
               <img
                 src={`${process.env.PUBLIC_URL}/MotorControl/7.png`}
-                alt="Feature 1"
+                alt="Reaction force vs frame graph for motor speed control"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Feature 1 Image");
                   e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/7.png`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/MotorControl/8.png`}
-                alt="Feature 2"
+                alt="Reaction force vs time graph for motor speed control"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Feature 2 Image");
                   e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/8.png`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/MotorControl/9.png`}
-                alt="Feature 3"
+                alt="Reaction force vs angular acceleration graph for motor speed control"
                 className="collage-image"
                 onError={(e) => {
                   console.error("Failed to load Feature 3 Image");
                   e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
                 }}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/9.png`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <div className="text-container">
@@ -212,6 +246,24 @@ const Project6 = () => {
       <div className="project-links">
         <Link to="/" className="back-link">Back to Home</Link>
       </div>
+
+      {/* Modal for Image Display */}
+      {isModalOpen && (
+        <div className="image-modal">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={closeModal}>
+              ×
+            </button>
+            <div className="modal-image-wrapper">
+              <img
+                src={selectedImage}
+                alt="Enlarged view of motor speed control content"
+                className="modal-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

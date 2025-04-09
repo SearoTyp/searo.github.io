@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project2.css';
 
 const Project2 = () => {
+  // State to manage the modal visibility and the selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal with the clicked image
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
   return (
     <div className="project-page">
       <div className="project-header">
@@ -31,6 +47,8 @@ const Project2 = () => {
               src={`${process.env.PUBLIC_URL}/FreshFridge/Schematic Diagram.jpg`}
               alt="FreshFridge Homepage Design"
               onError={() => console.error("Failed to load FreshFridge Homepage Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Schematic Diagram.jpg`)}
+              style={{ cursor: 'pointer' }}
             />
             <p>
               FreshFridge was developed using a layered full-stack approach:
@@ -51,24 +69,32 @@ const Project2 = () => {
                 alt="Main Page Interface"
                 className="collage-image"
                 onError={() => console.error("Failed to load Main Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Main Page.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/FreshFridge/Grocery Page.jpg`}
                 alt="Grocery List Page"
                 className="collage-image"
                 onError={() => console.error("Failed to load Grocery List Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Grocery Page.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/FreshFridge/Recipe Page.jpg`}
                 alt="Recipe Page"
                 className="collage-image"
                 onError={() => console.error("Failed to load Recipe Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Recipe Page.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/FreshFridge/Fridge.jpg`}
                 alt="Ingredients Page"
                 className="collage-image"
                 onError={() => console.error("Failed to load Ingredients Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Fridge.jpg`)}
+                style={{ cursor: 'pointer' }}
               />
             </div>
             <div>
@@ -107,22 +133,21 @@ const Project2 = () => {
             FreshFridge was a successful attempt at building an intuitive, feature-rich web application that simplifies kitchen management. The project would not have been possible without <em>Sae</em>, <em>Dil</em>, <em>Alex</em>, <em>Vq</em>, and <em>Jackie</em>. Check out our video to see all the features of FreshFridge!
           </p>
           <div className="conclusion-video" style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}>
-                        <iframe
-                        src="https://www.youtube.com/embed/qe16tw61GcM"
-                  title="FreshFridge Demo"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    border: "none"
-                  }}
-                ></iframe>
-              </div>
-
+            <iframe
+              src="https://www.youtube.com/embed/qe16tw61GcM"
+              title="FreshFridge Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              }}
+            ></iframe>
+          </div>
         </div>
       </div>
 
@@ -137,6 +162,23 @@ const Project2 = () => {
         </a>
         <Link to="/" className="back-link">Back to Home</Link>
       </div>
+
+      {isModalOpen && (
+  <div className="image-modal">
+    <div className="modal-content">
+      <button className="modal-close-button" onClick={closeModal}>
+        ×
+      </button>
+      <div className="modal-image-wrapper">
+        <img
+          src={selectedImage}
+          alt="Enlarged view of FreshFridge interface"
+          className="modal-image"
+        />
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

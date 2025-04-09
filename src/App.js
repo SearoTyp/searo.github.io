@@ -254,7 +254,7 @@ function App() {
 
                   <section className="contact" id="contact">
                     <div className="contact-content">
-                      <p className="contact-subtitle">GOT A PROJECT IN MIND?</p>
+                      <p className="contact-subtitle">GOT SOMETHING IN MIND?</p>
                       <h2 className="contact-title">LET'S CONNECT</h2>
                       <form
                         className="contact-form"
