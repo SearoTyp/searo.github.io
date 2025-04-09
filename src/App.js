@@ -1,7 +1,7 @@
-// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
 import { FaAngleDoubleDown, FaLinkedin, FaFileAlt } from 'react-icons/fa';
 import { HashRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import emailjs from '@emailjs/browser'; // Import EmailJS
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
 import Project3 from './projects/Project3';
@@ -17,6 +17,10 @@ function App() {
   const headerRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // State for form submission status
+  const [formStatus, setFormStatus] = useState(null);
+  const formRef = useRef(); // Reference to the form
 
   // Reset scroll position on route change with a slight delay
   useEffect(() => {
@@ -80,6 +84,33 @@ function App() {
 
   const handleProjectClick = (path) => {
     navigate(path);
+  };
+
+  // Handle form submission with EmailJS
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setFormStatus('Sending...');
+
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          console.log('Email sent successfully:', result.text);
+          setFormStatus('Message sent successfully!');
+          formRef.current.reset(); // Clear the form
+          setTimeout(() => setFormStatus(null), 5000); // Clear status message after 5 seconds
+        },
+        (error) => {
+          console.log('Failed to send email:', error.text);
+          setFormStatus('Failed to send message. Please try again later.');
+          setTimeout(() => setFormStatus(null), 5000); // Clear status message after 5 seconds
+        }
+      );
   };
 
   return (
@@ -258,9 +289,8 @@ function App() {
                       <h2 className="contact-title">LET'S CONNECT</h2>
                       <form
                         className="contact-form"
-                        action="mailto:nahiyanm@bu.edu"
-                        method="POST"
-                        encType="text/plain"
+                        onSubmit={sendEmail}
+                        ref={formRef}
                       >
                         <label htmlFor="name">Name</label>
                         <input
@@ -286,6 +316,11 @@ function App() {
                           required
                         ></textarea>
                         <button type="submit">Send Message</button>
+                        {formStatus && (
+                          <p className={`form-status ${formStatus.includes('successfully') ? 'success' : 'error'}`}>
+                            {formStatus}
+                          </p>
+                        )}
                       </form>
                       <p className="contact-social-text">FEEL FREE TO CONNECT WITH ME ON SOCIAL</p>
                       <div className="contact-social-links">
