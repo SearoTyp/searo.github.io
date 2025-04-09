@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
 import { FaAngleDoubleDown, FaLinkedin, FaFileAlt } from 'react-icons/fa';
-import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
 import Project3 from './projects/Project3';
@@ -33,6 +34,7 @@ function App() {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
+  // Handle preloader
   useEffect(() => {
     console.log("App component mounted");
     const timer = setTimeout(() => {
@@ -42,7 +44,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Header scroll behavior for homepage only
+  // Handle header visibility on scroll (only on home page)
   useEffect(() => {
     if (location.pathname === '/') {
       let lastScrollTop = 0;
@@ -50,19 +52,15 @@ function App() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollDifference = Math.abs(scrollTop - lastScrollTop);
 
-        // Debug scroll values
         console.log("ScrollTop:", scrollTop, "LastScrollTop:", lastScrollTop, "Difference:", scrollDifference);
 
-        // Show header if at the very top of the page
         if (scrollTop === 0) {
           setIsHeaderVisible(true);
-        }
-        // Only toggle visibility if the scroll difference is significant (e.g., > 10 pixels)
-        else if (scrollDifference > 10) {
+        } else if (scrollDifference > 10) {
           if (scrollTop > lastScrollTop) {
-            setIsHeaderVisible(false); // Hide header when scrolling down
+            setIsHeaderVisible(false);
           } else {
-            setIsHeaderVisible(true); // Show header when scrolling up
+            setIsHeaderVisible(true);
           }
         }
 
@@ -72,7 +70,6 @@ function App() {
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
     } else {
-      // Ensure header is hidden on other pages
       setIsHeaderVisible(false);
     }
   }, [location.pathname]);
@@ -92,7 +89,6 @@ function App() {
 
       {!loading && (
         <>
-          {/* Always render the header on the homepage, control visibility with class */}
           {location.pathname === '/' && (
             <header className={`header ${!isHeaderVisible ? 'hidden' : ''}`} ref={headerRef}>
               <div className="logo">Nahiyan M.</div>
@@ -194,28 +190,64 @@ function App() {
                     <h2>Projects</h2>
                     <div className="project-grid">
                       <div onClick={() => handleProjectClick('/project/1')} className="project-card">
-                        <h3>Project 1</h3>
-                        <p className="project-preview">Batch Reverse Osmosis System</p>
+                        <div
+                          className="project-image"
+                          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/Harmony/Final.jpg)` }}
+                          onError={() => console.log("Failed to load Batch Reverse Osmosis image")}
+                        ></div>
+                        <div className="project-content">
+                          <h3>Batch Reverse Osmosis System</h3>
+                        </div>
                       </div>
                       <div onClick={() => handleProjectClick('/project/2')} className="project-card">
-                        <h3>Project 2</h3>
-                        <p className="project-preview">FreshFridge</p>
+                        <div
+                          className="project-image"
+                          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/FreshFridge/Fridge.jpg)` }}
+                          onError={() => console.log("Failed to load FreshFridge image")}
+                        ></div>
+                        <div className="project-content">
+                          <h3>FreshFridge</h3>
+                        </div>
                       </div>
                       <div onClick={() => handleProjectClick('/project/3')} className="project-card">
-                        <h3>Project 3</h3>
-                        <p className="project-preview">Lamp Buddy</p>
+                        <div
+                          className="project-image"
+                          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg)` }}
+                          onError={() => console.log("Failed to load Lamp Buddy image")}
+                        ></div>
+                        <div className="project-content">
+                          <h3>Lamp Buddy</h3>
+                        </div>
                       </div>
                       <div onClick={() => handleProjectClick('/project/4')} className="project-card">
-                        <h3>Project 4</h3>
-                        <p className="project-preview">Automatic Water Dispensing System</p>
+                        <div
+                          className="project-image"
+                          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/WaterDispensing/elvehousing.jpg)` }}
+                          onError={() => console.log("Failed to load Automatic Water Dispensing image")}
+                        ></div>
+                        <div className="project-content">
+                          <h3>Automatic Water Dispensing System</h3>
+                        </div>
                       </div>
                       <div onClick={() => handleProjectClick('/project/5')} className="project-card">
-                        <h3>Project 5</h3>
-                        <p className="project-preview">Light Based Head Tracker</p>
+                        <div
+                          className="project-image"
+                          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/HeadSensor/2.png)` }}
+                          onError={() => console.log("Failed to load Light Based Head Tracker image")}
+                        ></div>
+                        <div className="project-content">
+                          <h3>Light Based Head Tracker</h3>
+                        </div>
                       </div>
                       <div onClick={() => handleProjectClick('/project/6')} className="project-card">
-                        <h3>Project 6</h3>
-                        <p className="project-preview">Motor Speed Control</p>
+                        <div
+                          className="project-image"
+                          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/MotorControl/3.png)` }}
+                          onError={() => console.log("Failed to load Motor Speed Control image")}
+                        ></div>
+                        <div className="project-content">
+                          <h3>Motor Speed Control</h3>
+                        </div>
                       </div>
                     </div>
                   </section>

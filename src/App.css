@@ -608,6 +608,7 @@ body {
 }
 
 .project-card {
+  position: relative;
   padding: 20px;
   background: #fff;
   border-radius: 8px;
@@ -615,13 +616,13 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  position: relative;
-  text-decoration: none;
-  color: #000;
-  z-index: 1;
   opacity: 0;
   transform: translateY(50px);
   animation: fadeInUp 0.5s ease forwards;
+  min-height: 100px; /* Ensure cards have a minimum height for consistency */
+  display: flex; /* Added to center content */
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
 }
 
 .project-card:nth-child(1) { animation-delay: 0.1s; }
@@ -643,87 +644,63 @@ body {
   opacity: 0.7;
 }
 
-.project-card h3 {
-  font-size: 1.5rem;
-  color: #1e3c72;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.project-card h3::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #1e3c72, #00d4ff);
-}
-
-.project-preview {
-  display: block;
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.6;
-  position: relative;
-  padding-left: 20px;
-}
-
-.project-preview::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 5px;
-  color: #00d4ff;
-  font-size: 1.2rem;
-}
-
-/* Project Sneak Peek */
-.project-sneak-peek {
+.project-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 212, 255, 0.9); /* Semi-transparent cyan background */
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  text-align: center;
-  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  border-radius: 8px; /* Match the card's border radius */
+}
+
+.project-card:hover .project-image {
+  opacity: 0.7; /* Show the image on hover with slight transparency */
+}
+
+.project-content {
+  position: relative;
   z-index: 2;
+  background: transparent; /* No background initially to match the screenshot */
+  transition: background 0.3s ease;
+  width: 100%; /* Ensure the content takes full width for centering */
 }
 
-.project-card:hover .project-sneak-peek {
-  opacity: 1;
-  visibility: visible;
+.project-card:hover .project-content {
+  background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background on hover for text readability */
+  border-radius: 4px;
+  padding: 10px; /* Add padding on hover to match the screenshot's text spacing */
 }
 
-/* Project Card Badge (nahi.jpg) */
+.project-content h3 {
+  font-size: 1.5rem;
+  color: #1e3c72;
+  margin: 0;
+  text-align: center; /* Center the title text */
+}
+
+/* Removed the ::after pseudo-element to remove the blue dash */
+.project-content h3::after {
+  display: none; /* Remove the blue underline */
+}
+
+/* Remove the project-preview since it's redundant in the screenshot */
+.project-preview {
+  display: none; /* Hide the project-preview since the screenshot only shows the title */
+}
+
+/* Remove the project-sneak-peek since it's not needed for this effect */
+.project-sneak-peek {
+  display: none;
+}
+
+/* Remove the project-card-badge since it's not in the screenshot */
 .project-card-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #00d4ff;
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.project-card:hover .project-card-badge {
-  opacity: 1;
-  transform: scale(1.5);
+  display: none;
 }
 
 /* Contact Section */
@@ -971,17 +948,8 @@ body {
     font-size: 2rem;
   }
 
-  .project-card h3 {
+  .project-content h3 {
     font-size: 1.3rem;
-  }
-
-  .project-preview {
-    font-size: 0.95rem;
-  }
-
-  .project-sneak-peek {
-    font-size: 0.85rem;
-    padding: 10px;
   }
 
   .social-icons {
@@ -1071,17 +1039,8 @@ body {
     font-size: 1.8rem;
   }
 
-  .project-card h3 {
+  .project-content h3 {
     font-size: 1.2rem;
-  }
-
-  .project-preview {
-    font-size: 0.9rem;
-  }
-
-  .project-sneak-peek {
-    font-size: 0.8rem;
-    padding: 8px;
   }
 
   .contact-title {
@@ -1127,9 +1086,13 @@ body {
     opacity: 0.7;
   }
 
-  /* Sneak peek won't work on touch devices without hover, so we can show it on active state */
-  .project-card:active .project-sneak-peek {
-    opacity: 1;
-    visibility: visible;
+  .project-card:active .project-image {
+    opacity: 0.7; /* Show the image on active state for touch devices */
+  }
+
+  .project-card:active .project-content {
+    background: rgba(255, 255, 255, 0.8); /* Add semi-transparent background on active state */
+    border-radius: 4px;
+    padding: 10px;
   }
 }

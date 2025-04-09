@@ -20,7 +20,7 @@ const Project3 = () => {
           {/* First Image Section: Design Concept */}
           <div className="project-item">
             <img
-              src={`${process.env.PUBLIC_URL}/Lamp Buddy/schem.jpg`}
+              src={`${process.env.PUBLIC_URL}/LampBuddy/schem.jpg`}
               alt="Lamp Buddy Design Concept"
               onError={() => console.error("Failed to load Lamp Buddy Design Concept Image")}
             />
@@ -38,22 +38,22 @@ const Project3 = () => {
           <div className="project-item reverse">
             <div className="collage-container">
               <img
-                src={`${process.env.PUBLIC_URL}/Lamp Buddy/image.jpg`}
+                src={`${process.env.PUBLIC_URL}/LampBuddy/image.jpg`}
                 alt="Touch-Free Operation"
                 className="collage-image"
               />
               <img
-                src={`${process.env.PUBLIC_URL}/Lamp Buddy/Circuit.jpg`}
+                src={`${process.env.PUBLIC_URL}/LampBuddy/Circuit.jpg`}
                 alt="Timer System"
                 className="collage-image"
               />
               <img
-                src={`${process.env.PUBLIC_URL}/Lamp Buddy/uv.jpg`}
+                src={`${process.env.PUBLIC_URL}/LampBuddy/uv.jpg`}
                 alt="Mood Lighting"
                 className="collage-image"
               />
               <img
-                src={`${process.env.PUBLIC_URL}/Lamp Buddy/Housing.jpg`}
+                src={`${process.env.PUBLIC_URL}/LampBuddy/Housing.jpg`}
                 alt="Lamp Buddy Assembly"
                 className="collage-image"
               />
@@ -84,7 +84,7 @@ const Project3 = () => {
           {/* Third Image Section: Implementation Details */}
           <div className="project-item">
             <img
-              src={`${process.env.PUBLIC_URL}/Lamp Buddy/moodlights.jpg`}
+              src={`${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg`}
               alt="Lamp Buddy Implementation"
               onError={() => console.error("Failed to load Lamp Buddy Implementation Image")}
             />
