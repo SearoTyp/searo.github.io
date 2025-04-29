@@ -26,6 +26,70 @@
     z-index: 0;
 }
 
+/* Navigation */
+.project-nav {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+/* Back Link */
+.back-link {
+    position: absolute;
+    left: 20px;
+    color: #00d4ff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #00d4ff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-link:hover,
+.back-link:focus {
+    background: #00d4ff;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+/* Next Link */
+.next-link {
+    position: absolute;
+    right: 20px;
+    color: #00d4ff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #00d4ff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.next-link:hover,
+.next-link:focus {
+    background: #00d4ff;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
 /* Header */
 .project-header {
     position: relative;
@@ -412,7 +476,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
     gap: 10px;
-    height: 300px; /* Reduced height since it's a single row */
+    height: 300px;
 }
 
 /* Assign grid areas for Section 10 */
@@ -442,7 +506,7 @@
     padding: 20px;
     margin-bottom: 40px;
     text-align: center;
-    width: 100%;
+    width: 97.5%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     border-top: 4px solid #00d4ff;
@@ -538,29 +602,7 @@
     position: relative;
 }
 
-/* Back Link */
-.back-link {
-    display: inline-block;
-    color: #00d4ff;
-    text-decoration: none;
-    background: none;
-    border: 1px solid #00d4ff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.back-link:hover,
-.back-link:focus {
-    background: #00d4ff;
-    color: #000;
-    text-decoration: none;
-    outline: none;
-}
-
-/* Image Modal (Moved outside media query) */
+/* Image Modal */
 .image-modal {
     position: fixed;
     top: 0;
@@ -608,30 +650,10 @@
     background: #e63939;
 }
 
-.zoom-controls {
-    margin-bottom: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-.zoom-controls button {
-    padding: 8px 16px;
-    background: #00d4ff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.zoom-controls button:hover {
-    background: #1e3c72;
-}
-
 .modal-image-wrapper {
     max-width: 100%;
     max-height: 70vh;
-    overflow: auto; /* Allow scrolling if the image overflows */
+    overflow: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -678,7 +700,7 @@
             "img3";
         grid-template-columns: 1fr;
         grid-template-rows: repeat(3, 1fr);
-        height: 600px; /* Adjusted for vertical stacking */
+        height: 600px;
     }
     .project-conclusion h3 {
         font-size: 1.3rem;
@@ -698,6 +720,11 @@
     .project-item h4 {
         font-size: 1.1rem;
     }
+    .back-link,
+    .next-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 600px) {
@@ -715,7 +742,7 @@
         height: 360px;
     }
     .project-item:nth-child(10) .collage-container {
-        height: 480px; /* Adjusted for smaller screens */
+        height: 480px;
     }
     .project-conclusion h3 {
         font-size: 1.2rem;
@@ -735,7 +762,6 @@
     .project-item h4 {
         font-size: 1rem;
     }
-    /* Modal adjustments for smaller screens */
     .modal-content {
         padding: 10px;
     }
@@ -744,8 +770,15 @@
         height: 25px;
         font-size: 1rem;
     }
-    .zoom-controls button {
+    .back-link,
+    .next-link {
         padding: 6px 12px;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+    }
+    .back-link {
+        left: 10px;
+    }
+    .next-link {
+        right: 10px;
     }
 }

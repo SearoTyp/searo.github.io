@@ -2,25 +2,40 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project4.css';
 
-const Project4 = () => {
-  // State for modal visibility and selected image
+const Project4 = ({ projects, currentProjectId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Function to open the modal
   const openModal = (imageSrc) => {
     setSelectedImage(imageSrc);
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
+  const nextProject = projects.find((proj) => proj.id === currentProjectId + 1);
+  const previousProject = projects.find((proj) => proj.id === currentProjectId - 1);
+   const lastProject = projects[projects.length - 1];
   
-  return (
-    <div className="project-page">
+    return (
+      <div className="project-page">
+        <div className="project-nav">
+          <Link to="/" className="back-link">Back to Home</Link>
+          {nextProject ? (
+            <Link to={nextProject.path} className="next-link">Next Project</Link>
+          ) : (
+            <Link to="/project/1" className="next-link">Back to First Project</Link>
+          )}
+          {previousProject ? (
+           <Link to={previousProject.path} className="prev-link">Previous Project</Link>
+          ) : (
+           <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
+          )}
+        </div>
+
       <div className="project-header">
         <h2>Automatic Water Dispensing System</h2>
       </div>
@@ -264,7 +279,6 @@ const Project4 = () => {
           </div>
         </div>
 
-        {/* Project Conclusion Section */}
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
@@ -283,26 +297,24 @@ const Project4 = () => {
       </div>
 
       <div className="project-links">
-        <Link to="/" className="back-link">Back to Home</Link>
       </div>
 
-      {/* Modal for Zoomable Image */}
       {isModalOpen && (
-  <div className="image-modal">
-    <div className="modal-content">
-      <button className="modal-close-button" onClick={closeModal}>
-        ×
-      </button>
-      <div className="modal-image-wrapper">
-        <img
-          src={selectedImage}
-          alt="Enlarged view of project content"
-          className="modal-image"
-        />
-      </div>
-    </div>
-  </div>
-)}
+        <div className="image-modal">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={closeModal}>
+              ×
+            </button>
+            <div className="modal-image-wrapper">
+              <img
+                src={selectedImage}
+                alt="Enlarged view of project content"
+                className="modal-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

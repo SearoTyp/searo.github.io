@@ -1,29 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project6.css';
 
-const Project6 = () => {
-  // State to manage the modal visibility and the selected image
+const Project6 = ({ projects, currentProjectId }) => {
+  useEffect(() => {
+    console.log("Project6 component mounted, scrolling to top");
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
+
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Function to open the modal with the clicked image
   const openModal = (imageSrc) => {
     setSelectedImage(imageSrc);
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
 
+  const nextProject = projects.find((proj) => proj.id === currentProjectId + 1);
+  const previousProject = projects.find((proj) => proj.id === currentProjectId - 1);
+  const lastProject = projects[projects.length - 1];
+
   return (
     <div className="project-page">
-      <div className="project-header">
-        <h2>Motor Speed Control</h2>
+      <div className="project-nav">
+        <Link to="/" className="back-link">Back to Home</Link>
+        {nextProject ? (
+          <Link to={nextProject.path} className="next-link">Next Project</Link>
+        ) : (
+          <Link to="/project/1" className="next-link">Back to First Project</Link>
+        )}
+        {previousProject ? (
+        <Link to={previousProject.path} className="prev-link">Previous Project</Link>
+        ) : (
+        <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
+        )}
       </div>
+
+      <div className="project-header">
+        <h2>Motor Speed Control System</h2>
+      </div>
+
       <div className="project-details">
         <div className="project-goal">
           <h3>Project Goal and Approach</h3>
@@ -33,135 +61,104 @@ const Project6 = () => {
         </div>
 
         <div className="project-content">
-          {/* Section 1: Initial Concept */}
+          {/* Section 1: Initial Sketches and Simulation */}
           <div className="project-item">
+            <p>
+              The project started with the development of initial sketches and designs to explore methods for transporting beams across a specified distance. We began by creating a SolidWorks simulation model to better understand the system’s parameters. This model featured a two-wheel-drive mechanism, with a gear attached to the rear wheels to drive motion through rotation. The accompanying Reaction Force vs. Time graph, shown, provided critical insights into the system’s dynamic behavior during this early phase.
+            </p>
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/1.jpeg`}
-              alt="Initial concept for motor speed control system"
-              onError={(e) => {
-                console.error("Failed to load Initial Concept Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-              }}
+              alt="Initial sketches and simulation model"
+              onError={() => console.error("Failed to load Section 1 Image")}
               onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/1.jpeg`)}
               style={{ cursor: 'pointer' }}
             />
-            <div className="text-container">
-              <p>
-                The project started with the development of initial sketches and designs to explore methods for transporting beams across a specified distance. We began by creating a SolidWorks simulation model to better understand the system’s parameters. This model featured a two-wheel-drive mechanism, with a gear attached to the rear wheels to drive motion through rotation. The accompanying Reaction Force vs. Time graph, shown, provided critical insights into the system’s dynamic behavior during this early phase.
-              </p>
-            </div>
           </div>
 
-          {/* Section 2: Prototype Development */}
+          {/* Section 2: Simulation Results */}
           <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/MotorControl/2.png`}
-              alt="Prototype development for motor speed control"
-              className="resized-image"
-              onError={(e) => {
-                console.error("Failed to load Prototype Development Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-              }}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/2.png`)}
-              style={{ cursor: 'pointer' }}
-            />
             <div className="text-container">
               <p>
                 The simulation yielded a time of 8 seconds at an acceleration of 850 mm/s², which was expected given the larger wheel size used in the model. In the physical prototype, however, we utilized smaller wheels, resulting in longer travel times, as observed in later tests.
               </p>
+              <img
+                src={`${process.env.PUBLIC_URL}/MotorControl/2.png`}
+                alt="Simulation results graph"
+                onError={() => console.error("Failed to load Section 2 Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/2.png`)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
           </div>
 
-          {/* Section 3: System Testing (YouTube Video) */}
+          {/* Section 3: Video Demonstration */}
           <div className="project-item">
             <iframe
-              className="section-video"
               src="https://www.youtube.com/embed/dr3hQA2cLek"
-              title="System Testing Video for Motor Speed Control"
+              title="Motor Speed Control System Demo 1"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              onError={() => console.error("Failed to load System Testing Video")}
             ></iframe>
           </div>
 
-          {/* Section 4: Component Assembly */}
+          {/* Section 4: Final Design */}
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/3.png`}
-              alt="Component assembly of motor speed control system"
-              onError={(e) => {
-                console.error("Failed to load Component Assembly Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-              }}
+              alt="Final design with rack-and-pinion mechanism"
+              onError={() => console.error("Failed to load Section 4 Image")}
               onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/3.png`)}
               style={{ cursor: 'pointer' }}
             />
-            <div className="text-container">
-              <p>
-                Following the prototyping phase, we finalized a two-wheel system design, incorporating a rack-and-pinion gear mechanism to drive rotation. This design proved highly effective, ensuring precise motion without slippage. The image below showcases the final design, marking the transition to the physical construction of the model.
-              </p>
-            </div>
+            <p>
+              Following the prototyping phase, we finalized a two-wheel system design, incorporating a rack-and-pinion gear mechanism to drive rotation. This design proved highly effective, ensuring precise motion without slippage. The image below showcases the final design, marking the transition to the physical construction of the model.
+            </p>
           </div>
 
-          {/* Section 5: Design Refinement */}
+          {/* Section 5: Fabrication */}
           <div className="project-item reverse">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/4.jpg`}
-              alt="Design refinement for motor speed control system"
-              onError={(e) => {
-                console.error("Failed to load Design Refinement Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-              }}
+              alt="Completed model with 3D-printed components"
+              onError={() => console.error("Failed to load Section 5 Image")}
               onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/4.jpg`)}
               style={{ cursor: 'pointer' }}
             />
-            <div className="text-container">
-              <p>
-                The rack-and-pinion components were 3D-printed, while the main body was precision-cut using a laser cutter. The image below presents the completed model, reflecting the culmination of our design and fabrication efforts.
-              </p>
-            </div>
+            <p>
+              The rack-and-pinion components were 3D-printed, while the main body was precision-cut using a laser cutter. The image below presents the completed model, reflecting the culmination of our design and fabrication efforts.
+            </p>
           </div>
 
-          {/* Section 6: Functional Testing */}
+          {/* Section 6: Arduino Code */}
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/5.jpeg`}
-              alt="Functional testing of motor speed control system"
-              onError={(e) => {
-                console.error("Failed to load Functional Testing Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-              }}
+              alt="Arduino sketch for motor control"
+              onError={() => console.error("Failed to load Section 6 Image")}
               onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/5.jpeg`)}
               style={{ cursor: 'pointer' }}
             />
-            <div className="text-container">
-              <p>
-                This Arduino sketch governs the motor’s acceleration and deceleration for both forward and backward movements using PWM signals on two digital output pins. In the setup() function, pins 5 and 6 are configured as outputs to control the motor. The loop() function orchestrates a gradual increase in PWM values from 0 to 235 to accelerate the motor, followed by a decrease back to 0 for deceleration, with a brief pause before reversing direction. This process is repeated for backward motion, ensuring precise speed and directional control. After one complete cycle, the program enters an infinite loop, halting further execution and maintaining the motor in a static state. This setup is ideal for applications requiring accurate motor control, such as robotics or automated systems.
-              </p>
-            </div>
+            <p>
+              This Arduino sketch governs the motor’s acceleration and deceleration for both forward and backward movements using PWM signals on two digital output pins. In the setup() function, pins 5 and 6 are configured as outputs to control the motor. The loop() function orchestrates a gradual increase in PWM values from 0 to 235 to accelerate the motor, followed by a decrease back to 0 for deceleration, with a brief pause before reversing direction. This process is repeated for backward motion, ensuring precise speed and directional control. After one complete cycle, the program enters an infinite loop, halting further execution and maintaining the motor in a static state. This setup is ideal for applications requiring accurate motor control, such as robotics or automated systems.
+            </p>
           </div>
 
           {/* Section 7: System Integration */}
           <div className="project-item reverse">
             <img
               src={`${process.env.PUBLIC_URL}/MotorControl/6.jpg`}
-              alt="System integration of motor speed control components"
-              onError={(e) => {
-                console.error("Failed to load System Integration Image");
-                e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-              }}
+              alt="Fully assembled model"
+              onError={() => console.error("Failed to load Section 7 Image")}
               onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/6.jpg`)}
               style={{ cursor: 'pointer' }}
             />
-            <div className="text-container">
-              <p>
-                This section illustrates the integration of all components into a unified system. The image depicts the fully assembled model, highlighting the structural design and the mechanism used to transport the aluminum extrusion while maintaining its upright position.
-              </p>
-            </div>
+            <p>
+              This section illustrates the integration of all components into a unified system. The image depicts the fully assembled model, highlighting the structural design and the mechanism used to transport the aluminum extrusion while maintaining its upright position.
+            </p>
           </div>
 
-          {/* Section 8: Key Features Showcase (1x3 Collage on Left, Text on Right) */}
+          {/* Section 8: Key Features Showcase */}
           <div className="project-item">
             <div className="collage-container vertical-collage">
               <img
@@ -206,48 +203,36 @@ const Project6 = () => {
             </div>
           </div>
 
-          {/* Section 9: Final Demonstration (YouTube Video with Text) */}
-          <div className="project-item reverse">
+          {/* Section 9: Final Test Results */}
+          <div className="project-item">
+          <p>
+              The SolidWorks simulation estimated a travel time of approximately 9.5 seconds at an acceleration of 950 mm/s². This closely aligned with our physical model, which completed the 10-foot distance in 10.4 seconds, as shown in the video. The slight discrepancy can be attributed to factors such as surface irregularities or higher-than-expected friction between the tires and the ground.
+            </p>
             <iframe
-              className="section-video resized-video"
               src="https://www.youtube.com/embed/QXV90hcXmdk"
-              title="Final Demonstration Video for Motor Speed Control"
+              title="Motor Speed Control System Final Test"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              onError={() => console.error("Failed to load Final Demonstration Video")}
             ></iframe>
-            <div className="text-container">
-              <p>
-                The SolidWorks simulation estimated a travel time of approximately 9.5 seconds at an acceleration of 950 mm/s². This closely aligned with our physical model, which completed the 10-foot distance in 10.4 seconds, as shown in the video. The slight discrepancy can be attributed to factors such as surface irregularities or higher-than-expected friction between the tires and the ground.
-              </p>
-            </div>
           </div>
         </div>
 
-        {/* Project Conclusion Section */}
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
-            This project successfully demonstrated the design and implementation of a motor speed control system capable of transporting a 1-foot aluminum extrusion section over a 10-foot distance while maintaining its upright orientation. Through a combination of SolidWorks simulations, iterative prototyping, and motor control via Arduino, we achieved a system that balanced speed, stability, and accuracy. The project would not have been possible without <em>Luis, XimXim, and Kaan</em>. Check out our final design below!
+            This project successfully demonstrated the design and implementation of a motor speed control system capable of transporting a 1-foot aluminum extrusion section over a 10-foot distance while maintaining its upright orientation. Through a combination of SolidWorks simulations, iterative prototyping, and motor control via Arduino, we achieved a system that balanced speed, stability, and accuracy. The project would not have been possible without Luis, XimXim, and Kaan. Check out our final design below!
           </p>
           <iframe
-            className="conclusion-video"
             src="https://www.youtube.com/embed/gtnZAXxPlus"
-            title="Final Design Video for Motor Speed Control"
+            title="Motor Speed Control System Final Demo"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            onError={() => console.error("Failed to load Project Conclusion Video")}
           ></iframe>
         </div>
       </div>
 
-      <div className="project-links">
-        <Link to="/" className="back-link">Back to Home</Link>
-      </div>
-
-      {/* Modal for Image Display */}
       {isModalOpen && (
         <div className="image-modal">
           <div className="modal-content">
@@ -257,7 +242,7 @@ const Project6 = () => {
             <div className="modal-image-wrapper">
               <img
                 src={selectedImage}
-                alt="Enlarged view of motor speed control content"
+                alt="Enlarged view of project content"
                 className="modal-image"
               />
             </div>

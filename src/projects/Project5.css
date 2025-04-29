@@ -9,11 +9,13 @@
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    overflow: hidden;
-}
-
-/* Subtle Background Pattern */
-.project-page::before {
+    overflow-x: hidden;
+    top: 0;
+    margin: 0;
+  }
+  
+  /* Subtle Background Pattern */
+  .project-page::before {
     content: '';
     position: absolute;
     top: 0;
@@ -22,12 +24,75 @@
     height: 100%;
     background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 2px, transparent 2px);
     background-size: 20px 20px;
-    opacity: 0.5;
     z-index: 0;
-}
-
-/* Header */
-.project-header {
+  }
+  
+  /* Navigation */
+  .project-nav {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+  
+  /* Back Link */
+  .back-link {
+    position: absolute;
+    left: 20px;
+    color: #00d4ff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #00d4ff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .back-link:hover,
+  .back-link:focus {
+    background: #00d4ff;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+  }
+  
+  /* Next Link */
+  .next-link {
+    position: absolute;
+    right: 20px;
+    color: #00d4ff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #00d4ff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .next-link:hover,
+  .next-link:focus {
+    background: #00d4ff;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+  }
+  
+  /* Header */
+  .project-header {
     position: relative;
     background-color: #000;
     padding: 40px 20px;
@@ -35,9 +100,9 @@
     width: 100%;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.project-header::before {
+  }
+  
+  .project-header::before {
     content: '';
     position: absolute;
     top: 0;
@@ -47,9 +112,14 @@
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     opacity: 0.3;
     z-index: 0;
-}
-
-.project-header h2 {
+    transition: opacity 0.5s ease;
+  }
+  
+  .project-header:hover::before {
+    opacity: 0.5;
+  }
+  
+  .project-header h2 {
     position: relative;
     z-index: 1;
     color: #00d4ff !important;
@@ -60,27 +130,27 @@
     animation: fadeInDown 1s ease forwards;
     text-transform: uppercase;
     text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
-}
-
-@keyframes fadeInDown {
+  }
+  
+  @keyframes fadeInDown {
     to {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
-}
-
-/* Project Details Container */
-.project-details {
+  }
+  
+  /* Project Details Container */
+  .project-details {
     max-width: 1200px;
     margin: 0 auto;
     text-align: left;
     width: 100%;
     position: relative;
     z-index: 1;
-}
-
-/* Project Goal Section */
-.project-goal {
+  }
+  
+  /* Project Goal Section */
+  .project-goal {
     background: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -90,21 +160,24 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-left: 4px solid #00d4ff;
     transition: transform 0.3s ease;
-}
-
-.project-goal:hover {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  .project-goal:hover {
     transform: translateY(-5px);
-}
-
-.project-goal h3 {
+  }
+  
+  .project-goal h3 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
     margin-bottom: 15px;
     position: relative;
-}
-
-.project-goal h3::after {
+  }
+  
+  .project-goal h3::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -113,54 +186,53 @@
     width: 50px;
     height: 2px;
     background: linear-gradient(90deg, #1e3c72, #00d4ff);
-}
-
-.project-goal p {
+  }
+  
+  .project-goal p {
     font-size: 1rem;
     color: #555;
     line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-/* Project Content */
-.project-content {
+  }
+  
+  /* Project Content */
+  .project-content {
     margin-top: 20px;
     position: relative;
-}
-
-/* Section Divider */
-.project-content::before {
+  }
+  
+  /* Section Divider */
+  .project-content::before {
     content: '';
     display: block;
     width: 80px;
     height: 2px;
     background: linear-gradient(90deg, #1e3c72, #00d4ff);
     margin: 0 auto 40px;
-}
-
-/* Single Image Items */
-.project-item {
+  }
+  
+  /* Single Image Items */
+  .project-item {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
     gap: 40px;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: fadeInUp 0.8s ease forwards;
     background: #fff;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-item:hover {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  .project-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.project-item::before {
+  }
+  
+  .project-item::before {
     content: '';
     position: absolute;
     top: 0;
@@ -170,66 +242,59 @@
     border: 1px solid rgba(0, 212, 255, 0.2);
     border-radius: 8px;
     pointer-events: none;
-}
-
-/* Animation delays for all 6 sections */
-.project-item:nth-child(1) {
+  }
+  
+  /* Removed animation delays to match Project1 */
+  .project-item:nth-child(1),
+  .project-item:nth-child(2),
+  .project-item:nth-child(3),
+  .project-item:nth-child(4),
+  .project-item:nth-child(5),
+  .project-item:nth-child(6) {
     animation-delay: 0s;
-}
-.project-item:nth-child(2) {
-    animation-delay: 0.2s;
-}
-.project-item:nth-child(3) {
-    animation-delay: 0.4s;
-}
-.project-item:nth-child(4) {
-    animation-delay: 0.6s;
-}
-.project-item:nth-child(5) {
-    animation-delay: 0.8s;
-}
-.project-item:nth-child(6) {
-    animation-delay: 1.0s;
-}
-
-@keyframes fadeInUp {
+  }
+  
+  @keyframes fadeInUp {
     to {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
-}
-
-.project-item.reverse {
+  }
+  
+  .project-item.reverse {
     flex-direction: row-reverse;
-}
-
-/* Vertical layout for sections with text above collage */
-.project-item.vertical-layout {
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-/* Text container for sections */
-.text-container {
-    width: 50%;
-}
-
-/* Single images (non-collage) */
-.project-item img:not(.collage-image) {
-    width: 50%;
-    height: 400px;
+  }
+  
+  /* Single images (non-collage) */
+  .project-item img:not(.collage-image) {
+    width: 100%;
+    height: 500px;
     object-fit: contain;
     border-radius: 8px;
     display: block;
     transition: transform 0.3s ease;
-}
-
-.project-item img:not(.collage-image):hover {
+  }
+  
+  .project-item img:not(.collage-image):hover {
     transform: scale(1.02);
-}
-
-/* Project item paragraph */
-.project-item p {
+  }
+  
+  /* Single videos (non-collage) */
+  .project-item iframe:not(.collage-video) {
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  .project-item iframe:not(.collage-video):hover {
+    transform: scale(1.02);
+  }
+  
+  /* Project item paragraph */
+  .project-item p {
+    width: 100%;
     line-height: 1.8;
     color: #444;
     font-size: 1.1rem;
@@ -238,168 +303,91 @@
     margin: 15px 0;
     transition: background-color 0.3s ease, color 0.3s ease;
     border-left: 2px solid #00d4ff;
-}
-
-/* Add a small decorative element before the paragraph */
-.project-item p::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    top: 5px;
-    color: #00d4ff;
-    font-size: 1.2rem;
-}
-
-/* Hover effect for paragraphs */
-.project-item p:hover {
+  }
+  
+  .project-item p:hover {
     background-color: rgba(0, 212, 255, 0.05);
     color: #222;
-}
-
-/* Collage Section Headings */
-.project-item h4 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    margin: 15px 0 10px;
-    position: relative;
-}
-
-.project-item h4::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background: linear-gradient(90deg, #1e3c72, #00d4ff);
-}
-
-/* Collage Container */
+  }
+  
+ /* Collage Container (for all collage sections) */
 .collage-container {
-    width: 50%;
-    display: flex;
+    width: 100%;
     border-radius: 8px;
     overflow: hidden;
     position: relative;
     border: 1px solid rgba(0, 212, 255, 0.2);
-}
-
-/* Section 4: 2x2 Grid for 4 Images with Labels */
-.project-item:nth-child(4) .collage-container.grid-2x2 {
-    display: grid;
-    grid-template-areas: 
-        "img1 img2"
-        "img3 img4";
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
-    height: 600px;
-    width: 100%; /* Full width since there's no text */
-}
-
-.project-item:nth-child(4) .grid-item {
-    position: relative;
+  }
+  
+  /* Section 5 Collage: 3x1 Horizontal Layout for 3 Images (was Section 6) */
+  .project-item:nth-child(5) .collage-container.horizontal-collage {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.project-item:nth-child(4) .grid-item:nth-child(1) {
-    grid-area: img1;
-}
-.project-item:nth-child(4) .grid-item:nth-child(2) {
-    grid-area: img2;
-}
-.project-item:nth-child(4) .grid-item:nth-child(3) {
-    grid-area: img3;
-}
-.project-item:nth-child(4) .grid-item:nth-child(4) {
-    grid-area: img4;
-}
-
-.project-item:nth-child(4) .collage-image {
+    flex-direction: row;
+    gap: 10px;
+    height: 250px;
     width: 100%;
-    height: 80%; /* Adjusted to leave space for the label */
-    object-fit: contain;
-    margin: 0;
-}
-
-.project-item:nth-child(4) .image-label {
-    margin: 5px 0 0;
-    font-size: 0.9rem;
-    color: #333;
-    text-align: center;
-}
-
-/* Section 5: 2 Images Side by Side */
-.project-item:nth-child(5) .collage-container.side-by-side {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    height: 400px;
-}
-
-.project-item:nth-child(5) .collage-image {
-    width: 50%;
+  }
+  
+  .project-item:nth-child(5) .collage-image {
+    width: 33.33%;
     height: 100%;
     object-fit: contain;
-}
-
-/* Section 6: 3x1 Horizontal Collage with Text on Top */
-.project-item:nth-child(6) .collage-container.horizontal-collage {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    height: 250px; /* Adjusted height for horizontal layout */
-    width: 100%; /* Full width since text is above */
-}
-
-.project-item:nth-child(6) .collage-image {
-    width: 33.33%; /* Each image takes 1/3 of the width */
-    height: 100%;
-    object-fit: contain;
-}
-
-/* Collage Images */
-.collage-image {
+  }
+  
+  /* Collage Images */
+  .collage-image {
+    display: block;
+    border-radius: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .collage-image:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Collage Video */
+  .collage-video {
     object-fit: contain;
     display: block;
     border-radius: 0;
     transition: transform 0.3s ease;
-}
-
-.collage-image:hover {
+  }
+  
+  .collage-video:hover {
     transform: scale(1.05);
-}
-
-/* Project Conclusion Section */
-.project-conclusion {
+  }
+  
+  
+  /* Project Conclusion Section */
+  .project-conclusion {
     background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 40px;
     text-align: center;
-    width: 100%;
+    width: 97.5%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     border-top: 4px solid #00d4ff;
     transition: transform 0.3s ease;
-}
-
-.project-conclusion:hover {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  .project-conclusion:hover {
     transform: translateY(-5px);
-}
-
-.project-conclusion h3 {
+  }
+  
+  .project-conclusion h3 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #1e3c72;
     margin-bottom: 15px;
     position: relative;
-}
-
-.project-conclusion h3::after {
+  }
+  
+  .project-conclusion h3::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -408,9 +396,9 @@
     width: 50px;
     height: 2px;
     background: linear-gradient(90deg, #1e3c72, #00d4ff);
-}
-
-.project-conclusion p {
+  }
+  
+  .project-conclusion p {
     font-size: 1.1rem;
     color: #333;
     line-height: 1.8;
@@ -420,74 +408,27 @@
     border-radius: 8px;
     position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Add a subtle background to conclusion paragraph */
-.project-conclusion p:hover {
+  }
+  
+  .project-conclusion p:hover {
     background-color: rgba(0, 212, 255, 0.1);
     color: #222;
-}
-
-/* Add a decorative element before the conclusion paragraph */
-.project-conclusion p::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    top: 15px;
-    color: #00d4ff;
-    font-size: 1.2rem;
-}
-
-/* Conclusion Video */
-.project-conclusion .conclusion-video {
+  }
+  
+  .project-conclusion iframe {
     width: 100%;
     height: 500px;
-    object-fit: contain;
     border-radius: 8px;
     display: block;
     transition: transform 0.3s ease;
-}
-
-.project-conclusion .conclusion-video:hover {
+  }
+  
+  .project-conclusion iframe:hover {
     transform: scale(1.02);
-}
-
-/* Project Links Container */
-.project-links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    padding: 20px 0;
-    position: relative;
-}
-
-/* Back Link */
-.back-link {
-    display: inline-block;
-    color: #00d4ff;
-    text-decoration: none;
-    background: none;
-    border: 1px solid #00d4ff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.back-link:hover,
-.back-link:focus {
-    background: #00d4ff;
-    color: #000;
-    text-decoration: none;
-    outline: none;
-}
-
-/* Image Modal */
-.image-modal {
+  }
+  
+  /* Image Modal */
+  .image-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -498,9 +439,9 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.modal-content {
+  }
+  
+  .modal-content {
     position: relative;
     max-width: 90%;
     max-height: 90%;
@@ -510,9 +451,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.modal-close-button {
+  }
+  
+  .modal-close-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -528,124 +469,133 @@
     justify-content: center;
     align-items: center;
     transition: background 0.3s ease;
-}
-
-.modal-close-button:hover {
+  }
+  
+  .modal-close-button:hover {
     background: #e63939;
-}
-
-.modal-image-wrapper {
+  }
+  
+  .modal-image-wrapper {
     max-width: 100%;
     max-height: 70vh;
-    overflow: auto; /* Allow scrolling if the image overflows */
+    overflow: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-image {
+  }
+  
+  .modal-image {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
     .project-item {
-        flex-direction: column;
+      flex-direction: column;
     }
     .project-item.reverse {
-        flex-direction: column;
+      flex-direction: column;
     }
     .project-item img:not(.collage-image),
-    .project-item .collage-container,
-    .project-item .text-container {
-        width: 100%;
+    .project-item p {
+      width: 100%;
     }
     .project-header h2 {
-        font-size: 2.5rem;
+      font-size: 2.5rem;
     }
     .project-goal h3 {
-        font-size: 1.3rem;
+      font-size: 1.3rem;
     }
-    .project-item img:not(.collage-image) {
-        height: 320px;
-    }
-    .project-item:nth-child(4) .collage-container.grid-2x2 {
-        height: 480px;
-    }
-    .project-item:nth-child(5) .collage-container.side-by-side {
-        height: 320px;
-    }
-    .project-item:nth-child(6) .collage-container.horizontal-collage {
-        height: 200px;
+    .collage-container {
+      width: 100%;
+      height: 450px;
     }
     .project-conclusion h3 {
-        font-size: 1.3rem;
+      font-size: 1.3rem;
     }
-    .project-conclusion .conclusion-video {
-        height: 400px;
+    .project-conclusion iframe {
+      height: 400px;
     }
     .project-item p,
     .project-conclusion p {
-        font-size: 1rem;
-        padding: 10px;
+      font-size: 1rem;
+      padding: 10px;
     }
-    .project-item h4 {
-        font-size: 1.1rem;
+    .back-link,
+    .next-link {
+      padding: 8px 15px;
+      font-size: 0.9rem;
     }
-}
-
-@media (max-width: 600px) {
-    .project-header h2 {
-        font-size: 2rem;
-    }
-    .project-goal h3 {
-        font-size: 1.2rem;
-    }
-    .project-item img:not(.collage-image) {
-        height: 240px;
-    }
-    .project-item:nth-child(4) .collage-container.grid-2x2 {
-        height: 360px;
-    }
-    .project-item:nth-child(5) .collage-container.side-by-side {
-        flex-direction: column;
-        height: 480px;
-    }
-    .project-item:nth-child(5) .collage-image {
-        width: 100%;
-        height: 50%;
+    .project-item:nth-child(4) .collage-container.side-by-side {
+      height: 450px;
     }
     .project-item:nth-child(6) .collage-container.horizontal-collage {
-        flex-direction: column;
-        height: 600px;
+      height: 200px;
     }
-    .project-item:nth-child(6) .collage-image {
-        width: 100%;
-        height: 33.33%;
+  }
+  
+  @media (max-width: 600px) {
+    .project-header h2 {
+      font-size: 2rem;
+    }
+    .project-goal h3 {
+      font-size: 1.2rem;
+    }
+    .collage-container {
+      height: 350px;
+    }
+    .project-item img:not(.collage-image) {
+      height: 300px;
     }
     .project-conclusion h3 {
-        font-size: 1.2rem;
+      font-size: 1.2rem;
     }
-    .project-conclusion .conclusion-video {
-        height: 300px;
+    .project-conclusion iframe {
+      height: 300px;
     }
     .project-item p,
     .project-conclusion p {
-        font-size: 0.95rem;
-        padding: 8px;
+      font-size: 0.95rem;
+      padding: 8px;
     }
-    .project-item h4 {
-        font-size: 1rem;
-    }
-    /* Modal adjustments for smaller screens */
     .modal-content {
-        padding: 10px;
+      padding: 10px;
     }
     .modal-close-button {
-        width: 25px;
-        height: 25px;
-        font-size: 1rem;
+      width: 25px;
+      height: 25px;
+      font-size: 1rem;
     }
-}
+    .back-link,
+    .next-link {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+    .back-link {
+      left: 10px;
+    }
+    .next-link {
+      right: 10px;
+    }
+    .project-item:nth-child(4) .collage-container.side-by-side {
+      flex-direction: column;
+      height: 700px;
+    }
+    .project-item:nth-child(4) .image-wrapper {
+      width: 100%;
+      height: 50%;
+    }
+    .project-item:nth-child(4) .collage-image {
+      height: calc(100% - 40px);
+    }
+    .project-item:nth-child(6) .collage-container.horizontal-collage {
+      flex-direction: column;
+      height: 600px;
+    }
+    .project-item:nth-child(6) .collage-image {
+      width: 100%;
+      height: 33.33%;
+    }
+  }

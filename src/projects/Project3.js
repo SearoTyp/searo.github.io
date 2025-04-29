@@ -2,25 +2,40 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project3.css';
 
-const Project3 = () => {
-  // State to manage the modal visibility and the selected image
+const Project3 = ({ projects, currentProjectId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Function to open the modal with the clicked image
   const openModal = (imageSrc) => {
     setSelectedImage(imageSrc);
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
 
-  return (
-    <div className="project-page">
+    const nextProject = projects.find((proj) => proj.id === currentProjectId + 1);
+    const previousProject = projects.find((proj) => proj.id === currentProjectId - 1);
+    const lastProject = projects[projects.length - 1];
+    
+      return (
+        <div className="project-page">
+          <div className="project-nav">
+            <Link to="/" className="back-link">Back to Home</Link>
+            {nextProject ? (
+              <Link to={nextProject.path} className="next-link">Next Project</Link>
+            ) : (
+              <Link to="/project/1" className="next-link">Back to First Project</Link>
+            )}
+            {previousProject ? (
+             <Link to={previousProject.path} className="prev-link">Previous Project</Link>
+            ) : (
+             <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
+            )}
+          </div>
+
       <div className="project-header">
         <h2>Lamp Buddy</h2>
       </div>
@@ -33,7 +48,6 @@ const Project3 = () => {
         </div>
 
         <div className="project-content">
-          {/* First Image Section: Design Concept */}
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/LampBuddy/schem.jpg`}
@@ -52,7 +66,6 @@ const Project3 = () => {
             </p>
           </div>
 
-          {/* Second Image Section: Features Showcase */}
           <div className="project-item reverse">
             <div className="collage-container">
               <img
@@ -107,7 +120,6 @@ const Project3 = () => {
             </div>
           </div>
 
-          {/* Third Image Section: Implementation Details */}
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg`}
@@ -127,7 +139,6 @@ const Project3 = () => {
           </div>
         </div>
 
-        {/* Project Conclusion Section */}
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
@@ -154,10 +165,8 @@ const Project3 = () => {
         >
           Check out the Competition Website
         </a>
-        <Link to="/" className="back-link">Back to Home</Link>
       </div>
 
-      {/* Modal for Image Display */}
       {isModalOpen && (
         <div className="image-modal">
           <div className="modal-content">

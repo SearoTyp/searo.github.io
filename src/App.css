@@ -4,12 +4,11 @@ html, body {
   overflow-x: hidden;
   height: 100%;
   width: 100%;
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  scroll-behavior: auto;
 }
 
-/* Override scroll-behavior for project pages */
 .project-page {
-  scroll-behavior: auto !important; /* Ensure instant scroll for project pages */
+  scroll-behavior: auto !important;
 }
 
 body::-webkit-scrollbar {
@@ -24,7 +23,6 @@ body {
 .App {
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  position: relative;
   overflow-x: hidden;
 }
 
@@ -53,7 +51,7 @@ body {
   }
 }
 
-/* Transition Overlay (for page transitions) */
+/* Transition Overlay */
 .transition-overlay {
   position: fixed;
   top: 0;
@@ -69,10 +67,10 @@ body {
 
 /* Header */
 .header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 95%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,27 +164,22 @@ body {
 
 /* Social Icons */
 .social-icons {
-  position: fixed;
-  right: 40px;
+  position: absolute;
   top: 50%;
+  right: 40px;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 20px;
   z-index: 100;
-  opacity: 0;
-  animation: slideInRight 1s ease forwards 1s;
+  opacity: 1;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-  }
+.social-icons.hidden {
+  transform: translateX(100px);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .social-icon {
@@ -239,6 +232,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 60px;
 }
 
 .home-content > * {
@@ -289,7 +283,7 @@ body {
 }
 
 .intro-text:hover::after {
-  width: 100%; /* Restored the underline animation on hover */
+  width: 100%;
 }
 
 .role-text {
@@ -529,6 +523,19 @@ body {
   line-height: 1.6;
 }
 
+/* Skill Links */
+.skill-link {
+  color: #00d4ff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.skill-link:hover {
+  color: #1e3c72;
+  text-decoration: underline;
+}
+
 .hobbies ul {
   list-style: none;
   padding: 0;
@@ -538,15 +545,6 @@ body {
   position: relative;
   padding-left: 20px;
   margin-bottom: 10px;
-}
-
-.hobbies ul li::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 5px;
-  color: #00d4ff;
-  font-size: 1.2rem;
 }
 
 /* Projects Section */
@@ -607,41 +605,73 @@ body {
   z-index: 1;
 }
 
+.project-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* For overlay positioning */
+}
+
 .project-card {
   position: relative;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #ffffff, #f0f8ff);
+  border-radius: 12px;
   border-left: 4px solid #00d4ff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Separated fade-in effect */
+.project-card.fade-in-up {
   opacity: 0;
   transform: translateY(50px);
   animation: fadeInUp 0.5s ease forwards;
-  min-height: 100px; /* Ensure cards have a minimum height for consistency */
-  display: flex; /* Added to center content */
-  align-items: center; /* Vertically center the content */
-  justify-content: center; /* Horizontally center the content */
 }
 
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
-.project-card:nth-child(4) { animation-delay: 0.4s; }
-.project-card:nth-child(5) { animation-delay: 0.5s; }
-.project-card:nth-child(6) { animation-delay: 0.6s; }
+/* Delays */
+.project-card.fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+.project-card.fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+.project-card.fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+.project-card.fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+.project-card.fade-in-up:nth-child(5) { animation-delay: 0.5s; }
+.project-card.fade-in-up:nth-child(6) { animation-delay: 0.6s; }
 
-.project-card:hover,
-.project-card:focus {
-  transform: translateY(-5px);
+/* Hover - Same as Skills and Hobbies */
+.project-card:hover {
+  transform: translateY(-15px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Description Overlay on Hover */
+.project-description-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.project-card:hover .project-description-overlay {
   opacity: 1;
 }
 
-.project-grid:hover .project-card:not(:hover) {
-  transform: scale(0.95);
-  opacity: 0.7;
+.project-description-overlay .project-description {
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 10px;
+  text-align: center;
 }
 
 .project-image {
@@ -652,55 +682,46 @@ body {
   height: 100%;
   background-size: cover;
   background-position: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-  border-radius: 8px; /* Match the card's border radius */
+  border-radius: 12px;
 }
 
-.project-card:hover .project-image {
-  opacity: 0.7; /* Show the image on hover with slight transparency */
+.project-info {
+  margin-top: 10px;
+  text-align: center;
 }
 
-.project-content {
-  position: relative;
-  z-index: 2;
-  background: transparent; /* No background initially to match the screenshot */
-  transition: background 0.3s ease;
-  width: 100%; /* Ensure the content takes full width for centering */
-}
-
-.project-card:hover .project-content {
-  background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background on hover for text readability */
-  border-radius: 4px;
-  padding: 10px; /* Add padding on hover to match the screenshot's text spacing */
-}
-
-.project-content h3 {
+.project-info h3 {
   font-size: 1.5rem;
   color: #1e3c72;
-  margin: 0;
-  text-align: center; /* Center the title text */
+  margin: 0 0 5px 0;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-/* Removed the ::after pseudo-element to remove the blue dash */
-.project-content h3::after {
-  display: none; /* Remove the blue underline */
+.project-info h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #1e3c72, #00d4ff);
+  border-radius: 2px;
 }
 
-/* Remove the project-preview since it's redundant in the screenshot */
-.project-preview {
-  display: none; /* Hide the project-preview since the screenshot only shows the title */
-}
-
-/* Remove the project-sneak-peek since it's not needed for this effect */
-.project-sneak-peek {
-  display: none;
-}
-
-/* Remove the project-card-badge since it's not in the screenshot */
-.project-card-badge {
-  display: none;
+.project-skills {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 5px 0;
+  padding: 8px 12px;
+  background: linear-gradient(90deg, #e0f7fa, #b2ebf2);
+  border: 1px solid #00d4ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 212, 255, 0.2);
+  display: inline-block;
+  line-height: 1.2;
 }
 
 /* Contact Section */
@@ -712,9 +733,8 @@ body {
   position: relative;
   background: #000;
   overflow: hidden;
-  border-radius: 20px;
-  margin: 20px;
-  padding: 20px;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .contact::before {
@@ -743,6 +763,7 @@ body {
   z-index: 2;
   width: 100%;
   max-width: 1200px;
+  gap: 20px; /* Added spacing between elements */
 }
 
 .contact-content > * {
@@ -763,25 +784,14 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 10px;
-  position: relative;
-  padding-left: 20px;
   opacity: 0.7;
-}
-
-.contact-subtitle::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 5px;
-  color: #00d4ff;
-  font-size: 1.2rem;
 }
 
 .contact-title {
   font-size: 4rem;
   color: #fff;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 0; /* Adjusted margin */
   position: relative;
   text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
 }
@@ -803,7 +813,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 500px;
-  margin-bottom: 40px;
+  margin: 20px 0; /* Adjusted margin for spacing */
 }
 
 .contact-form label {
@@ -819,8 +829,8 @@ body {
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 12px; /* Increased padding for better usability */
+  margin-bottom: 20px; /* Increased spacing between fields */
   border: 1px solid #00d4ff;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
@@ -869,24 +879,14 @@ body {
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 20px;
-  position: relative;
-  padding-left: 20px;
+  margin: 20px 0; /* Adjusted margin for spacing */
   opacity: 0.7;
-}
-
-.contact-social-text::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 5px;
-  color: #00d4ff;
-  font-size: 1.2rem;
 }
 
 .contact-social-links {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
 .contact-social-links a {
@@ -894,11 +894,10 @@ body {
   text-decoration: none;
   font-size: 1rem;
   text-transform: uppercase;
-  padding: 5px 10px;
+  padding: 8px 16px; /* Increased padding for better click area */
   border: 1px solid #00d4ff;
   border-radius: 8px;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .contact-social-links a:hover,
@@ -909,9 +908,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
 }
 
-/* Add these styles to the bottom of your existing App.css */
-
-/* Form status message */
+/* Form Status Message */
 .form-status {
   margin-top: 10px;
   font-size: 1rem;
@@ -919,11 +916,11 @@ body {
 }
 
 .form-status.success {
-  color: #28a745; /* Green for success */
+  color: #28a745;
 }
 
 .form-status.error {
-  color: #dc3545; /* Red for error */
+  color: #dc3545;
 }
 
 /* Responsive Design */
@@ -965,7 +962,7 @@ body {
     font-size: 2rem;
   }
 
-  .project-content h3 {
+  .project-info h3 {
     font-size: 1.3rem;
   }
 
@@ -1056,8 +1053,13 @@ body {
     font-size: 1.8rem;
   }
 
-  .project-content h3 {
+  .project-info h3 {
     font-size: 1.2rem;
+  }
+
+  .project-skills {
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
 
   .contact-title {
@@ -1065,8 +1067,8 @@ body {
   }
 
   .contact-form {
-    max-width: 300px;
-  }
+    max-width: 90%;
+  }  
 
   .contact-form input,
   .contact-form textarea {
@@ -1095,21 +1097,10 @@ body {
   .project-card:active {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    opacity: 1;
   }
 
-  .project-grid:active .project-card:not(:active) {
-    transform: scale(0.95);
-    opacity: 0.7;
-  }
-
-  .project-card:active .project-image {
-    opacity: 0.7; /* Show the image on active state for touch devices */
-  }
-
-  .project-card:active .project-content {
-    background: rgba(255, 255, 255, 0.8); /* Add semi-transparent background on active state */
-    border-radius: 4px;
-    padding: 10px;
+  /* Disable hover overlay on touch devices */
+  .project-description-overlay {
+    display: none;
   }
 }

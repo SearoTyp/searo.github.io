@@ -2,25 +2,41 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Project2.css';
 
-const Project2 = () => {
-  // State to manage the modal visibility and the selected image
+const Project2 = ({ projects, currentProjectId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Function to open the modal with the clicked image
   const openModal = (imageSrc) => {
     setSelectedImage(imageSrc);
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
 
-  return (
-    <div className="project-page">
+    const nextProject = projects.find((proj) => proj.id === currentProjectId + 1);
+    const previousProject = projects.find((proj) => proj.id === currentProjectId - 1);
+    const lastProject = projects[projects.length - 1];
+    
+      return (
+        <div className="project-page">
+          <div className="project-nav">
+            <Link to="/" className="back-link">Back to Home</Link>
+            {nextProject ? (
+              <Link to={nextProject.path} className="next-link">Next Project</Link>
+            ) : (
+              <Link to="/project/1" className="next-link">Back to First Project</Link>
+            )}
+            {previousProject ? (
+             <Link to={previousProject.path} className="prev-link">Previous Project</Link>
+            ) : (
+             <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
+            )}
+          </div>
+  
+
       <div className="project-header">
         <h2>FreshFridge</h2>
       </div>
@@ -41,7 +57,6 @@ const Project2 = () => {
         </div>
 
         <div className="project-content">
-          {/* First Image Section: Single Image */}
           <div className="project-item">
             <img
               src={`${process.env.PUBLIC_URL}/FreshFridge/Schematic Diagram.jpg`}
@@ -61,7 +76,6 @@ const Project2 = () => {
             </p>
           </div>
 
-          {/* Second Image Section: Collage of 4 Images (2x2 Grid) */}
           <div className="project-item reverse">
             <div className="collage-container">
               <img
@@ -126,7 +140,6 @@ const Project2 = () => {
           </div>
         </div>
 
-        {/* Project Conclusion Section */}
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
@@ -160,25 +173,24 @@ const Project2 = () => {
         >
           Check out the project on GitHub
         </a>
-        <Link to="/" className="back-link">Back to Home</Link>
       </div>
 
       {isModalOpen && (
-  <div className="image-modal">
-    <div className="modal-content">
-      <button className="modal-close-button" onClick={closeModal}>
-        ×
-      </button>
-      <div className="modal-image-wrapper">
-        <img
-          src={selectedImage}
-          alt="Enlarged view of FreshFridge interface"
-          className="modal-image"
-        />
-      </div>
-    </div>
-  </div>
-)}
+        <div className="image-modal">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={closeModal}>
+              ×
+            </button>
+            <div className="modal-image-wrapper">
+              <img
+                src={selectedImage}
+                alt="Enlarged view of FreshFridge interface"
+                className="modal-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
