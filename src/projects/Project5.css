@@ -1,601 +1,69 @@
-/* Project Page */
-.project-page {
-    min-height: 100vh;
-    padding: 0 20px 60px;
-    background: #f0f0f0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
-    overflow-x: hidden;
-    top: 0;
-    margin: 0;
-  }
-  
-  /* Subtle Background Pattern */
-  .project-page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 2px, transparent 2px);
-    background-size: 20px 20px;
-    z-index: 0;
-  }
-  
-  /* Navigation */
-  .project-nav {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
-    z-index: 1000;
-  }
-  
-  /* Back Link */
-  .back-link {
-    position: absolute;
-    left: 20px;
-    color: #00d4ff;
-    text-decoration: none;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #00d4ff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .back-link:hover,
-  .back-link:focus {
-    background: #00d4ff;
-    color: #000;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
-  }
-  
-  /* Next Link */
-  .next-link {
-    position: absolute;
-    right: 20px;
-    color: #00d4ff;
-    text-decoration: none;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #00d4ff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .next-link:hover,
-  .next-link:focus {
-    background: #00d4ff;
-    color: #000;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
-  }
-  
-  /* Header */
-  .project-header {
-    position: relative;
-    background-color: #000;
-    padding: 40px 20px;
-    margin-bottom: 40px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .project-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    opacity: 0.3;
-    z-index: 0;
-    transition: opacity 0.5s ease;
-  }
-  
-  .project-header:hover::before {
-    opacity: 0.5;
-  }
-  
-  .project-header h2 {
-    position: relative;
-    z-index: 1;
-    color: #00d4ff !important;
-    font-size: 3rem;
-    margin: 0;
-    opacity: 0;
-    transform: translateY(-50px);
-    animation: fadeInDown 1s ease forwards;
-    text-transform: uppercase;
-    text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
-  }
-  
-  @keyframes fadeInDown {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Project Details Container */
-  .project-details {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: left;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* Project Goal Section */
-  .project-goal {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 40px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid #00d4ff;
-    transition: transform 0.3s ease;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: fadeInUp 0.8s ease forwards;
-  }
-  
-  .project-goal:hover {
-    transform: translateY(-5px);
-  }
-  
-  .project-goal h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-    position: relative;
-  }
-  
-  .project-goal h3::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(90deg, #1e3c72, #00d4ff);
-  }
-  
-  .project-goal p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-  }
-  
-  /* Project Content */
-  .project-content {
-    margin-top: 20px;
-    position: relative;
-  }
-  
-  /* Section Divider */
-  .project-content::before {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(90deg, #1e3c72, #00d4ff);
-    margin: 0 auto 40px;
-  }
-  
-  /* Single Image Items */
-  .project-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 40px;
-    gap: 40px;
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: fadeInUp 0.8s ease forwards;
-  }
-  
-  .project-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .project-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 8px;
-    pointer-events: none;
-  }
-  
-  /* Removed animation delays to match Project1 */
-  .project-item:nth-child(1),
-  .project-item:nth-child(2),
-  .project-item:nth-child(3),
-  .project-item:nth-child(4),
-  .project-item:nth-child(5),
-  .project-item:nth-child(6) {
-    animation-delay: 0s;
-  }
-  
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .project-item.reverse {
-    flex-direction: row-reverse;
-  }
-  
-  /* Single images (non-collage) */
-  .project-item img:not(.collage-image) {
-    width: 100%;
-    height: 500px;
-    object-fit: contain;
-    border-radius: 8px;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-  
-  .project-item img:not(.collage-image):hover {
-    transform: scale(1.02);
-  }
-  
-  /* Single videos (non-collage) */
+/* Project5.css */
+
+/* Removed Animation Delays to Match Project 1 */
+.project-item:nth-child(1),
+.project-item:nth-child(2),
+.project-item:nth-child(3),
+.project-item:nth-child(4),
+.project-item:nth-child(5),
+.project-item:nth-child(6) {
+  animation-delay: 0s;
+}
+
+/* Override Image and iframe Heights */
+.project-item img:not(.collage-image),
+.project-item iframe:not(.collage-video) {
+  height: 500px;
+}
+
+/* Section 5 Collage: 3x1 Horizontal Layout for 3 Images (was Section 6) */
+.project-item:nth-child(5) .collage-container.horizontal-collage {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 250px;
+  width: 100%;
+}
+
+.project-item:nth-child(5) .collage-image {
+  width: 33.33%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Collage Video */
+.collage-video {
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+
+.collage-video:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-item img:not(.collage-image),
   .project-item iframe:not(.collage-video) {
-    width: 100%;
-    height: 500px;
-    border-radius: 8px;
-    display: block;
-    transition: transform 0.3s ease;
+    height: unset;
   }
-  
-  .project-item iframe:not(.collage-video):hover {
-    transform: scale(1.02);
-  }
-  
-  /* Project item paragraph */
-  .project-item p {
-    width: 100%;
-    line-height: 1.8;
-    color: #444;
-    font-size: 1.1rem;
-    position: relative;
-    padding-left: 20px;
-    margin: 15px 0;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border-left: 2px solid #00d4ff;
-  }
-  
-  .project-item p:hover {
-    background-color: rgba(0, 212, 255, 0.05);
-    color: #222;
-  }
-  
- /* Collage Container (for all collage sections) */
-.collage-container {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(0, 212, 255, 0.2);
-  }
-  
-  /* Section 5 Collage: 3x1 Horizontal Layout for 3 Images (was Section 6) */
   .project-item:nth-child(5) .collage-container.horizontal-collage {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    height: 250px;
-    width: 100%;
+    height: 200px;
   }
-  
-  .project-item:nth-child(5) .collage-image {
-    width: 33.33%;
-    height: 100%;
-    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .project-item img:not(.collage-image) {
+    height: 300px;
   }
-  
-  /* Collage Images */
-  .collage-image {
-    display: block;
-    border-radius: 0;
-    transition: transform 0.3s ease;
-  }
-  
-  .collage-image:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Collage Video */
-  .collage-video {
-    object-fit: contain;
-    display: block;
-    border-radius: 0;
-    transition: transform 0.3s ease;
-  }
-  
-  .collage-video:hover {
-    transform: scale(1.05);
-  }
-  
-  
-  /* Project Conclusion Section */
-  .project-conclusion {
-    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 40px;
-    text-align: center;
-    width: 97.5%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    border-top: 4px solid #00d4ff;
-    transition: transform 0.3s ease;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: fadeInUp 0.8s ease forwards;
-  }
-  
-  .project-conclusion:hover {
-    transform: translateY(-5px);
-  }
-  
-  .project-conclusion h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #1e3c72;
-    margin-bottom: 15px;
-    position: relative;
-  }
-  
-  .project-conclusion h3::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(90deg, #1e3c72, #00d4ff);
-  }
-  
-  .project-conclusion p {
-    font-size: 1.1rem;
-    color: #333;
-    line-height: 1.8;
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
-    position: relative;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .project-conclusion p:hover {
-    background-color: rgba(0, 212, 255, 0.1);
-    color: #222;
-  }
-  
-  .project-conclusion iframe {
-    width: 100%;
-    height: 500px;
-    border-radius: 8px;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-  
-  .project-conclusion iframe:hover {
-    transform: scale(1.02);
-  }
-  
-  /* Image Modal */
-  .image-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
+  .project-item:nth-child(5) .collage-container.horizontal-collage {
     flex-direction: column;
-    align-items: center;
+    height: 600px;
   }
-  
-  .modal-close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff4d4d;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.3s ease;
+  .project-item:nth-child(5) .collage-image {
+    width: 100%;
+    height: 33.33%;
   }
-  
-  .modal-close-button:hover {
-    background: #e63939;
-  }
-  
-  .modal-image-wrapper {
-    max-width: 100%;
-    max-height: 70vh;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .project-item {
-      flex-direction: column;
-    }
-    .project-item.reverse {
-      flex-direction: column;
-    }
-    .project-item img:not(.collage-image),
-    .project-item p {
-      width: 100%;
-    }
-    .project-header h2 {
-      font-size: 2.5rem;
-    }
-    .project-goal h3 {
-      font-size: 1.3rem;
-    }
-    .collage-container {
-      width: 100%;
-      height: 450px;
-    }
-    .project-conclusion h3 {
-      font-size: 1.3rem;
-    }
-    .project-conclusion iframe {
-      height: 400px;
-    }
-    .project-item p,
-    .project-conclusion p {
-      font-size: 1rem;
-      padding: 10px;
-    }
-    .back-link,
-    .next-link {
-      padding: 8px 15px;
-      font-size: 0.9rem;
-    }
-    .project-item:nth-child(4) .collage-container.side-by-side {
-      height: 450px;
-    }
-    .project-item:nth-child(6) .collage-container.horizontal-collage {
-      height: 200px;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .project-header h2 {
-      font-size: 2rem;
-    }
-    .project-goal h3 {
-      font-size: 1.2rem;
-    }
-    .collage-container {
-      height: 350px;
-    }
-    .project-item img:not(.collage-image) {
-      height: 300px;
-    }
-    .project-conclusion h3 {
-      font-size: 1.2rem;
-    }
-    .project-conclusion iframe {
-      height: 300px;
-    }
-    .project-item p,
-    .project-conclusion p {
-      font-size: 0.95rem;
-      padding: 8px;
-    }
-    .modal-content {
-      padding: 10px;
-    }
-    .modal-close-button {
-      width: 25px;
-      height: 25px;
-      font-size: 1rem;
-    }
-    .back-link,
-    .next-link {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-    }
-    .back-link {
-      left: 10px;
-    }
-    .next-link {
-      right: 10px;
-    }
-    .project-item:nth-child(4) .collage-container.side-by-side {
-      flex-direction: column;
-      height: 700px;
-    }
-    .project-item:nth-child(4) .image-wrapper {
-      width: 100%;
-      height: 50%;
-    }
-    .project-item:nth-child(4) .collage-image {
-      height: calc(100% - 40px);
-    }
-    .project-item:nth-child(6) .collage-container.horizontal-collage {
-      flex-direction: column;
-      height: 600px;
-    }
-    .project-item:nth-child(6) .collage-image {
-      width: 100%;
-      height: 33.33%;
-    }
-  }
+}

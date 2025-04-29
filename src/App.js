@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FaAngleDoubleDown, FaLinkedin, FaFileAlt } from 'react-icons/fa';
 import { HashRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
+import './projects/global.css';
 import Project1 from './projects/Project1';
 import Project2 from './projects/Project2';
 import Project3 from './projects/Project3';
