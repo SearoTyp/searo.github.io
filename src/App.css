@@ -253,7 +253,7 @@ body {
   animation-delay: 0.6s;
 }
 
-.home-content .scroll-arrow {
+.home-content .scroll-arrow-up {
   animation-delay: 0.8s;
 }
 
@@ -296,6 +296,7 @@ body {
   font-size: 1.2rem;
   font-style: italic;
   margin-top: 10px;
+  margin-bottom: 20px;
   transition: transform 0.3s ease;
 }
 
@@ -303,33 +304,54 @@ body {
   transform: scale(1.05);
 }
 
-.scroll-arrow {
-  margin-top: 20px;
+.scroll-arrow-up {
+  margin-top: 10px;
   font-size: 3rem;
   color: #00d4ff;
   cursor: pointer;
-  animation: bounce 2s infinite ease-in-out;
+  transform: rotate(180deg);
+  z-index: 10;
+  position: relative;
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
-
-.scroll-arrow:hover {
+.scroll-arrow-up:hover {
   color: #fff;
 }
 
-.scroll-arrow:focus {
+.scroll-arrow-up:focus {
   outline: 2px solid #00d4ff;
   outline-offset: 2px;
+}
+
+/* Moving Text Animation */
+.moving-text {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  animation: tickerLoop 15s linear infinite;
+}
+
+.ticker span {
+  display: inline-block;
+  font-size: 12rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  padding-right: 40px;
+}
+
+@keyframes tickerLoop {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
 /* About Section */
@@ -384,6 +406,56 @@ body {
   }
 }
 
+.learn-more-button {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  color: #00d4ff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 20px;
+  border: 1px solid #00d4ff;
+  border-radius: 20px;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  animation: slideButton 1.5s infinite ease-in-out;
+  z-index: 1;
+}
+
+.learn-more-button:hover,
+.learn-more-button:focus {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.learn-more-button::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.learn-more-button:hover::before,
+.learn-more-button:focus::before {
+  border-color: #fff;
+}
+
+@keyframes slideButton {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
 .about-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -418,8 +490,8 @@ body {
 }
 
 .profile-pic {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #00d4ff;
@@ -433,6 +505,7 @@ body {
 
 .about-right {
   flex: 2;
+  position: relative;
 }
 
 .about-right p {
@@ -609,7 +682,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* For overlay positioning */
+  position: relative;
 }
 
 .project-card {
@@ -626,14 +699,12 @@ body {
   transform: translateY(0);
 }
 
-/* Separated fade-in effect */
 .project-card.fade-in-up {
   opacity: 0;
   transform: translateY(50px);
   animation: fadeInUp 0.5s ease forwards;
 }
 
-/* Delays */
 .project-card.fade-in-up:nth-child(1) { animation-delay: 0.1s; }
 .project-card.fade-in-up:nth-child(2) { animation-delay: 0.2s; }
 .project-card.fade-in-up:nth-child(3) { animation-delay: 0.3s; }
@@ -641,13 +712,11 @@ body {
 .project-card.fade-in-up:nth-child(5) { animation-delay: 0.5s; }
 .project-card.fade-in-up:nth-child(6) { animation-delay: 0.6s; }
 
-/* Hover - Same as Skills and Hobbies */
 .project-card:hover {
   transform: translateY(-15px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Description Overlay on Hover */
 .project-description-overlay {
   position: absolute;
   top: 0;
@@ -682,7 +751,14 @@ body {
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border-radius: 12px;
+}
+
+.mini-vtol-image {
+  background-size: 60%; /* Zoom out only the Mini VTOL image */
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .project-info {
@@ -763,7 +839,7 @@ body {
   z-index: 2;
   width: 100%;
   max-width: 1200px;
-  gap: 20px; /* Added spacing between elements */
+  gap: 20px;
 }
 
 .contact-content > * {
@@ -791,7 +867,7 @@ body {
   font-size: 4rem;
   color: #fff;
   font-weight: bold;
-  margin: 0; /* Adjusted margin */
+  margin: 0;
   position: relative;
   text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
 }
@@ -813,7 +889,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 500px;
-  margin: 20px 0; /* Adjusted margin for spacing */
+  margin: 20px 0;
 }
 
 .contact-form label {
@@ -829,8 +905,8 @@ body {
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 12px; /* Increased padding for better usability */
-  margin-bottom: 20px; /* Increased spacing between fields */
+  padding: 12px;
+  margin-bottom: 20px;
   border: 1px solid #00d4ff;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
@@ -879,7 +955,7 @@ body {
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 20px 0; /* Adjusted margin for spacing */
+  margin: 20px 0;
   opacity: 0.7;
 }
 
@@ -894,7 +970,7 @@ body {
   text-decoration: none;
   font-size: 1rem;
   text-transform: uppercase;
-  padding: 8px 16px; /* Increased padding for better click area */
+  padding: 8px 16px;
   border: 1px solid #00d4ff;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -933,6 +1009,13 @@ body {
   .about-right p {
     font-size: 1rem;
     padding: 10px;
+  }
+
+  .learn-more-button {
+    top: 100px;
+    right: 10px;
+    font-size: 0.9rem;
+    padding: 5px 15px;
   }
 
   .about-boxes {
@@ -981,6 +1064,15 @@ body {
   .contact-social-links {
     gap: 15px;
   }
+
+  .scroll-arrow-up {
+    font-size: 2.5rem;
+  }
+
+  .moving-text span {
+    font-size: 1.5rem;
+    margin-right: 30px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1028,6 +1120,13 @@ body {
   .about-right p {
     font-size: 0.95rem;
     padding: 8px;
+  }
+
+  .learn-more-button {
+    top: 90px;
+    right: 10px;
+    font-size: 0.85rem;
+    padding: 5px 12px;
   }
 
   .skills h3,
@@ -1090,6 +1189,15 @@ body {
   .contact-social-text {
     font-size: 0.9rem;
   }
+
+  .scroll-arrow-up {
+    font-size: 2rem;
+  }
+
+  .moving-text span {
+    font-size: 1.2rem;
+    margin-right: 20px;
+  }
 }
 
 /* Touch Devices */
@@ -1099,7 +1207,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  /* Disable hover overlay on touch devices */
   .project-description-overlay {
     display: none;
   }

@@ -1,0 +1,209 @@
+/* Project4.css */
+
+/* Animation Delays for All 10 Sections */
+.project-item:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .project-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .project-item:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  .project-item:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  .project-item:nth-child(5) {
+    animation-delay: 0.8s;
+  }
+  .project-item:nth-child(6) {
+    animation-delay: 1.0s;
+  }
+  .project-item:nth-child(7) {
+    animation-delay: 1.2s;
+  }
+  .project-item:nth-child(8) {
+    animation-delay: 1.4s;
+  }
+  .project-item:nth-child(9) {
+    animation-delay: 1.6s;
+  }
+  .project-item:nth-child(10) {
+    animation-delay: 1.8s;
+  }
+  
+  /* Vertical Layout for Sections with Text Above Collage */
+  .project-item.vertical-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .project-item.vertical-layout .text-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Section Videos */
+  .project-item .section-video {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  .project-item .section-video:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Add a Small Decorative Element Before the Paragraph */
+  .project-item p::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color: #00d4ff;
+    font-size: 1.2rem;
+  }
+  
+  /* Section 4 Collage: 3x3 Grid for 9 Images */
+  .project-item:nth-child(4) .collage-container {
+    grid-template-areas: 
+      "img1 img2 img3"
+      "img4 img5 img6"
+      "img7 img8 img9";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0;
+  }
+  
+  .project-item:nth-child(4) .collage-image:nth-child(1) {
+    grid-area: img1;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(2) {
+    grid-area: img2;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(3) {
+    grid-area: img3;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(4) {
+    grid-area: img4;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(5) {
+    grid-area: img5;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(6) {
+    grid-area: img6;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(7) {
+    grid-area: img7;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(8) {
+    grid-area: img8;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  .project-item:nth-child(4) .collage-image:nth-child(9) {
+    grid-area: img9;
+    width: 45%;
+    height: 45%;
+    margin: 0 auto;
+  }
+  
+  /* Section 10 Collage: 1x3 Horizontal Layout for 3 Images */
+  .project-item:nth-child(10) .collage-container {
+    grid-template-areas: "img1 img2 img3";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 10px;
+    height: 300px;
+  }
+  
+  .project-item:nth-child(10) .collage-image:nth-child(1) {
+    grid-area: img1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  .project-item:nth-child(10) .collage-image:nth-child(2) {
+    grid-area: img2;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  .project-item:nth-child(10) .collage-image:nth-child(3) {
+    grid-area: img3;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  
+  /* Add a Decorative Element Before the Conclusion Paragraph */
+  .project-conclusion p::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    color: #00d4ff;
+    font-size: 1.2rem;
+  }
+  
+  /* Project Links Container */
+  .project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    position: relative;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .project-item .section-video {
+      height: 320px;
+    }
+    .project-item:nth-child(10) .collage-container {
+      grid-template-areas: 
+        "img1"
+        "img2"
+        "img3";
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 1fr);
+      height: 600px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .project-item .section-video {
+      height: 240px;
+    }
+    .project-item:nth-child(10) .collage-container {
+      height: 480px;
+    }
+  }

@@ -1,118 +1,283 @@
-/* Project3.css */
+/* Base styles are inherited from global.css; this file customizes layouts for Project 3 */
 
-/* Animation Delays */
-.project-item:nth-child(1) {
+/* Remove animation delays to match Project 2 */
+.project-item:nth-child(1),
+.project-item:nth-child(2),
+.project-item:nth-child(3),
+.project-item:nth-child(4),
+.project-item:nth-child(5),
+.project-item:nth-child(6) {
   animation-delay: 0s;
 }
-.project-item:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.project-item:nth-child(3) {
-  animation-delay: 0.4s;
-}
 
-/* Add a small decorative element before the paragraph */
-.project-item p::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 5px;
-  color: #00d4ff;
-  font-size: 1.2rem;
-}
-
-/* Second Section Collage: 2x2 Grid for 4 Images */
-.project-item:nth-child(2) .collage-container {
-  grid-template-areas: 
-    "img1 img2"
-    "img3 img4";
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 0;
-}
-
-/* Assign grid areas for the images in the second section */
-.project-item:nth-child(2) .collage-image:nth-child(1) {
-  grid-area: img1;
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-}
-
-.project-item:nth-child(2) .collage-image:nth-child(2) {
-  grid-area: img2;
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-}
-
-.project-item:nth-child(2) .collage-image:nth-child(3) {
-  grid-area: img3;
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-}
-
-.project-item:nth-child(2) .collage-image:nth-child(4) {
-  grid-area: img4;
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-}
-
-/* Add a decorative element before the conclusion paragraph */
-.project-conclusion p::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 15px;
-  color: #00d4ff;
-  font-size: 1.2rem;
-}
-
-/* Competition Link in Conclusion */
-.project-conclusion .competition-link {
-  color: #00d4ff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.project-conclusion .competition-link:hover {
-  color: #1e3c72;
-  text-decoration: underline;
-}
-
-/* Project Links Container */
-.project-links {
+/* Section 1: Current Microreactor Design (2 Pictures Stacked) */
+.project-item:nth-child(1) .collage-container.vertical-collage {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.project-item:nth-child(1) .collage-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+/* Section 2: CAD Design of NTG (Text on Top, Image and GIF Stacked Below) */
+.project-item:nth-child(2) .collage-container.vertical-collage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.project-item:nth-child(2) .collage-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+/* Section 3: Simulation Schematic Diagrams (2 Pictures Stacked) */
+.project-item:nth-child(3) .collage-container.vertical-collage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.project-item:nth-child(3) .collage-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+/* Section 4: Python Simulations (Text on One Side, 3 Pictures: 1 Top, 2 Bottom on the Other) */
+.project-item.simulation-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.project-item.simulation-section .text-container {
+  width: 50%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all; /* Ensure long equations break to the next line */
+  padding: 0 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.project-item.simulation-section .collage-container.vertical-collage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  height: auto;
+}
+
+.project-item.simulation-section .collage-image.top-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.project-item.simulation-section .horizontal-subcollage {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.project-item.simulation-section .collage-image.subcollage-image {
+  width: 50%;
+  height: 300px;
+  object-fit: contain;
+}
+
+/* Section 5: MOOSE and Gmsh Simulations (Big Block with GIF) */
+.project-item.gif-block {
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
-  padding: 20px 0;
-  position: relative;
+  width: 96.5%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
 }
 
-/* GitHub Link */
-.github-link {
-  display: inline-block;
+.project-item.gif-block .gif-image {
+  width: 100%;
+  max-width: 800px; /* Limit maximum width for a big block effect */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.project-item.gif-block .gif-image:hover {
+  transform: scale(1.02);
+}
+
+/* Section 6: Additional MOOSE and Gmsh Simulations (2 Images on Left, Text on Right) */
+.project-item:nth-child(6) .collage-container.vertical-collage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  height: auto;
+}
+
+.project-item:nth-child(6) .collage-image.top-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+/* Conclusion Links */
+.conclusion-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.conclusion-link {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #00d4ff;
+  border-radius: 20px;
   color: #00d4ff;
   text-decoration: none;
-  background: none;
-  border: 1px solid #00d4ff;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
   font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.github-link:hover,
-.github-link:focus {
+.conclusion-link:hover,
+.conclusion-link:focus {
   background: #00d4ff;
   color: #000;
-  text-decoration: none;
-  outline: none;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.conclusion-link.center-link {
+  background: #1e3c72;
+  color: #fff;
+  border-color: #1e3c72;
+}
+
+.conclusion-link.center-link:hover,
+.conclusion-link.center-link:focus {
+  background: #00d4ff;
+  color: #000;
+  border-color: #00d4ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Section 1: Vertical collage remains, adjust height */
+  .project-item:nth-child(1) .collage-image {
+    height: 300px;
+  }
+
+  /* Section 2: Vertical collage remains, adjust height */
+  .project-item:nth-child(2) .collage-image {
+    height: 300px;
+  }
+
+  /* Section 3: Vertical collage remains, adjust height */
+  .project-item:nth-child(3) .collage-image {
+    height: 300px;
+  }
+
+  /* Section 4: Adjust layout for mobile */
+  .project-item.simulation-section {
+    flex-direction: column;
+  }
+
+  .project-item.simulation-section .text-container,
+  .project-item.simulation-section .collage-container.vertical-collage {
+    width: 100%;
+  }
+
+  .project-item.simulation-section .collage-image.top-image {
+    height: 300px;
+  }
+
+  .project-item.simulation-section .collage-image.subcollage-image {
+    height: 200px;
+  }
+
+  /* Section 5: Adjust GIF block for mobile */
+  .project-item.gif-block .gif-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Section 6: Adjust layout for mobile */
+  .project-item:nth-child(6) .collage-container.vertical-collage {
+    width: 100%;
+  }
+
+  .project-item:nth-child(6) .collage-image.top-image {
+    height: 300px;
+  }
+
+  /* Conclusion Links */
+  .conclusion-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .conclusion-link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Section 1 */
+  .project-item:nth-child(1) .collage-image {
+    height: 200px;
+  }
+
+  /* Section 2 */
+  .project-item:nth-child(2) .collage-image {
+    height: 200px;
+  }
+
+  /* Section 3 */
+  .project-item:nth-child(3) .collage-image {
+    height: 200px;
+  }
+
+  /* Section 4 */
+  .project-item.simulation-section .collage-image.top-image {
+    height: 200px;
+  }
+
+  .project-item.simulation-section .collage-image.subcollage-image {
+    height: 150px;
+  }
+
+  /* Section 5 */
+  .project-item.gif-block .gif-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Section 6 */
+  .project-item:nth-child(6) .collage-image.top-image {
+    height: 200px;
+  }
 }

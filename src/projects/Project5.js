@@ -1,20 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Project5.css';
+import './Project2.css';
 
-const Project5 = ({ projects, currentProjectId }) => {
-  useEffect(() => {
-    console.log("Project5 component mounted, scrolling to top");
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant',
-    });
-
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, []);
-
+const Project2 = ({ projects, currentProjectId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -28,127 +16,126 @@ const Project5 = ({ projects, currentProjectId }) => {
     setSelectedImage(null);
   };
 
-  const nextProject = projects.find((proj) => proj.id === currentProjectId + 1);
-  const previousProject = projects.find((proj) => proj.id === currentProjectId - 1);
-  const lastProject = projects[projects.length - 1];
-
-  return (
-    <div className="project-page">
-      <div className="project-nav">
-        <Link to="/" className="back-link">Back to Home</Link>
-        {nextProject ? (
-          <Link to={nextProject.path} className="next-link">Next Project</Link>
-        ) : (
-          <Link to="/project/1" className="next-link">Back to First Project</Link>
-        )}
-        {previousProject ? (
-         <Link to={previousProject.path} className="prev-link">Previous Project</Link>
-          ) : (
-         <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
-          )}
-      </div>
+    const nextProject = projects.find((proj) => proj.id === currentProjectId + 1);
+    const previousProject = projects.find((proj) => proj.id === currentProjectId - 1);
+    const lastProject = projects[projects.length - 1];
+    
+      return (
+        <div className="project-page">
+          <div className="project-nav">
+            <Link to="/" className="back-link">Back to Home</Link>
+            {nextProject ? (
+              <Link to={nextProject.path} className="next-link">Next Project</Link>
+            ) : (
+              <Link to="/project/1" className="next-link">Back to First Project</Link>
+            )}
+            {previousProject ? (
+             <Link to={previousProject.path} className="prev-link">Previous Project</Link>
+            ) : (
+             <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
+            )}
+          </div>
+  
 
       <div className="project-header">
-        <h2>Light Based Head Tracker</h2>
+        <h2>FreshFridge</h2>
       </div>
-
       <div className="project-details">
         <div className="project-goal">
           <h3>Project Goal and Approach</h3>
           <p>
-            <strong>The objective of this project was to develop a light-based head tracking system to assist users with limited dexterity in interacting with technology through head movements.</strong> This project aimed to create an accessible solution for applications such as assistive technology, communication devices, or computer navigation. My approach involved designing a headset with light sensors to detect head position, integrating it with a microcontroller for processing, and displaying the position on an LED screen.
+            <strong>My goal was to develop FreshFridge, a web application designed to streamline meal planning, ingredient tracking, and grocery shopping for home cooks and food enthusiasts.</strong> The team first started by deciding on what interface to use and how to execute our imagination. The website interface was built using React, and I created dedicated HTML and CSS files for the Grocery List Page. To manage data efficiently, we stored the Ingredient and Grocery lists using JSON stringify and parse functions and used APIs to fetch custom recipes.
           </p>
+          <p>
+            The goal of FreshFridge is to streamline meal planning and grocery shopping by providing users with a comprehensive digital kitchen assistant. The application enables users to:
+          </p>
+          <ul className="goal-list">
+            <li>Track their available ingredients,</li>
+            <li>Generate recipes based on current inventory and preferences,</li>
+            <li>Build and manage grocery lists.</li>
+          </ul>
         </div>
 
         <div className="project-content">
-          {/* Section 1: Prototype */}
           <div className="project-item">
             <img
-              src={`${process.env.PUBLIC_URL}/HeadSensor/1.png`}
-              alt="Prototype of light-based head tracker"
-              onError={() => console.error("Failed to load Section 1 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/1.png`)}
+              src={`${process.env.PUBLIC_URL}/FreshFridge/Schematic Diagram.jpg`}
+              alt="FreshFridge Homepage Design"
+              onError={() => console.error("Failed to load FreshFridge Homepage Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Schematic Diagram.jpg`)}
               style={{ cursor: 'pointer' }}
             />
             <p>
-              <strong>Prototype:</strong> This initial design mimics head movement by tracking light variations and displays the position on an LED screen. It was designed with comfort in mind, ensuring a lightweight and ergonomic fit. The system was specifically made for those with limited dexterity, providing an intuitive way to interact with technology.
+              FreshFridge was developed using a layered full-stack approach:
+              <ul className="goal-list">
+                <li>Frontend: Built with React.</li>
+                <li>Backend: Developed using Node.js, managing API communications with Edamam, session storage, and parsing recipe/nutritional data.</li>
+                <li>APIs: Edamam APIs were integrated to fetch real-time recipes and detailed nutrition information tailored to user input.</li>
+                <li>Data Persistence: Session storage was used for storing ingredients and grocery lists between interactions.</li>
+              </ul>
             </p>
           </div>
 
-          {/* Section 2: Setup Process */}
           <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/HeadSensor/2.png`}
-              alt="Setup process for head tracker"
-              onError={() => console.error("Failed to load Section 2 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/2.png`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              <strong>Setup Process:</strong> The headset is designed to be easy to put on and off. The user, often with assistance, places the headset on their head. Next, the user turns on the headlamp to activate the light source. The user then plugs in the Arduino to power the sensor system. Once connected, the system is ready to go, enabling seamless head tracking.
-            </p>
-          </div>
-
-          {/* Section 3: System Specifications */}
-          <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/HeadSensor/3.png`}
-              alt="System specifications for head tracker"
-              onError={() => console.error("Failed to load Section 3 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/3.png`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              <strong>Headlamp:</strong> Powered by a 9V battery, offering 18.3 hours of use with a spot size of LED at 217 nm.<br />
-              <strong>Sensor/Display:</strong> Plugs directly into a wall outlet or a computer, reading data every 50 ms for a fast, near real-time response.<br />
-              <strong>Accuracy/Reliability:</strong> Follows the intended direction 97% of the time, as shown in the Phototransistor Voltage vs. Distance graph below.
-            </p>
-          </div>
-
-          {/* Section 5: Circuitry and Arduino Mega */}
-          <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/HeadSensor/8.png`}
-              alt="Circuitry of head tracker"
-              onError={() => console.error("Failed to load Section 5 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/8.png`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              <strong>Circuitry and Arduino Mega:</strong> The system’s core is powered by an Arduino Mega, which processes data from the sensors and controls the LED display. The circuitry integrates the phototransistors, infrared LEDs, and power management components, ensuring reliable operation and efficient data handling for real-time tracking.
-            </p>
-          </div>
-
-          {/* Section 6: The Code */}
-          <div className="project-item">
-            <p>
-              The code for the head tracker system manages sensor data collection, processes head movement inputs, and updates the LED display in real-time. The graphs below illustrate the system’s performance, including sensor data processing speed, LED display refresh rate, and error rates during operation, highlighting the efficiency and reliability of the code.
-            </p>
-            <div className="collage-container horizontal-collage">
+            <div className="collage-container">
               <img
-                src={`${process.env.PUBLIC_URL}/HeadSensor/10.png`}
-                alt="Sensor data processing speed graph"
+                src={`${process.env.PUBLIC_URL}/FreshFridge/Main Page.jpg`}
+                alt="Main Page Interface"
                 className="collage-image"
-                onError={() => console.error("Failed to load Section 6 Image 1")}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/10.png`)}
+                onError={() => console.error("Failed to load Main Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Main Page.jpg`)}
                 style={{ cursor: 'pointer' }}
               />
               <img
-                src={`${process.env.PUBLIC_URL}/HeadSensor/11.png`}
-                alt="LED display refresh rate graph"
+                src={`${process.env.PUBLIC_URL}/FreshFridge/Grocery Page.jpg`}
+                alt="Grocery List Page"
                 className="collage-image"
-                onError={() => console.error("Failed to load Section 6 Image 2")}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/11.png`)}
+                onError={() => console.error("Failed to load Grocery List Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Grocery Page.jpg`)}
                 style={{ cursor: 'pointer' }}
               />
               <img
-                src={`${process.env.PUBLIC_URL}/HeadSensor/12.png`}
-                alt="Error rates graph for head tracker"
+                src={`${process.env.PUBLIC_URL}/FreshFridge/Recipe Page.jpg`}
+                alt="Recipe Page"
                 className="collage-image"
-                onError={() => console.error("Failed to load Section 6 Image 3")}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/HeadSensor/12.png`)}
+                onError={() => console.error("Failed to load Recipe Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Recipe Page.jpg`)}
                 style={{ cursor: 'pointer' }}
               />
+              <img
+                src={`${process.env.PUBLIC_URL}/FreshFridge/Fridge.jpg`}
+                alt="Ingredients Page"
+                className="collage-image"
+                onError={() => console.error("Failed to load Ingredients Page Image")}
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/FreshFridge/Fridge.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+            </div>
+            <div>
+              <h4>1. Main Page</h4>
+              <ul className="goal-list">
+                <li>Welcomes users with a clean, intuitive dashboard for quick navigation.</li>
+                <li>Displays a summary of available ingredients and suggested recipes.</li>
+                <li>Provides quick links to the Ingredients, Recipe, and Grocery List pages.</li>
+              </ul>
+              <h4>2. Ingredients Page</h4>
+              <ul className="goal-list">
+                <li>Allows users to input ingredients they currently have.</li>
+                <li>Tracks each item along with units or quantity.</li>
+                <li>Provides real-time feedback to indicate availability for recipe generation.</li>
+              </ul>
+              <h4>3. Grocery List Page</h4>
+              <ul className="goal-list">
+                <li>Users can add missing ingredients or personal items.</li>
+                <li>Ingredients from selected recipes can be automatically appended to the list.</li>
+                <li>Designed for quick list creation before shopping trips.</li>
+              </ul>
+              <h4>4. Recipe Page</h4>
+              <ul className="goal-list">
+                <li>Fetches recipes using the Edamam API based on available ingredients and user preferences (e.g., dietary restrictions).</li>
+                <li>Displays recipes with full nutritional breakdowns (calories, macros, vitamins).</li>
+                <li>Users can add missing ingredients directly to their grocery list.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -156,17 +143,36 @@ const Project5 = ({ projects, currentProjectId }) => {
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
-            The Light Based Head Tracker project successfully created an accessible and reliable system for users with limited dexterity to interact with technology through head movements. By integrating light sensors, an Arduino Mega, and an LED display, the system achieved a 97% accuracy rate in tracking head positions, with a fast response time of 50 ms. Challenges such as ensuring comfort, managing varying lighting conditions, and optimizing sensor sensitivity were overcome through iterative design and testing. The final system, as demonstrated in the sections above, provides a practical solution for assistive technology applications, with potential for further development in areas like multi-axis tracking or integration with advanced communication devices. Check out the final demonstration below!
+            FreshFridge was a successful attempt at building an intuitive, feature-rich web application that simplifies kitchen management. The project would not have been possible without <em>Sae</em>, <em>Dil</em>, <em>Alex</em>, <em>Vq</em>, and <em>Jackie</em>. Check out our video to see all the features of FreshFridge!
           </p>
-          <iframe
-            className="collage-video"
-            src="https://www.youtube.com/embed/Fo3scTZS1BI"
-            title="Light Based Head Tracker Demo"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <div className="conclusion-video" style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}>
+            <iframe
+              src="https://www.youtube.com/embed/qe16tw61GcM"
+              title="FreshFridge Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              }}
+            ></iframe>
+          </div>
         </div>
+      </div>
+
+      <div className="project-links">
+        <a
+          href="https://github.com/Searotyp/freshfridge"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="github-link"
+        >
+          Check out the project on GitHub
+        </a>
       </div>
 
       {isModalOpen && (
@@ -178,7 +184,7 @@ const Project5 = ({ projects, currentProjectId }) => {
             <div className="modal-image-wrapper">
               <img
                 src={selectedImage}
-                alt="Enlarged view of project content"
+                alt="Enlarged view of FreshFridge interface"
                 className="modal-image"
               />
             </div>
@@ -189,4 +195,4 @@ const Project5 = ({ projects, currentProjectId }) => {
   );
 };
 
-export default Project5;
+export default Project2;

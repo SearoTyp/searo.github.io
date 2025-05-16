@@ -42,195 +42,141 @@ const Project6 = ({ projects, currentProjectId }) => {
           <Link to="/project/1" className="next-link">Back to First Project</Link>
         )}
         {previousProject ? (
-        <Link to={previousProject.path} className="prev-link">Previous Project</Link>
+          <Link to={previousProject.path} className="prev-link">Previous Project</Link>
         ) : (
-        <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
+          <Link to={`/project/${lastProject.id}`} className="prev-link">Back to Last Project</Link>
         )}
       </div>
 
       <div className="project-header">
-        <h2>Motor Speed Control System</h2>
+        <h2>Lamp Buddy</h2>
       </div>
-
       <div className="project-details">
         <div className="project-goal">
           <h3>Project Goal and Approach</h3>
           <p>
-            <strong>The objective of this project was to design a platform that leverages Multibody Dynamic Simulation to maximize the acceleration of a 1-foot aluminum extrusion section, transporting it 10 feet while keeping it upright.</strong> This initiative tackled the challenge of efficient and stable transportation. Our approach involved CADing and Simulations, iterative prototyping, and rigorous testing to ensure the system achieved its performance targets.
+            <strong>Designed and built Lamp Buddy for the Lutron Lighting Innovation Challenge 2024, a smart study lamp that helps students stay focused by minimizing phone distractions.</strong> The lamp features ultrasound sensors for touch-free operation, a timer system that enables study sessions with scheduled breaks, and adjustable mood lighting to create an optimal study environment. My approach involved integrating hardware components like ultrasound sensors and LED strips with a microcontroller, programming the logic using Arduino, and designing a user-friendly interface to control the lamp’s features.
           </p>
         </div>
 
         <div className="project-content">
-          {/* Section 1: Initial Sketches and Simulation */}
           <div className="project-item">
-            <p>
-              The project started with the development of initial sketches and designs to explore methods for transporting beams across a specified distance. We began by creating a SolidWorks simulation model to better understand the system’s parameters. This model featured a two-wheel-drive mechanism, with a gear attached to the rear wheels to drive motion through rotation. The accompanying Reaction Force vs. Time graph, shown, provided critical insights into the system’s dynamic behavior during this early phase.
-            </p>
             <img
-              src={`${process.env.PUBLIC_URL}/MotorControl/1.jpeg`}
-              alt="Initial sketches and simulation model"
-              onError={() => console.error("Failed to load Section 1 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/1.jpeg`)}
+              src={`${process.env.PUBLIC_URL}/LampBuddy/schem.jpg`}
+              alt="Lamp Buddy design concept schematic"
+              onError={() => console.error("Failed to load Lamp Buddy Design Concept Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/schem.jpg`)}
               style={{ cursor: 'pointer' }}
             />
+            <p>
+              The design concept for Lamp Buddy focused on creating a sleek, modern study lamp that blends functionality with aesthetics:
+              <ul className="goal-list">
+                <li>Incorporated a minimalist cylindrical design with a matte black finish.</li>
+                <li>Positioned ultrasound sensors on top for touch-free interaction.</li>
+                <li>Integrated an LED strip around the base for adjustable mood lighting.</li>
+              </ul>
+            </p>
           </div>
 
-          {/* Section 2: Simulation Results */}
           <div className="project-item reverse">
-            <div className="text-container">
-              <p>
-                The simulation yielded a time of 8 seconds at an acceleration of 850 mm/s², which was expected given the larger wheel size used in the model. In the physical prototype, however, we utilized smaller wheels, resulting in longer travel times, as observed in later tests.
-              </p>
+            <div className="collage-container">
               <img
-                src={`${process.env.PUBLIC_URL}/MotorControl/2.png`}
-                alt="Simulation results graph"
-                onError={() => console.error("Failed to load Section 2 Image")}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/2.png`)}
+                src={`${process.env.PUBLIC_URL}/LampBuddy/image.jpg`}
+                alt="Touch-free operation of Lamp Buddy"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/image.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/LampBuddy/Circuit.jpg`}
+                alt="Timer system circuit for Lamp Buddy"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/Circuit.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/LampBuddy/uv.jpg`}
+                alt="Mood lighting feature of Lamp Buddy"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/uv.jpg`)}
+                style={{ cursor: 'pointer' }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/LampBuddy/Housing.jpg`}
+                alt="Lamp Buddy assembly and housing"
+                className="collage-image"
+                onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/Housing.jpg`)}
                 style={{ cursor: 'pointer' }}
               />
             </div>
-          </div>
-
-          {/* Section 3: Video Demonstration */}
-          <div className="project-item">
-            <iframe
-              src="https://www.youtube.com/embed/dr3hQA2cLek"
-              title="Motor Speed Control System Demo 1"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-
-          {/* Section 4: Final Design */}
-          <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/MotorControl/3.png`}
-              alt="Final design with rack-and-pinion mechanism"
-              onError={() => console.error("Failed to load Section 4 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/3.png`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              Following the prototyping phase, we finalized a two-wheel system design, incorporating a rack-and-pinion gear mechanism to drive rotation. This design proved highly effective, ensuring precise motion without slippage. The image below showcases the final design, marking the transition to the physical construction of the model.
-            </p>
-          </div>
-
-          {/* Section 5: Fabrication */}
-          <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/MotorControl/4.jpg`}
-              alt="Completed model with 3D-printed components"
-              onError={() => console.error("Failed to load Section 5 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/4.jpg`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              The rack-and-pinion components were 3D-printed, while the main body was precision-cut using a laser cutter. The image below presents the completed model, reflecting the culmination of our design and fabrication efforts.
-            </p>
-          </div>
-
-          {/* Section 6: Arduino Code */}
-          <div className="project-item">
-            <img
-              src={`${process.env.PUBLIC_URL}/MotorControl/5.jpeg`}
-              alt="Arduino sketch for motor control"
-              onError={() => console.error("Failed to load Section 6 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/5.jpeg`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              This Arduino sketch governs the motor’s acceleration and deceleration for both forward and backward movements using PWM signals on two digital output pins. In the setup() function, pins 5 and 6 are configured as outputs to control the motor. The loop() function orchestrates a gradual increase in PWM values from 0 to 235 to accelerate the motor, followed by a decrease back to 0 for deceleration, with a brief pause before reversing direction. This process is repeated for backward motion, ensuring precise speed and directional control. After one complete cycle, the program enters an infinite loop, halting further execution and maintaining the motor in a static state. This setup is ideal for applications requiring accurate motor control, such as robotics or automated systems.
-            </p>
-          </div>
-
-          {/* Section 7: System Integration */}
-          <div className="project-item reverse">
-            <img
-              src={`${process.env.PUBLIC_URL}/MotorControl/6.jpg`}
-              alt="Fully assembled model"
-              onError={() => console.error("Failed to load Section 7 Image")}
-              onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/6.jpg`)}
-              style={{ cursor: 'pointer' }}
-            />
-            <p>
-              This section illustrates the integration of all components into a unified system. The image depicts the fully assembled model, highlighting the structural design and the mechanism used to transport the aluminum extrusion while maintaining its upright position.
-            </p>
-          </div>
-
-          {/* Section 8: Key Features Showcase */}
-          <div className="project-item">
-            <div className="collage-container vertical-collage">
-              <img
-                src={`${process.env.PUBLIC_URL}/MotorControl/7.png`}
-                alt="Reaction force vs frame graph for motor speed control"
-                className="collage-image"
-                onError={(e) => {
-                  console.error("Failed to load Feature 1 Image");
-                  e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-                }}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/7.png`)}
-                style={{ cursor: 'pointer' }}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/MotorControl/8.png`}
-                alt="Reaction force vs time graph for motor speed control"
-                className="collage-image"
-                onError={(e) => {
-                  console.error("Failed to load Feature 2 Image");
-                  e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-                }}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/8.png`)}
-                style={{ cursor: 'pointer' }}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/MotorControl/9.png`}
-                alt="Reaction force vs angular acceleration graph for motor speed control"
-                className="collage-image"
-                onError={(e) => {
-                  console.error("Failed to load Feature 3 Image");
-                  e.target.src = `${process.env.PUBLIC_URL}/MotorControl/placeholder.png`;
-                }}
-                onClick={() => openModal(`${process.env.PUBLIC_URL}/MotorControl/9.png`)}
-                style={{ cursor: 'pointer' }}
-              />
-            </div>
-            <div className="text-container">
-              <h4>Key Features Showcase</h4>
-              <p>
-                Prior to conducting the physical test, we performed a SolidWorks simulation to estimate the time required to cover the 10-foot distance. The collage on the left displays three graphs derived from this simulation, plotting Reaction Force on the y-axis against Frame, Time, and Angular Acceleration on the x-axis. These visualizations were instrumental in determining the total time for the system’s operation.
-              </p>
+            <div>
+              <h4>1. Touch-Free Operation</h4>
+              <ul className="goal-list">
+                <li>Uses ultrasound sensors to detect hand gestures for turning the lamp on/off.</li>
+                <li>Allows brightness adjustments with a wave of the hand.</li>
+              </ul>
+              <h4>2. Timer System</h4>
+              <ul className="goal-list">
+                <li>Implements the Pomodoro technique with 25-minute study sessions and 5-minute breaks.</li>
+                <li>Alerts users with a gentle light fade to indicate break times.</li>
+              </ul>
+              <h4>3. Mood Lighting</h4>
+              <ul className="goal-list">
+                <li>Offers adjustable LED colors (warm, cool, and neutral) to suit different study moods.</li>
+                <li>Automatically adjusts lighting based on the time of day.</li>
+              </ul>
+              <h4>4. Assembly Process</h4>
+              <ul className="goal-list">
+                <li>Constructed the housing using laser-cut Acrylic for a sturdy and aesthetic build.</li>
+              </ul>
             </div>
           </div>
 
-          {/* Section 9: Final Test Results */}
           <div className="project-item">
-          <p>
-              The SolidWorks simulation estimated a travel time of approximately 9.5 seconds at an acceleration of 950 mm/s². This closely aligned with our physical model, which completed the 10-foot distance in 10.4 seconds, as shown in the video. The slight discrepancy can be attributed to factors such as surface irregularities or higher-than-expected friction between the tires and the ground.
+            <img
+              src={`${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg`}
+              alt="Lamp Buddy implementation with mood lights"
+              onError={() => console.error("Failed to load Lamp Buddy Implementation Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/LampBuddy/moodlights.jpg`)}
+              style={{ cursor: 'pointer' }}
+            />
+            <p>
+              The implementation of Lamp Buddy involved a combination of hardware and software:
+              <ul className="goal-list">
+                <li>Used an Arduino microcontroller to manage sensor inputs and LED outputs.</li>
+                <li>Programmed the timer and lighting logic using C++ in the Arduino IDE.</li>
+                <li>Integrated a small OLED display to show timer status and lighting mode.</li>
+              </ul>
             </p>
-            <iframe
-              src="https://www.youtube.com/embed/QXV90hcXmdk"
-              title="Motor Speed Control System Final Test"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
           </div>
         </div>
 
         <div className="project-conclusion">
           <h3>Project Conclusion</h3>
           <p>
-            This project successfully demonstrated the design and implementation of a motor speed control system capable of transporting a 1-foot aluminum extrusion section over a 10-foot distance while maintaining its upright orientation. Through a combination of SolidWorks simulations, iterative prototyping, and motor control via Arduino, we achieved a system that balanced speed, stability, and accuracy. The project would not have been possible without Luis, XimXim, and Kaan. Check out our final design below!
+            Lamp Buddy was a rewarding project that combined hardware and software to create a practical tool for students. It won 3rd place in the <a href="https://www.bu.edu/eng/academics/teaching-and-innovation/singh-imagineering-lab-silab/competitions/lutron-lighting-competition/lutron-2024-competition/" target="_blank" rel="noopener noreferrer" className="competition-link">Lutron Lighting Innovation Challenge 2024</a>, highlighting its innovative approach to minimizing distractions and enhancing study environments. The project would not have been possible without the help of <em>Inal, Mario, and Slava</em>. Check out our video to see Lamp Buddy in action!
           </p>
-          <iframe
-            src="https://www.youtube.com/embed/gtnZAXxPlus"
-            title="Motor Speed Control System Final Demo"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", width: "100%" }}>
+            <iframe
+              src="https://www.youtube.com/embed/e01kFQK6CQI"
+              title="Lamp Buddy Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+            ></iframe>
+          </div>
         </div>
+      </div>
+
+      <div className="project-links">
+        <a
+          href="https://www.bu.edu/eng/academics/teaching-and-innovation/singh-imagineering-lab-silab/competitions/lutron-lighting-competition/lutron-2024-competition/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="github-link"
+        >
+          Check out the Competition Website
+        </a>
       </div>
 
       {isModalOpen && (
@@ -242,7 +188,7 @@ const Project6 = ({ projects, currentProjectId }) => {
             <div className="modal-image-wrapper">
               <img
                 src={selectedImage}
-                alt="Enlarged view of project content"
+                alt="Enlarged view of Lamp Buddy content"
                 className="modal-image"
               />
             </div>

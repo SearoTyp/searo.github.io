@@ -1,70 +1,118 @@
-/* Project6.css */
+/* Project3.css */
 
-/* Animation Delays for Staggered Effect */
-.project-item:nth-child(1) { animation-delay: 0.2s; }
-.project-item:nth-child(2) { animation-delay: 0.4s; }
-.project-item:nth-child(3) { animation-delay: 0.6s; }
-.project-item:nth-child(4) { animation-delay: 0.8s; }
-.project-item:nth-child(5) { animation-delay: 1.0s; }
-.project-item:nth-child(6) { animation-delay: 1.2s; }
-.project-item:nth-child(7) { animation-delay: 1.4s; }
-.project-item:nth-child(8) { animation-delay: 1.6s; }
-.project-item:nth-child(9) { animation-delay: 1.8s; }
-
-/* Override Image and iframe Heights */
-.project-item img:not(.collage-image),
-.project-item iframe:not(.collage-video) {
-  height: 500px;
+/* Animation Delays */
+.project-item:nth-child(1) {
+  animation-delay: 0s;
+}
+.project-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.project-item:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
-/* Text Container for Sections with Image Below Text (e.g., Section 2) */
-.text-container {
-  width: 100%;
+/* Add a small decorative element before the paragraph */
+.project-item p::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  color: #00d4ff;
+  font-size: 1.2rem;
+}
+
+/* Second Section Collage: 2x2 Grid for 4 Images */
+.project-item:nth-child(2) .collage-container {
+  grid-template-areas: 
+    "img1 img2"
+    "img3 img4";
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+}
+
+/* Assign grid areas for the images in the second section */
+.project-item:nth-child(2) .collage-image:nth-child(1) {
+  grid-area: img1;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+}
+
+.project-item:nth-child(2) .collage-image:nth-child(2) {
+  grid-area: img2;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+}
+
+.project-item:nth-child(2) .collage-image:nth-child(3) {
+  grid-area: img3;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+}
+
+.project-item:nth-child(2) .collage-image:nth-child(4) {
+  grid-area: img4;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+}
+
+/* Add a decorative element before the conclusion paragraph */
+.project-conclusion p::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  top: 15px;
+  color: #00d4ff;
+  font-size: 1.2rem;
+}
+
+/* Competition Link in Conclusion */
+.project-conclusion .competition-link {
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.project-conclusion .competition-link:hover {
+  color: #1e3c72;
+  text-decoration: underline;
+}
+
+/* Project Links Container */
+.project-links {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  position: relative;
 }
 
-/* Vertical Collage (1x3 Grid for Section 8) */
-.project-item:nth-child(8) .collage-container.vertical-collage {
-  grid-template-areas: 
-    "img1"
-    "img2"
-    "img3";
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
-  gap: 10px;
-  height: 500px;
+/* GitHub Link */
+.github-link {
+  display: inline-block;
+  color: #00d4ff;
+  text-decoration: none;
+  background: none;
+  border: 1px solid #00d4ff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.project-item:nth-child(8) .vertical-collage .collage-image:nth-child(1) {
-  grid-area: img1;
-  width: 100%;
-  height: 100%;
-}
-
-.project-item:nth-child(8) .vertical-collage .collage-image:nth-child(2) {
-  grid-area: img2;
-  width: 100%;
-  height: 100%;
-}
-
-.project-item:nth-child(8) .vertical-collage .collage-image:nth-child(3) {
-  grid-area: img3;
-  width: 100%;
-  height: 100%;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .project-item img:not(.collage-image),
-  .project-item iframe:not(.collage-video) {
-    height: unset;
-  }
-}
-
-@media (max-width: 600px) {
-  .project-item img:not(.collage-image) {
-    height: 300px;
-  }
+.github-link:hover,
+.github-link:focus {
+  background: #00d4ff;
+  color: #000;
+  text-decoration: none;
+  outline: none;
 }

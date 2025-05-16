@@ -1,0 +1,69 @@
+/* Project5.css */
+
+/* Removed Animation Delays to Match Project 1 */
+.project-item:nth-child(1),
+.project-item:nth-child(2),
+.project-item:nth-child(3),
+.project-item:nth-child(4),
+.project-item:nth-child(5),
+.project-item:nth-child(6) {
+  animation-delay: 0s;
+}
+
+/* Override Image and iframe Heights */
+.project-item img:not(.collage-image),
+.project-item iframe:not(.collage-video) {
+  height: 500px;
+}
+
+/* Section 5 Collage: 3x1 Horizontal Layout for 3 Images (was Section 6) */
+.project-item:nth-child(5) .collage-container.horizontal-collage {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 250px;
+  width: 100%;
+}
+
+.project-item:nth-child(5) .collage-image {
+  width: 33.33%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Collage Video */
+.collage-video {
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+
+.collage-video:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-item img:not(.collage-image),
+  .project-item iframe:not(.collage-video) {
+    height: unset;
+  }
+  .project-item:nth-child(5) .collage-container.horizontal-collage {
+    height: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-item img:not(.collage-image) {
+    height: 300px;
+  }
+  .project-item:nth-child(5) .collage-container.horizontal-collage {
+    flex-direction: column;
+    height: 600px;
+  }
+  .project-item:nth-child(5) .collage-image {
+    width: 100%;
+    height: 33.33%;
+  }
+}

@@ -1,0 +1,327 @@
+.aboutme-page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #e0f7fa);
+  color: #1e3c72;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 60px 20px;
+  position: relative;
+}
+
+.aboutme-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #011336;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.logo {
+  color: #00d4ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  left: 40px;
+  transition: color 0.3s ease;
+  pointer-events: auto;
+}
+
+.logo:hover {
+  color: #fff;
+}
+
+.aboutme-nav {
+  display: flex;
+  gap: 20px;
+  pointer-events: auto;
+}
+
+.aboutme-nav span {
+  color: #00d4ff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+}
+
+.aboutme-nav span:hover,
+.aboutme-nav span:focus {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.aboutme-nav span::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.aboutme-nav span:hover::before,
+.aboutme-nav span:focus::before {
+  border-color: #fff;
+}
+
+.contact-link {
+  position: absolute;
+  right: 40px;
+  pointer-events: auto;
+}
+
+.contact-link span {
+  color: #00d4ff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border: 1px solid #00d4ff;
+  border-radius: 20px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contact-link span:hover,
+.contact-link span:focus {
+  color: #fff;
+  border-color: #fff;
+  background: #00d4ff;
+  transform: scale(1.05);
+}
+
+.aboutme-content {
+  max-width: 1200px; /* Increased from 1000px to fill the page more */
+  margin: 20px auto 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.aboutme-title {
+  font-size: 2.8rem;
+  color: #1e3c72;
+  margin: 0px 0 30px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: fadeInDown 1s ease forwards;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
+}
+
+.aboutme-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #1e3c72, #00d4ff);
+}
+
+@keyframes fadeInDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.aboutme-story {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.story-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px; /* Increased from 500px to make the text box wider */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  border-left: 3px solid #00d4ff;
+  transition: background-color 0.3s ease;
+}
+
+.story-text p:hover {
+  background-color: rgba(0, 212, 255, 0.1);
+}
+
+.story-photos {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px; /* Increased from 500px to match the text box width */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.slideshow {
+  width: 100%;
+  height: 500px; /* Increased from 400px to make the image box larger */
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+  .aboutme-header {
+    padding: 10px 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .aboutme-nav {
+    gap: 10px;
+  }
+
+  .aboutme-title {
+    font-size: 2rem;
+  }
+
+  .aboutme-story {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .story-text,
+  .story-photos {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .slideshow {
+    height: 400px; /* Increased from 300px for consistency */
+  }
+
+  .contact-link {
+    position: static;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .aboutme-header {
+    padding: 10px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .aboutme-nav span {
+    font-size: 0.9rem;
+    padding: 3px 8px;
+  }
+
+  .aboutme-title {
+    font-size: 1.8rem;
+  }
+
+  .story-text p {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .slideshow {
+    height: 350px; /* Increased from 250px for consistency */
+  }
+
+  .contact-link {
+    margin-top: 5px;
+  }
+}

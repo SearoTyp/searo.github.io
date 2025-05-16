@@ -1,0 +1,70 @@
+/* Project9.css */
+
+/* Animation Delays for Staggered Effect */
+.project-item:nth-child(1) { animation-delay: 0.2s; }
+.project-item:nth-child(2) { animation-delay: 0.4s; }
+.project-item:nth-child(3) { animation-delay: 0.6s; }
+.project-item:nth-child(4) { animation-delay: 0.8s; }
+.project-item:nth-child(5) { animation-delay: 1.0s; }
+.project-item:nth-child(6) { animation-delay: 1.2s; }
+.project-item:nth-child(7) { animation-delay: 1.4s; }
+.project-item:nth-child(8) { animation-delay: 1.6s; }
+.project-item:nth-child(9) { animation-delay: 1.8s; }
+
+/* Override Image and iframe Heights */
+.project-item img:not(.collage-image),
+.project-item iframe:not(.collage-video) {
+  height: 500px;
+}
+
+/* Text Container for Sections with Image Below Text (e.g., Section 2) */
+.text-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Vertical Collage (1x3 Grid for Section 8) */
+.project-item:nth-child(8) .collage-container.vertical-collage {
+  grid-template-areas: 
+    "img1"
+    "img2"
+    "img3";
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  height: 500px;
+}
+
+.project-item:nth-child(8) .vertical-collage .collage-image:nth-child(1) {
+  grid-area: img1;
+  width: 100%;
+  height: 100%;
+}
+
+.project-item:nth-child(8) .vertical-collage .collage-image:nth-child(2) {
+  grid-area: img2;
+  width: 100%;
+  height: 100%;
+}
+
+.project-item:nth-child(8) .vertical-collage .collage-image:nth-child(3) {
+  grid-area: img3;
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-item img:not(.collage-image),
+  .project-item iframe:not(.collage-video) {
+    height: unset;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-item img:not(.collage-image) {
+    height: 300px;
+  }
+}

@@ -205,13 +205,13 @@ const Project1 = ({ projects, currentProjectId }) => {
           <p>
             The Countertop Batch Reverse Osmosis Filter project for Harmony Desalting was a resounding success. It would not have been possible without the mentorship and support of <strong>Quantum Wei</strong>. Who played a pivotal role in guiding me throughout the process and helping me expand my knowledge. Beyond learning about BRO systems, this project deepened my skills in initiative-taking, problem-solving under pressure, and applying engineering theory to real-world challenges.
           </p>
-          <img
-            src={`${process.env.PUBLIC_URL}/Harmony/Final.jpg`}
-            alt="Final Batch Reverse Osmosis System"
-            onError={() => console.error("Failed to load Project Conclusion Image")}
-            onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Final.jpg`)}
-            style={{ cursor: 'pointer' }}
-          />
+            <img
+              src={`${process.env.PUBLIC_URL}/Harmony/Final.jpg`}
+              alt="Final Batch Reverse Osmosis System"
+              onError={() => console.error("Failed to load Project Conclusion Image")}
+              onClick={() => openModal(`${process.env.PUBLIC_URL}/Harmony/Final.jpg`)}
+              style={{ cursor: 'pointer' }}
+            />
         </div>
       </div>
 
