@@ -72,6 +72,14 @@ function App() {
   ];
 
   useEffect(() => {
+    console.log("App component mounted");
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     console.log("Route changed to:", location.pathname);
     // Skip scroll-to-top if navigating to a specific section
     if (location.state?.skipScrollToTop) {
@@ -87,15 +95,7 @@ function App() {
       document.body.scrollTop = 0;
     }, 100);
     return () => clearTimeout(timer);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    console.log("App component mounted");
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2200);
-    return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname, location.state]); // Added location.state to dependency array
 
   const scrollToSection = (sectionId) => {
     if (location.pathname !== '/') {
@@ -270,12 +270,15 @@ function App() {
                           </div>
                         </div>
                         <div className="hobbies">
-                          <h3>Involvement & Leadership</h3>
+                          <h3>Experience & Leadership</h3>
                           <ul>
-                            <li>Member of Boston University Engineering Society, organizing workshops and events.</li>
-                            <li>Team Lead in BU Hackathon 2024, leading a team to develop a sustainable tech solution.</li>
-                            <li>Intern at Harmony Desalting, contributing to the Countertop BRO Filter project.</li>
-                            <li>Volunteer at BU Sustainability Club, promoting energy-efficient initiatives on campus.</li>
+                            <li><b>Energy Systems Engineer</b> at Bay State Energy</li>
+                            <li><b>Technology Innovation Scholar</b></li>
+                            <li><b>Singh Imagineering Lab Advisor </b>- BU Engineering Makerspace </li>
+                            <li><b>Process Engineer</b> at Harmony Desalting</li>
+                            <li><b>Executive Chair </b>at Boston University Environmental Affairs</li>
+                            <li><b>Student Researcher</b> for BU Campus Climate Lab</li>
+                            <li><b>Automation Engineer</b> at Relief Validation Limited</li>
                           </ul>
                         </div>
                       </div>

@@ -827,10 +827,6 @@ body {
   transition: opacity 0.5s ease;
 }
 
-.contact:hover::before {
-  opacity: 0.5;
-}
-
 .contact-content {
   display: flex;
   flex-direction: column;
